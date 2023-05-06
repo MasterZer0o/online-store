@@ -1,0 +1,14 @@
+.auth-btn {
+	cursor: pointer;
+	padding: 0.35em 0.7em;
+	margin-left: 10px;
+	border: none;
+	font-size: 1.1em;
+	border-radius: 4px;
+	background-color: var(--bg5);
+	color: var(--text);
+	transition: background-color 50ms ease-in-out;
+	&:hover {
+		background-color: var(--bg4);
+	}
+}

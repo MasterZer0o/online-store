@@ -1,0 +1,145 @@
+$collapseTime: 200ms;
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 20px;
+  margin-top: 1.5em;
+  height: 100%;
+
+  .filters-container {
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--bg4);
+
+    & > div:first-child {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5em;
+
+      & > button {
+        background-color: transparent;
+      }
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+
+      .filter {
+        background-color: var(--bg5);
+        border-radius: 5px;
+        padding: 1px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        cursor: pointer;
+        transition: opacity 100ms ease-in-out;
+        &:hover {
+          opacity: 0.8;
+        }
+
+        button {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .filter-section {
+    margin-top: 10px;
+    margin-bottom: 2em;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px;
+      margin-bottom: 0.5em;
+      cursor: pointer;
+      user-select: none;
+      svg {
+        margin-left: auto;
+        transition: transform $collapseTime ease-in-out;
+      }
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 5px 4px;
+        display: flex;
+
+        label {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          font-size: 1.05em;
+          gap: 10px;
+        }
+
+        .check-option {
+          position: relative;
+          width: 1.05em;
+          height: 1.05em;
+          padding: 0;
+          border: 1px solid hsl(222, 16%, 40%);
+          border-radius: 4px;
+          appearance: none;
+          outline: 0;
+          cursor: pointer;
+          transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+
+          &::before {
+            position: absolute;
+            content: '';
+            display: block;
+            top: 0px;
+            left: 5px;
+            width: 7px;
+            height: 13px;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            opacity: 0;
+          }
+          &:checked {
+            color: white;
+            border-color: var(--accent);
+            background: var(--accent);
+            &::before {
+              opacity: 1;
+            }
+          }
+        }
+
+        .item-count {
+          background-color: var(--bg4);
+          padding: 0 0.15em;
+          text-align: center;
+          border-radius: 5px;
+          display: block;
+          min-width: 15px;
+        }
+      }
+    }
+  }
+}
+.collapsed {
+  transform: rotate(180deg);
+}
+// collapse animation
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: height $collapseTime ease-in-out;
+  overflow: hidden;
+}
+
+.collapse-enter-from,
+.collapse-leave-to {
+  height: 0px !important;
+}

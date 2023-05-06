@@ -1,0 +1,36 @@
+@use './theme_switcher.scss';
+@use './auth-buttons.scss';
+@use './nav_user.scss';
+.dark .top-navbar {
+  background-color: var(--bg3);
+}
+.top-navbar {
+  background-color: var(--bg2);
+  display: flex;
+  align-items: center;
+  padding: 0.65em 0.5em;
+  & > ul {
+    margin: 0;
+    list-style: none;
+    margin-right: auto;
+    width: fit-content;
+    li {
+      display: inline-block;
+      margin-right: 5px;
+      border-radius: 4px;
+      background-color: var(--bg4);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--bg5);
+      }
+      a.nav-link {
+        font-size: 1.05em;
+        display: block;
+        padding: 0.3em 0.5em;
+        text-decoration: none;
+        color: var(--text);
+      }
+    }
+  }
+}

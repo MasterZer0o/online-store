@@ -1,0 +1,43 @@
+.page-not-found {
+  display: flex;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  picture {
+    align-self: baseline;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  h1 {
+    padding: 0.05em;
+    font-size: 3em;
+    backdrop-filter: blur(3px);
+    border-radius: 5px;
+    overflow: hidden;
+    letter-spacing: 1px;
+    color: #eceff4;
+  }
+
+  button {
+    font-size: 1.1em;
+    border: none;
+    letter-spacing: 1px;
+    padding: 0.5em 1em;
+    background-color: var(--accent);
+    border-radius: 4px;
+    transition: opacity 200ms ease-in-out;
+    color: #eceff4;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

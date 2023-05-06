@@ -1,0 +1,79 @@
+.nav-user {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+  &:hover {
+    svg {
+      transform: rotate(180deg);
+    }
+    & .nav-user__dropdown {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__username {
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    padding: 3px 0.7em;
+    background-color: white;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+    color: black;
+    font-size: 1.15em;
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+
+    svg {
+      transition: transform 150ms ease-in-out;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    background-color: rgb(230, 230, 230);
+    transition: opacity 150ms ease-in-out;
+    list-style: none;
+    margin: 0;
+    border-radius: 4px;
+    padding: 6px 4px;
+    &:hover {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    li a,
+    li:not(:has(a)) {
+      padding: 0.25em 0.7em;
+      color: black;
+      cursor: pointer;
+      transition: opacity 50ms ease-in-out;
+      border-radius: 4px;
+      display: block;
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+    }
+
+    li {
+      margin: 1px 0;
+      &:first-child,
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    li a.router-link-exact-active {
+      background-color: black;
+      color: white;
+    }
+  }
+}

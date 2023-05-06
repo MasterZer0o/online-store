@@ -1,0 +1,176 @@
+.products-container {
+  padding: 1.5em 10px 10px;
+  margin: auto;
+  margin-bottom: 1em;
+  width: fit-content;
+  position: relative;
+
+  .products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .product-card {
+    width: 230px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bg4);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      padding: 0.5em 0;
+      & > span {
+        margin-left: 5px;
+      }
+    }
+
+    &__bottom {
+      padding: 7px;
+    }
+
+    &__info {
+      min-height: 60px;
+      margin: auto;
+    }
+
+    &__title {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+    }
+
+    &__price {
+      display: block;
+      font-size: 1.05em;
+      padding-bottom: 0.5em;
+    }
+
+    .buy-action {
+      margin-top: auto;
+      margin-bottom: 0.5em;
+      display: flex;
+      align-items: center;
+
+      button {
+        font-weight: bold;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        border-radius: 4px;
+        padding: 3px 8px;
+        background-color: var(--accent);
+        transition: opacity 150ms ease-in-out;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    img {
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      background-color: rgb(179, 179, 179);
+      border-bottom: 1px solid var(--bg4);
+    }
+
+    &:has(img:hover) .product-card__actions,
+    &__actions:hover {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    &__actions {
+      position: absolute;
+      top: 4px;
+      left: 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      opacity: 0;
+      width: fit-content;
+      transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+    }
+
+    &__action {
+      padding: 4px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      position: relative;
+      text-align: center;
+      transition: all 250ms ease-in-out;
+
+      &:hover {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        span {
+          opacity: 1;
+          transform: translateX(0);
+          visibility: visible;
+        }
+      }
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        padding-right: 10px;
+        height: 2rem;
+        width: max-content;
+        line-height: 210%;
+        transform: translateX(-15px);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        visibility: hidden;
+        opacity: 0;
+        font-size: 0.9em;
+        background-color: var(--accent);
+        transition: all 250ms ease-in-out;
+      }
+    }
+  }
+}
+
+.mask {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  z-index: 111;
+  & .wrapper {
+    display: grid;
+    width: fit-content;
+    margin: auto;
+    place-items: center;
+    position: sticky;
+    top: 50%;
+  }
+
+  .loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid #fff;
+    border-right: 3px solid transparent;
+    animation: rotation 800ms linear infinite;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

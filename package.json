@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "postinstall": "nuxt prepare",
+    "update-deps": "yarn upgrade-interactive --latest",
+    "preview": "nuxt preview",
+    "test": "lightningcss --minify --bundle .output/public/public/assets/9f3b2ed0.css -o output.css"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.6",
+    "@ngneat/falso": "^6.4.0",
+    "@types/validator": "^13.7.15",
+    "@unocss/nuxt": "^0.51.12",
+    "@unocss/transformer-compile-class": "^0.51.12",
+    "autoprefixer": "^10.4.14",
+    "consola": "^3.1.0",
+    "eslint": "^8.40.0",
+    "lightningcss-cli": "^1.20.0",
+    "nuxt": "npm:nuxt3@latest",
+    "sass": "^1.62.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@nuxtjs/html-validator": "^1.2.5",
+    "@pinia/nuxt": "^0.4.9",
+    "@vueuse/core": "^10.1.2",
+    "@vueuse/nuxt": "^10.1.2",
+    "argon2": "^0.30.3",
+    "just-debounce-it": "^3.2.0",
+    "nuxt-purgecss": "^2.0.0",
+    "pg": "^8.10.0",
+    "primevue": "^3.28.0",
+    "sequelize": "^6.31.1",
+    "validator": "^13.9.0"
+  }
+}

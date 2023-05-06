@@ -1,0 +1,29 @@
+@use 'vars';
+@use 'base';
+@use 'ripple';
+@use 'error_page.scss';
+
+@use 'components/navbar/navbar.scss';
+@use 'components/form.scss';
+@use 'components/login/login.scss';
+
+.scroll-up {
+  background: transparent;
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  cursor: pointer;
+  transition: transform 150ms ease-in-out;
+  animation: showScrollUp 300ms ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+  @keyframes showScrollUp {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

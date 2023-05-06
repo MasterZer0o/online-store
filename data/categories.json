@@ -1,0 +1,77 @@
+[
+  {
+      "name": "Bluzy",
+      "slug": "bluzy",
+      "image": "https://a.allegroimg.com/s180/11ca40/d8d43da14cfa9ec94f869e880262/Bluza-Helikon-Range-Hoodie-Topcool-Coyote-Green-L"
+  },
+  {
+      "name": "Dresy kompletne",
+      "slug": "dresy-kompletne",
+      "image": "https://a.allegroimg.com/s180/1156ee/deddca944fad9d1f7e554c122712/ADIDAS-DRES-MESKI-BLUZA-SPODNIE-ENTRADA-M-178cm"
+  },
+  {
+      "name": "Garnitury",
+      "slug": "garnitury",
+      "image": "https://a.allegroimg.com/s180/11bde4/6ed7d0c644ca89c6d8e6f61e3575/GARNITUR-meski-granatowy-KLASYCZNY-176-70-132-pas"
+  },
+  {
+      "name": "Jeansy",
+      "slug": "jeansy",
+      "image": "https://a.allegroimg.com/s180/113da1/ed8a05394002bd5b6f86a99cad10/WRANGLER-LARSTON-IDIGO-WIT-W18S2325F-27-32"
+  },
+  {
+      "name": "Kamizelki",
+      "slug": "kamizelki",
+      "image": "https://a.allegroimg.com/s180/1190db/c9fbb78d40d48abbc74973352fb4/Bezrekawnik-czarny-pikowany-z-kapturem-M-7XL"
+  },
+  {
+      "name": "Koszule",
+      "slug": "koszule",
+      "image": "https://a.allegroimg.com/s180/1173ef/84d7d5d048edb0cef891d4879e82/KOSZULA-ROBOCZA-FLANELOWA-BAWELNA-NIEBIESKA-M"
+  },
+  {
+      "name": "Koszulki bez rekawow",
+      "slug": "koszulki-bez-rekawow",
+      "image": "https://a.allegroimg.com/s180/118de3/9054aec541c8b65c9c99dc88c7da/Bezrekawnik-Tank-top-meski-Adler-na-silownie-XXL"
+  },
+  {
+      "name": "Koszulki polo",
+      "slug": "koszulki-polo",
+      "image": "https://a.allegroimg.com/s180/11d0ca/3610a3594b478ab78632efac7699/4F-koszulka-polo-meska-sportowa-bawelna-roz-L"
+  },
+  {
+      "name": "Koszulki z dlugim rekawem",
+      "slug": "koszulki-z-dlugim-rekawem",
+      "image": "https://a.allegroimg.com/s180/031b04/41f2e87643779016f7fe374f4201/NIKE-KOSZULKA-TERMOAKTYWNA-Bielizna-S-173-cm"
+  },
+  {
+      "name": "Marynarki",
+      "slug": "marynarki",
+      "image": "https://a.allegroimg.com/s180/11dc99/abee71a8488f9dde102588455459/Marynarka-Blazer-TIGER-OF-SWEDEN-Nedvin-SlimFit-46"
+  },
+  {
+      "name": "Okrycia wierzchnie",
+      "slug": "okrycia-wierzchnie",
+      "image": "https://a.allegroimg.com/s180/11d9d3/cfe4d1814a5f9f5993df9a5e3a09/KURTKA-MESKA-BOMBERKA-PRZEJSCIOWA"
+  },
+  {
+      "name": "Spodenki",
+      "slug": "spodenki",
+      "image": "https://a.allegroimg.com/s180/11daae/3b99352f4061bd49d7481ab5f003/CRAIGSTON-Meskie-Spodenki-Regular-Fit-M"
+  },
+  {
+      "name": "Spodnie",
+      "slug": "spodnie",
+      "image": "https://a.allegroimg.com/s180/117892/d0e09896452aa9a7a60ace5a11c6/Spodnie-bojowki-Helikon-M65-Nyco-Olive-XL-Regular"
+  },
+  {
+      "name": "Swetry",
+      "slug": "swetry",
+      "image": "https://a.allegroimg.com/s180/1103cf/75d716874335a8d11eb5a5928f3b/Golf-meski-100-bawelna-czarny-rozmiar-XXL"
+  },
+  {
+      "name": "T shirty",
+      "slug": "t-shirty",
+      "image": "https://a.allegroimg.com/s180/113849/9c2c4ed84831a0f64ca1a45408ea/Koszulka-T-Shirt-Mil-Tec-Stone-Grey-Olive-L"
+  }
+]

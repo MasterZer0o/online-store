@@ -1,0 +1,49 @@
+// @use '/node_modules/element-plus/theme-chalk/src/dark/css-vars.scss' as *;
+// @use '/node_modules/primevue/resources/themes/soho-dark/theme.css';
+@use '/node_modules/primevue/resources/themes/vela-blue/theme.css';
+
+// components
+@use './components/admin/sidebar.scss';
+@use './components/admin/topbar.scss';
+@use './components/admin/main.scss';
+.dashboard-wrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+  --accent100: hsl(213, 32%, 52%);
+  --accent200: hsl(210, 34%, 63%);
+  --accent300: hsl(329, 20%, 43%);
+  --accent400: hsl(329, 20%, 48%);
+  --accent500: hsl(210, 34%, 40%);
+  --accent600: hsl(329, 20%, 53%);
+}
+.dark .dashboard-wrapper {
+  --bg1: #2e3440;
+}
+
+.light .dashboard-wrapper {
+  --bg1: #f5f5f5;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.admin-page-enter-active,
+.admin-page-leave-active {
+  transition: all 200ms ease-out;
+}
+.admin-page-enter-from,
+.admin-page-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.admin-page-move,
+.admin-page-enter-active,
+.admin-page-leave-active {
+  position: absolute;
+}

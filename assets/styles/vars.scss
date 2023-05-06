@@ -1,0 +1,25 @@
+.dark {
+  --bg: hsl(220, 16%, 20%);
+  --bg2: hsl(222, 16%, 25%);
+  --bg3: hsl(222, 16%, 28%);
+  --bg4: hsl(222, 16%, 35%);
+  --bg5: hsl(222, 16%, 40%);
+  --text: #eceff4;
+  --text-dim: rgba(236, 239, 244, 0.876);
+  --eye-color: hsl(219, 27%, 80%);
+}
+.light {
+  --bg: hsl(218, 27%, 100%);
+  --bg2: hsl(218, 27%, 90%);
+  --bg3: hsl(218, 27%, 85%);
+  --bg4: hsl(218, 27%, 80%);
+  --bg5: hsl(218, 27%, 75%);
+  --text: #2e3440;
+  --text-dim: #2e3440c6;
+  --eye-color: hsl(220, 16%, 20%);
+}
+
+:root {
+  --font-primary: 'Karla', sans-serif;
+  --accent: rgb(0, 106, 255);
+}
