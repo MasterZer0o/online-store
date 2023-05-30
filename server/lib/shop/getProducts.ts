@@ -113,27 +113,6 @@ export async function getProducts(options: Params) {
   const totalPages = allProductsCount / MAX_PRODUCTS_PER_PAGE
 
   const items = prepareProducts(data)
-  // const items = data.map((item) => {
-  //   const discount = item['Discount.value'] ?? null
-  //   if (discount) {
-  //     const discountType = item['Discount.type']
-
-  //     item.price = {
-  //       amount: item.price,
-  //       discountLabel: discountType === 'amount' ? `-${discount}` : `-${discount}%`,
-  //       discountedAmount: discountType === 'amount' ? item.price - discount : Math.floor(item.price - (item.price * discount / 100)) + 0.99
-  //     } as any
-  //   }
-  //   else {
-  //     item.price = {
-  //       amount: item.price
-  //     } as any
-  //   }
-
-  //   // remove properties that are not needed for response
-  //   (['count', 'Discount.value', 'Discount.type'] as const).forEach(key => delete item[key])
-  //   return item
-  // }) as Product[]
 
   // CASE: user manually went to page higher than total pages
   if (items.length === 0)
