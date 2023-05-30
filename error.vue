@@ -40,11 +40,13 @@ if (process.server) {
 
   <DevOnly>
     <div style="position: absolute;bottom: 0;width: 100%;">
-      <h2 style="display: block; width: 80%;margin: auto;color: white;">
+      <div style="width: 80%;margin: auto;">
+        <h2 style="display: block; color: white;">
         DEV-ONLY LOG
       </h2>
-      <pre style="width: 80%;margin: auto;font-size: clamp(14px,1.5vw ,1.5em);background-color: var(--bg2);opacity:.8;padding: 1em;border-radius: 4px;">{{ error }}
-  </pre>
+      <pre style="margin: auto;font-size: clamp(14px,1.5vw ,1.5em);background-color: var(--bg2);opacity:.8;padding: 1em;border-radius: 4px;">{{ error }}
+      </pre>
+      </div>
     </div>
   </DevOnly>
 </template>

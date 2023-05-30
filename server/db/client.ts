@@ -1,39 +1,14 @@
-import sequelize from './config'
-import { User } from './models/User'
-import { Session } from './models/Session'
-import { syncModels } from './syncModels'
+import { Sequelize } from 'sequelize'
 
-import { Product } from './models/Product'
-import { Discount } from './models/Discount'
-import { ShoppingSession } from './models/ShoppingSession'
-import { PaymentDetails } from './models/Payment'
-import { OrderDetails } from './models/OrderDetails'
-import { Category } from './models/Category'
-import { CartItem } from './models/CartItem'
-import { OrderItem } from './models/OrderItems'
-import { seed } from './seeders/seed'
-import type { Filter } from './models/Filter'
+const { DATABASE_URL } = useRuntimeConfig()
 
-User.hasMany(Session, { foreignKey: 'user_id' })
-Session.belongsTo(User, { foreignKey: 'user_id' })
-
-Product.hasOne(Discount, { foreignKey: 'id' })
-Discount.belongsTo(Product, { foreignKey: 'id' })
-
-ShoppingSession.belongsTo(User, { foreignKey: 'user_id' })
-User.hasOne(ShoppingSession, { foreignKey: 'user_id' })
-
-OrderDetails.hasOne(User, { foreignKey: 'id' })
-OrderDetails.belongsTo(User, { foreignKey: 'user_id' })
-OrderDetails.hasOne(PaymentDetails, { foreignKey: 'id' })
-PaymentDetails.belongsTo(OrderDetails, { foreignKey: 'id' })
-
-CartItem.hasOne(Session, { foreignKey: 'id' })
-Session.belongsTo(CartItem, { foreignKey: 'id' })
-
-OrderItem.hasOne(OrderDetails, { foreignKey: 'id' })
-// seed.seedProducts()
-// seed.seedCategories()
-// syncModels()
-
+const sequelize = new Sequelize(DATABASE_URL, {
+  pool: {
+    max: 10,
+    min: 0
+  },
+  benchmark: true,
+  logging: false
+  // logging: process.env.NODE_ENV === 'production' ? false : (sql, timing) => logInfo(sql, `[${timing}ms]`)
+})
 export default sequelize

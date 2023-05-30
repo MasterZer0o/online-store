@@ -15,7 +15,7 @@ export async function previousPage() {
     return
 
   store.currentPage--
-  store.cid = undefined // reset cursor
+  store.resetCursor()
 
   goToPage(store.currentPage)
 }
@@ -36,7 +36,7 @@ export const pageFromInput = debounce((event: InputEvent, shouldScrollTop?: bool
     return
 
   store.currentPage = pageValue
-  store.cid = undefined
+  store.resetCursor()
 
   inputElement.blur()
 

@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import type { CreationOptional, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import db from '../config'
+import db from '../client'
 import { OrderDetails } from './OrderDetails'
 
 interface PaymentDetailsModel extends Model<InferAttributes<PaymentDetailsModel>, InferCreationAttributes<PaymentDetailsModel>> {

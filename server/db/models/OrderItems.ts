@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import type { CreationOptional, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import db from '../config'
+import db from '../client'
 import { OrderDetails } from './OrderDetails'
 import { Product } from './Product'
 
@@ -29,7 +29,7 @@ export const OrderItem = db.define<OrderItemModel>('OrderItem', {
   },
 
   product_id: {
-    type: DataTypes.STRING(80),
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: Product,

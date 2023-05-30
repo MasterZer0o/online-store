@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { usePrimeVue } from 'primevue/config'
+
 const store = useProducts()
 
 const changeProductView = () => store.isGridView = !store.isGridView

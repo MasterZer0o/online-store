@@ -11,12 +11,16 @@ const products = useProducts()
         <span class="loader"></span>
       </div>
     </div>
-    <div v-if="products.isLoadingInitial" class="products-grid">
-      <Skeleton v-for="i in 10" :key="i" width="230px" height="330px" />
+    <div v-if="products.isLoadingInitial" class=" products-grid">
+      <Skeleton v-for="i in 10" :key="i" height="330px" />
     </div>
 
-    <div v-else class="products-grid">
+    <div v-if="!products.isLoadingInitial && products.products.length !== 0" class="products-grid">
       <ShopProductCard v-for="product in products.products" :key="product.id" :product="product" />
     </div>
   </section>
+
+  <h3 v-if="products.products.length === 0" class=":uno: text-center py-20 mb-70">
+    No products in this category.
+  </h3>
 </template>

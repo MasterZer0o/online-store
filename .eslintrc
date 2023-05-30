@@ -5,6 +5,7 @@
     "curly": "off",
     "no-console": "off",
     "@typescript-eslint/comma-dangle": "off",
+    "vue/comma-dangle": "off",
     "vue/valid-v-for": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "max-statements-per-line": "off",
@@ -12,7 +13,9 @@
     "vue/html-self-closing": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
-    "antfu/top-level-function": "off"
+    "antfu/top-level-function": "off",
+    "vue/dot-location": "off",
+    "vue/space-unary-ops": "off"
   },
   "overrides": [
     {

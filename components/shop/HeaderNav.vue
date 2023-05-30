@@ -1,19 +1,19 @@
 <template>
   <nav>
-    <ul>
-      <li>
+    <ul class="nav-links">
+      <li class="nav-link">
         <NuxtLink to="/">
           Link
         </NuxtLink>
       </li>
-      <li>
+      <li class="nav-link">
         <NuxtLink to="/">
           Link
         </NuxtLink>
       </li>
-      <li>
+      <li class="nav-link">
         <NuxtLink to="/shop/">
-          Category
+          Categories
         </NuxtLink>
         <ShopMegaMenu />
       </li>

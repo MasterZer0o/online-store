@@ -6,7 +6,7 @@ const store = useProducts()
   <div class="top-bar">
     <div class="listing-name">
       <h2> {{ store.currentCategory.name }}</h2>
-      <span>{{ store.cid ? `(${store.currentCategory.productCount})` : "" }}</span>
+      <span v-if="!store.isLoadingInitial">{{ `(${store.currentCategory.productCount})` }}</span>
     </div>
 
     <div class="top-bar__row">

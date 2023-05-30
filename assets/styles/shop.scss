@@ -6,6 +6,7 @@
 @use './components/shop/bottom_bar.scss';
 @use './components/shop/pagination.scss';
 @use './components/shop/sorting.scss';
+@use './components/shop/mega_menu.scss';
 
 .tooltip {
   color: white;
@@ -46,9 +47,10 @@
 }
 
 main {
-  width: 90%;
-  margin: auto;
+  margin-left: 4rem;
+  margin-right: 4rem;
   position: relative;
+  justify-content: center;
   display: flex;
   gap: 3em;
   margin-top: 1em;

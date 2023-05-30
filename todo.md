@@ -10,18 +10,24 @@
 
 - get fields from db as camelCase (use AS) and update types accordingly
 
-- put number of results per page in runtime variable and use it 
-
-- handle case where navigated from non /shop page ? get categories (with names)
+- put number of results per page in runtime variable and use it  (?)
 
 - transactions
 
-- rename db client/ config 
-
-- theme code move to inline instead of file import
-
 - handle (detect) when using back button (for example when page param change)
 
-- show no product if products== 0
-
 - add message and timeout to fetching products, if timeout, show message to try again.
+
+- combine css (https://vitejs.dev/config/build-options.html#build-csscodesplit)
+
+---
+- filters
+
+
+https://www.spreadshirt.pl/
+https://www.redbubble.com/
+
+https://dribbble.com/tags/ecommerce%20dashboard
+https://dashthis.com/blog/10-essential-ecommerce-metrics-for-your-reporting-dashboard/
+
+https://github.com/antfu/bumpp

@@ -7,7 +7,8 @@ export default defineNuxtConfig({
   ],
   experimental: {
     inlineSSRStyles: false,
-    componentIslands: true
+    componentIslands: true,
+    typedPages: true,
   },
   imports: {
     dirs: ['stores']
@@ -25,7 +26,6 @@ export default defineNuxtConfig({
   //     }
   //   }
   // },
-  ignore: ['store', 'store-admin'],
   build: {
     transpile: ['primevue'],
   },
@@ -39,7 +39,11 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400&display=swap' }
       ],
-      script: [{ src: '/theme.js', tagPosition: 'bodyOpen' }]
+      // theme script
+      script: [{
+        innerHTML: '(()=>{let e=localStorage.getItem("theme");if(["dark","light"].includes(e)){document.body.setAttribute("class",e);return}let t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";localStorage.setItem("theme",t),document.body.setAttribute("class",t)})();',
+        tagPosition: 'bodyOpen'
+      }]
 
     },
 

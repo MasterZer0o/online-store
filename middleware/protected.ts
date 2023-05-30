@@ -1,4 +1,5 @@
 import { userSession } from '~~/server/lib/userSession'
+
 export default defineNuxtRouteMiddleware(async (to) => {
   const store = useUserStore()
   const event = useRequestEvent()

@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import type { CreationOptional, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import db from '../config'
+import db from '../client'
 import { Product } from './Product'
 import { Session } from './Session'
 
@@ -8,7 +8,7 @@ interface CartItemModel extends Model<InferAttributes<CartItemModel>, InferCreat
   id: string
   quantity: number
   session_id: string
-  product_id: string
+  product_id: number
   created_at: CreationOptional<Date>
   updated_at: CreationOptional<Date>
 }
@@ -33,7 +33,7 @@ export const CartItem = db.define<CartItemModel>('CartItem', {
     }
   },
   product_id: {
-    type: DataTypes.STRING(80),
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: Product,
@@ -57,7 +57,7 @@ declare global {
     id: string
     quantity: number
     session_id: string
-    product_id: string
+    product_id: number
     created_at: Date
     updated_at: Date
   }

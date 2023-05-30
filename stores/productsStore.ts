@@ -12,8 +12,6 @@ export const useProducts = defineStore('products', () => {
 }
   const currentPage = ref<number>(1)
 
-  // TODO: create computed for when fetched ? if cid
-
   const currentCategory: CategoryMeta = reactive({
     name: '',
     slug: '',
@@ -41,11 +39,19 @@ export const useProducts = defineStore('products', () => {
     currentPage.value = 1
   }
 
+  /**
+   * Resets cursor id
+   */
+  function resetCursor() {
+    cid.value = undefined
+  }
+
   const sortingOption = ref('')
   return {
     beginLoader,
     stopLoader,
     toInitialState,
+    resetCursor,
     categories,
     cid,
     isLoadingProducts,

@@ -1,4 +1,4 @@
-import sequelize from '../db/client'
+import sequelize from '../db/relations'
 import { logError, logSuccess } from '~~/server/lib/logger'
 
 export default defineNitroPlugin(async () => {

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       return {
         error: category.error
       }
-      // await new Promise<void>(resolve => setTimeout(() => resolve(), 2000))
+      // await new Promise<void>(resolve => setTimeout(() => resolve(), 2000)) // fake wait
     return { category }
   }
   catch (error: any) {

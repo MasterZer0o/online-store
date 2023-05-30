@@ -1,17 +1,18 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'shop',
-  validate: (route) => {
+  layout: 'listing',
+  validate: (route: any) => {
     // early basic validation
-    return Array.isArray(route.params.category) && /^[a-z]+-?[a-z]+$/g.test(route.params.category[0])
+    return Array.isArray(route.params.category) && /^[a-z](-?[a-z])+$/g.test(route.params.category[0])
   }
 })
 
 const store = useProducts()
 
-const route = useRoute()
+const route = useRoute('shop-category-category')
 
 const page = route.query.page
+
 // if user manually went to page <=0, redirect to page 1.
 if (page && parseInt(page as string) <= 0) {
   await navigateTo({
@@ -28,29 +29,19 @@ if (page && !isNaN(parseInt(page as string)) && +page >= 1) {
 
 if (process.server) {
   try {
-    await fetchMeta(route.params.category[0])
+    await fetchMeta(route.params.category![0])
   }
   catch (error) {
     throw createError({ statusCode: 404, message: 'Page not found' })
   }
 }
-// if (process.server) {
-//   try {
-//     const category = await useFetch<{ error: string } | { category: { categoryName: string } }>
-//     ('/category', { params: { name: route.params.category[0] } })
+onBeforeMount(() => {
+  const route = useRoute('shop-category-category')
 
-//     if ('error' in category.data.value!)
-//       throw createError({ statusCode: 404, message: category.data.value.error })
+  store.currentCategory.slug = route.params.category![0]
 
-//     store.currentCategory.name = category.data.value!.category.categoryName
-//     store.currentCategory.slug = category.data.value!.category.categoryName.toLowerCase()
-//   }
-//   catch (error) {
-//     throw createError({ statusCode: 404, message: 'Something went wrong' })
-//   }
-// }
-
-onBeforeMount(() => fetchProducts(false, true))
+  fetchProducts(false, true)
+})
 
 useHead({
   title: () => store.currentCategory.name!
@@ -59,7 +50,7 @@ useHead({
 
 <template>
   <ShopSidebar />
-  <div>
+  <div class=":uno: w-full">
     <ShopTopBar />
     <ShopProductsGrid />
     <ShopBottomBar />

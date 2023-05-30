@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   title: 'Shop',
-  layout: 'shop'
+  layout: 'listing'
 })
 
 // todo: redirect to /categories page

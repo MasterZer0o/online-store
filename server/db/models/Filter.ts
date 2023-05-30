@@ -1,10 +1,10 @@
 import type { CreationOptional, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
 import { DataTypes } from 'sequelize'
-import db from '../config'
+import db from '../client'
 import { Category } from './Category'
 
 interface ProductFilter extends Model<InferAttributes<ProductFilter>, InferCreationAttributes<ProductFilter>> {
-  id: string
+  id: CreationOptional<number>
   name: string
   category_id: string
   created_at: CreationOptional<Date>
@@ -13,7 +13,7 @@ interface ProductFilter extends Model<InferAttributes<ProductFilter>, InferCreat
 
 declare global {
   export interface FilterType {
-    id: string
+    id: number
     name: string
     created_at: Date
     updated_at: Date
@@ -22,8 +22,9 @@ declare global {
 
 export const Filter = db.define<ProductFilter>('Filter', {
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   name: {

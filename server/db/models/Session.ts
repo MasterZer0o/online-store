@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import db from '../config'
+import db from '../client'
 import { User } from './User'
 
 export const Session = db.define<UserSessionModel>('Session', {

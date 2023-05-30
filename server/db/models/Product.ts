@@ -1,8 +1,7 @@
 import { DataTypes } from 'sequelize'
 import type { CreationOptional, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import db from '../config'
+import db from '../client'
 import { Category } from './Category'
-import { Discount } from './Discount'
 
 interface ProductModel extends Model<InferAttributes<ProductModel>, InferCreationAttributes<ProductModel>> {
   id: CreationOptional<number>
@@ -14,7 +13,6 @@ interface ProductModel extends Model<InferAttributes<ProductModel>, InferCreatio
   rating_rate: number
   rating_count: number
   category_id: string
-  discount_id: string | null
   created_at: CreationOptional<Date>
   updated_at: CreationOptional<Date>
   count?: string | number
@@ -60,13 +58,6 @@ export const Product = db.define<ProductModel>('Product', {
     }
 
   },
-  discount_id: {
-    type: DataTypes.STRING(80),
-    references: {
-      model: Discount,
-      key: 'id'
-    }
-  },
   created_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
@@ -80,19 +71,22 @@ export const Product = db.define<ProductModel>('Product', {
   tableName: 'products',
   timestamps: false
 })
-
+type Amount = number
 declare global {
   export interface Product {
     id: number
     name: string
     description: string
-    price: number
+    price: {
+      amount: Amount
+      discountedAmount?: Amount
+      discountLabel?: string
+  }
     product_image: string
     SKU: string
     rating_rate: number
     rating_count: number
     category_id: string
-    discount_id: string | null
     created_at: Date
     updated_at: Date
   }

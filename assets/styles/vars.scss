@@ -4,8 +4,11 @@
   --bg3: hsl(222, 16%, 28%);
   --bg4: hsl(222, 16%, 35%);
   --bg5: hsl(222, 16%, 40%);
+  --bg-invert: hsl(218, 27%, 100%);
   --text: #eceff4;
+  --text-invert: #2e3440;
   --text-dim: rgba(236, 239, 244, 0.876);
+  --shadow: hsla(222, 16%, 28%, 0.5);
   --eye-color: hsl(219, 27%, 80%);
 }
 .light {
@@ -14,8 +17,11 @@
   --bg3: hsl(218, 27%, 85%);
   --bg4: hsl(218, 27%, 80%);
   --bg5: hsl(218, 27%, 75%);
+  --bg-invert: hsl(222, 16%, 28%);
   --text: #2e3440;
+  --text-invert: #eceff4;
   --text-dim: #2e3440c6;
+  --shadow: hsla(217, 27%, 85%, 0.5);
   --eye-color: hsl(220, 16%, 20%);
 }
 

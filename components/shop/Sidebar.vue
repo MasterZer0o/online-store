@@ -2,12 +2,14 @@
   <section class="sidebar">
     <div class="filters-container">
       <div>
-        <span><strong>Filters</strong></span>
+        <span>
+          <strong>Filters</strong>
+        </span>
         <button type="button">
           Clear all
         </button>
       </div>
-      <div class="filters">
+      <div class="active-filters">
         <div v-for="i in 5" :key="i" class="filter">
           <span>Filter</span>
           <button type="button" aria-label="remove filter" title="remove filter">

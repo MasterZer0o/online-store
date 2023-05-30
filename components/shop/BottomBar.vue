@@ -6,7 +6,11 @@ const text = computed(() => {
   const totalPages = store.currentCategory.totalPages
   const productCount = store.products.length
 
-  return `${totalPages === 1 ? productCount : (currentPage - 1) * 30}-${currentPage === totalPages ? (totalPages - 1) * 30 + productCount : (totalPages - 1) * 30}`
+  return `${totalPages === 1
+    ? productCount
+    : (currentPage - 1) * 30}-${currentPage === totalPages
+    ? (totalPages - 1) * 30 + productCount
+    : (totalPages - 1) * 30}`
 })
 </script>
 

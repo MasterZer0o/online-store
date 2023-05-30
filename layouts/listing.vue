@@ -7,6 +7,7 @@
   <main>
     <NuxtPage />
   </main>
+  <Footer />
 </template>
 
 <style lang="scss">

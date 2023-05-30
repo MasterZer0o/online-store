@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const count = 3
 </script>
 
 <template>
@@ -14,20 +14,23 @@
           </label>
         </div>
 
-        <div class="action">
-          <IconsCompare />
-          <ShopTooltip text="Compare products" />
-        </div>
-
-        <div class="action">
+        <div class="action user-action" :data-count="count">
           <IconsCart />
           <ShopTooltip text="Show cart" />
         </div>
+
+        <div class="action">
+          <IconsHeart width="30" height="30" />
+          <ShopTooltip text="Your wishlist" />
+        </div>
+
+        <div class="action">
+          <IconsUserFilled />
+          <ShopTooltip text="Your account" />
+        </div>
       </section>
+
       <ThemeSwitcher />
-      <section class="account-manage">
-        <span>Account</span>
-      </section>
     </div>
   </header>
 </template>

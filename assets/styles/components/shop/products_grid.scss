@@ -2,18 +2,17 @@
   padding: 1.5em 10px 10px;
   margin: auto;
   margin-bottom: 1em;
-  width: fit-content;
   position: relative;
 
   .products-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1.2rem;
+    width: 100%;
   }
 
   .product-card {
-    width: 230px;
-    height: 330px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--bg4);
@@ -21,13 +20,15 @@
     overflow: hidden;
     position: relative;
 
-    .product-rating {
-      display: flex;
-      align-items: center;
-      padding: 0.5em 0;
-      & > span {
-        margin-left: 5px;
-      }
+    .product-discount {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      font-size: 0.95em;
+      font-weight: 700;
+      background-color: var(--accent);
+      padding: 3px 4px;
+      border-radius: 5px;
     }
 
     &__bottom {
@@ -74,7 +75,8 @@
     }
 
     img {
-      height: 200px;
+      width: 100%;
+      height: 300px;
       object-fit: cover;
       cursor: pointer;
       background-color: rgb(179, 179, 179);
@@ -146,10 +148,12 @@
   background: rgba(0, 0, 0, 0.5);
   inset: 0;
   z-index: 111;
+  width: 100%;
   & .wrapper {
     display: grid;
     width: fit-content;
     margin: auto;
+    margin-top: 70px;
     place-items: center;
     position: sticky;
     top: 50%;
@@ -172,5 +176,11 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .products-container .products-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
