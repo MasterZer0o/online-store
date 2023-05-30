@@ -13,6 +13,7 @@ import { Product } from './models/Product'
 import { ShoppingSession } from './models/ShoppingSession'
 import { Filter } from './models/Filter'
 import { FilterOptions } from './models/FilterOptions'
+import { WishlistItem } from './models/WishListItem'
 
 export async function syncModels(force?: boolean, _models?: ModelStatic<Model>[]) {
   console.log('------------------------')
@@ -29,7 +30,7 @@ export async function syncModels(force?: boolean, _models?: ModelStatic<Model>[]
   const models = [
     User, Session, Product, CartItem, Category, PaymentDetails,
     OrderItem, OrderDetails, ShoppingSession,
-    Discount, Filter, FilterOptions
+    Discount, Filter, FilterOptions, WishlistItem
   ]
 
   for (const model of models) {

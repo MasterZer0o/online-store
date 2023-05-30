@@ -18,11 +18,12 @@ const count = 3
           <IconsCart />
           <ShopTooltip text="Show cart" />
         </div>
-
-        <div class="action">
-          <IconsHeart width="30" height="30" />
-          <ShopTooltip text="Your wishlist" />
-        </div>
+        <NuxtLink to="/wishlist">
+          <div class="action">
+            <IconsHeart width="30" height="30" />
+            <ShopTooltip text="Your wishlist" />
+          </div>
+        </NuxtLink>
 
         <div class="action">
           <IconsUserFilled />
