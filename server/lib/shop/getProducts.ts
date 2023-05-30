@@ -1,5 +1,4 @@
 import { Op } from 'sequelize'
-import { logInfo } from '../logger'
 import sequelize from '~/server/db/client'
 import { Product } from '~/server/db/models/Product'
 import { Discount } from '~/server/db/models/Discount'
@@ -20,7 +19,6 @@ type DataFromDatabase =
     })[]
 export async function getProducts(options: Params) {
   const MAX_PRODUCTS_PER_PAGE = 30
-
   const whereConditions: Record<string, any> = { category_id: options.categoryId }
 
   // CASE: get next page results
