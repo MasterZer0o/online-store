@@ -11,3 +11,5 @@ dist
 
 priv
 test.js
+exports.ts
+migrations

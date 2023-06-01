@@ -82,7 +82,7 @@ export async function getProducts(options: Params) {
       include: [ // this adds `count` property meaning count of all products in this category
         sequelize.literal(`(SELECT COUNT(*) as count FROM products WHERE products.category_id = '${options.categoryId}')`),
       ]
-    }
+    },
   }) as unknown as DataFromDatabase
   // CASE: no products in this category or user manually went to page higher than total pages
   if (data.length === 0) {

@@ -15,7 +15,8 @@
     "@typescript-eslint/consistent-type-definitions": "off",
     "antfu/top-level-function": "off",
     "vue/dot-location": "off",
-    "vue/space-unary-ops": "off"
+    "vue/space-unary-ops": "off",
+    "no-restricted-globals": 0
   },
   "overrides": [
     {

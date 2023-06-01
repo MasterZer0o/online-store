@@ -24,6 +24,8 @@
 - filters
 
 
+- check if query params are correct in product query 
+
 https://www.spreadshirt.pl/
 https://www.redbubble.com/
 
