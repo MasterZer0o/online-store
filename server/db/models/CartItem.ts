@@ -53,7 +53,7 @@ export const CartItem = db.define<CartItemModel>('CartItem', {
   tableName: 'cart_items'
 })
 declare global {
-  export interface CateItem {
+  export interface CartItem {
     id: string
     quantity: number
     session_id: string

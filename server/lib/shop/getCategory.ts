@@ -1,18 +1,30 @@
-import { Category } from '~/server/db/models/Category'
+import { eq } from 'drizzle-orm'
+import { categories } from '~/server/db/drizzle/schema/products'
 
 export async function getCategory(slug: string) {
   try {
-    const category = await Category.findOne({ where: { slug }, raw: true, attributes: ['name', 'id'] })
+    const db = getDb()
 
-    if (category === null)
-      throw new Error('Category not found')
+    const [category] = await db.select({
+      name: categories.name,
+      id: categories.id
+    }).from(categories).where(eq(categories.slug, slug)).limit(1)
+
+    if (!category)
+      throw new Error('Category not found', { cause: 'Not found' })
 
     return {
       name: category.name,
       id: category.id
     }
   }
-  catch (error: unknown) {
-    return { error: 'Category not found' }
+
+  catch (error: any) {
+    if (error?.cause === 'Not found')
+      return { error: 'Category not found' }
+
+    return {
+      error: 'Internal error'
+    }
   }
 }

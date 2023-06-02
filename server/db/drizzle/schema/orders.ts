@@ -29,10 +29,22 @@ export const payments = pgTable('payment_details', {
   updatedAt: timestamp('updated_at', { withTimezone: true })
 })
 
+export const cartItem = pgTable('cart_items', {
+  id: uuid('id').defaultRandom().notNull(),
+  productId: integer('product_id').notNull(),
+  userId: integer('user_id').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+})
+
 declare global {
   export type OrderItemDrizzle = InferModel<typeof orderItems>
   export type NewOrderItem = InferModel<typeof orderItems, 'insert'>
 
   export type OrderDetailsDrizzle = InferModel<typeof orderDetails>
   export type NewOrderDetails = InferModel<typeof orderDetails, 'insert'>
+
+  export type CartItemDrizzle = InferModel<typeof orderDetails>
+  export type NewCartItem = InferModel<typeof orderDetails, 'insert'>
+
 }
