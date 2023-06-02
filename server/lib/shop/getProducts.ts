@@ -2,7 +2,7 @@ import { and, asc, desc, eq, gt, gte, sql } from 'drizzle-orm'
 import { discounts, products } from '~/server/db/drizzle/schema/products'
 
 interface Params {
-  categoryId: number | string
+  categoryId: number
   page: string
   cid?: string
   meta: boolean
@@ -13,7 +13,12 @@ export async function getProducts(options: Params) {
 
   const MAX_PRODUCTS_PER_PAGE = 30
 
-  const whereConditions: Record<string, any> = { categoryId: 10, filters: [] }
+  const whereConditions: Record<string, any> = {
+    categoryId: options.categoryId,
+    filters: [
+      eq(products.categoryId, options.categoryId)
+    ]
+  }
 
   // CASE: get next page results
   if (options.cid) {
@@ -24,7 +29,7 @@ export async function getProducts(options: Params) {
     const offset = (parseInt(options.page) - 1) * MAX_PRODUCTS_PER_PAGE || 0
 
     whereConditions.filters.push(gte(products.id,
-      sql`(SELECT MIN(id) + ${offset} FROM ${products} WHERE ${products.id} <= (SELECT MAX(id) FROM ${products}) AND ${products.categoryId} = ${whereConditions.categoryId})`
+      sql`(SELECT MIN(id) + ${offset} FROM ${products} WHERE ${products.id} <= (SELECT MAX(${products.id}) FROM ${products}) AND ${products.categoryId} = ${whereConditions.categoryId})`
     ))
   }
   const selectFields = {
