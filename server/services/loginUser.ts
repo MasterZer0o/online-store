@@ -1,27 +1,30 @@
-import { User } from '../db/models/User'
+import { eq } from 'drizzle-orm'
+import { users } from '../db/drizzle/schema/users'
 import { verifyPassword } from '../utils/hashPassword'
-import { logError } from '~~/server/lib/logger'
 
 export default async function loginUser({ login, password }: UserLoginCredentials): Promise<UserLoginResponse> {
   try {
-    const user = (await User.findOne({
-      where: {
-        username: login
-      },
-      attributes: ['password', 'id', 'role', 'username'],
-      raw: true
-    })) as null | User
+    const [user] = await getDb().select({
+      password: users.password,
+      id: users.id,
+      role: users.role,
+      username: users.name
+    }).from(users).where(eq(users.email, login))
 
-    if (user === null)
+    if (!user)
       return null
 
-    const hashedPassword: string = user.password
+    const hashedPassword = user.password
     const isPasswordCorrect: boolean = await verifyPassword(hashedPassword, password)
 
     if (!isPasswordCorrect)
       return null
 
-    return { userId: user.id, role: user.role, username: user.username }
+    return {
+      userId: user.id,
+      role: user.role,
+      username: user.username
+    }
   }
   catch (error) {
     logError('error', 'Error while logging in user', error)

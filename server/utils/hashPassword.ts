@@ -1,5 +1,6 @@
 import argon2 from 'argon2'
 import { logError } from '~~/server/lib/logger'
+
 /**
  *
  * @param password password to hash

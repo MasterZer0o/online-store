@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
       // }
     }
   }
-  catch (error) {
+  catch (error: any) {
     logError(error)
   }
 })

@@ -104,11 +104,11 @@ onUnmounted(() => {
             <div>DEV ONLY</div>
             <button
               type="button"
-              style="padding: .4em .8em;margin-right: 5px;background-color: cornsilk;border: none;border-radius: 4px; color: black;font-weight: bold;" @click="passwordValue = 'testtest';loginValue = 'test';tryLogin()"
+              style="padding: .4em .8em;margin-right: 5px;background-color: cornsilk;border: none;border-radius: 4px; color: black;font-weight: bold;" @click="passwordValue = 'testtest';loginValue = 'test@test.com';tryLogin()"
             >
               as user
             </button>
-            <button type="button" style="padding: .4em .8em;background-color: cornsilk;border: none;border-radius: 4px; color: black;font-weight: bold;" @click="passwordValue = 'adminadmin'; loginValue = 'admin';tryLogin()">
+            <button type="button" style="padding: .4em .8em;background-color: cornsilk;border: none;border-radius: 4px; color: black;font-weight: bold;" @click="passwordValue = 'adminadmin'; loginValue = 'admin@admin.com';tryLogin()">
               as admin
             </button>
           </div>

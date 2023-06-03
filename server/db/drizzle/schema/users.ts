@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, serial, timestamp, uuid, varchar } from 'drizzle-orm/pg-core'
 import type { InferModel } from 'drizzle-orm'
 import { products } from './products'
 
@@ -12,11 +12,11 @@ export const users = pgTable('users', {
   email: varchar('email').notNull(),
   role: varchar('role', { enum: roles }).default('user').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at'),
+  updatedAt: timestamp('updated_at')
 })
 
 export const sessions = pgTable('sessions', {
-  id: serial('id').primaryKey(),
+  id: uuid('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, {
     onDelete: 'cascade',
   }),
@@ -30,7 +30,7 @@ export const wishlist = pgTable('wishlist', {
   }),
   productId: integer('product_id').notNull().references(() => products.id),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at'),
+  updatedAt: timestamp('updated_at')
 })
 
 declare global {

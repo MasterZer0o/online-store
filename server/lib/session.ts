@@ -1,6 +1,6 @@
+import { eq } from 'drizzle-orm'
+import { sessions, users } from '../db/drizzle/schema/users'
 import { Session } from '../db/models/Session'
-import { User } from '../db/models/User'
-import { logError, logSuccess } from '~~/server/lib/logger'
 
 type SessionReturn =
   { sessionId: string }
@@ -14,7 +14,11 @@ export async function saveSession({ userId, role, id }: UserSessionInfo): Promis
       user_id: userId
     }
 
-    await Session.create(session, { returning: false })
+    await getDb().insert(sessions).values({
+      id: session.id,
+      userId
+    })
+
     logSuccess(`Session created for userID: ${session.user_id}`)
 
     return { sessionId: session.id }
@@ -36,32 +40,29 @@ export async function removeSession(sessionId: string) {
           id: sessionId
         }
       })
+
+    await getDb().delete(sessions).where(eq(sessions.id, sessionId))
   }
-  catch (error) {
+  catch (error: any) {
     logError(error)
   }
 }
 
 export async function findUserSession(sessionId: string) {
   try {
-    const user = await Session.findByPk(sessionId, {
-      attributes: ['user_id', 'id', 'role'],
-      include: [{ model: User, attributes: ['username'], required: true }],
-      logging: false
-    }) as UserSessionModel & {
-        dataValues: {
-          User: {
-            dataValues: { username: string }
-          }
-      }
-    } | null
+    const [user] = await getDb().select({
+      name: users.name
+    })
+      .from(sessions)
+      .leftJoin(users, eq(sessions.userId, users.id))
+      .where(eq(sessions.id, sessionId))
+      .limit(1)
 
     if (!user)
       return user
 
     return {
-      username: user.dataValues.User.dataValues.username,
-      role: user.dataValues.role
+      username: user.name
     }
   }
   catch (error) {

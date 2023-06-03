@@ -1,27 +1,31 @@
-import { User } from '../db/models/User'
+import { eq } from 'drizzle-orm'
+import { users } from '../db/drizzle/schema/users'
 import { hashPassword } from '../utils/hashPassword'
-import { logSuccess } from '~~/server/lib/logger'
+
 /**
  * This function saves user to database if validated successfully.
  * @param userData data provided by user through form
  */
 export default async function saveUser(userData: RegisterUser) {
   const { username, email, password } = userData
+
   try {
     const hashedPassword = await hashPassword(password)
+
     if (typeof hashedPassword !== 'string')
       throw hashedPassword
 
-    await User.create({
-      username,
+    await getDb().insert(users).values({
       email,
-      password: hashedPassword
-    }, { returning: false })
+      password: hashedPassword,
+      name: username,
+      lastname: 'random'
+    })
 
     logSuccess(`User '${userData.username}' saved.`)
   }
   catch (error) {
-    // eslint-disable-next-line no-throw-literal
+    /* eslint-disable-next-line no-throw-literal */
     throw {
       error: 'Failed to save user to database.',
       type: 'critical',
@@ -31,17 +35,21 @@ export default async function saveUser(userData: RegisterUser) {
 }
 
 export async function checkAvailability(userData: RegisterUser) {
-  const emailExists = await User.findOne({
-    where: {
-      email: userData.email
-    },
-    attributes: ['email']
-  })
-  if (emailExists) {
+  try {
+    const emailExists = await getDb().query.users.findFirst({ where: eq(users.email, userData.email) })
+
+    if (emailExists) {
+      return {
+        error: true,
+        message: 'Email is in use'
+      }
+    }
+    return { error: false }
+  }
+  catch (error) {
     return {
       error: true,
-      message: 'Email is in use'
+      message: 'Internal error'
     }
   }
-  return { error: false }
 }
