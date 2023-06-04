@@ -5,7 +5,7 @@
     return
   }
 
-  let theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  let theme = window?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   localStorage.setItem('theme', theme)
   document.body.setAttribute('class', theme)
 })()

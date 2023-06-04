@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { users } from '../db/drizzle/schema/users'
+import { users } from '../db/schema/users'
 import { verifyPassword } from '../utils/hashPassword'
 
 export default async function loginUser({ login, password }: UserLoginCredentials): Promise<UserLoginResponse> {
@@ -27,7 +27,7 @@ export default async function loginUser({ login, password }: UserLoginCredential
     }
   }
   catch (error) {
-    logError('error', 'Error while logging in user', error)
+    logError('Error while logging in user', error)
     return null
   }
 }

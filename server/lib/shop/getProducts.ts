@@ -1,5 +1,5 @@
 import { and, asc, desc, eq, gt, gte, sql } from 'drizzle-orm'
-import { discounts, products } from '~/server/db/drizzle/schema/products'
+import { discounts, products } from '~/server/db/schema/products'
 
 interface Params {
   categoryId: number

@@ -1,5 +1,3 @@
-import type { CreationOptional, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-
 export { }
 declare global {
   export type RegisterError = {
@@ -12,35 +10,9 @@ declare global {
 
   export type UserRole = 'admin' | 'user' | 'guest'
 
-  export interface User {
-    id: number
-    username: string
-    password: string
-    email: string
-    role: UserRole
-    last_access?: number
-  }
-  export interface UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
-    id: CreationOptional<number>
-    username: string
-    password: string
-    email: string
-    role: CreationOptional<UserRole>
-    last_access: CreationOptional<number>
-    created_at: CreationOptional<Date>
-    updated_at: CreationOptional<Date>
-  }
-
   export interface UserSession {
     id: string
     timeCreated?: string
-    user_id: number
-    role: UserRole
-  }
-
-  export interface UserSessionModel extends Model<InferAttributes<UserSessionModel>, InferCreationAttributes<UserSessionModel>> {
-    id: string
-    created_at: string
     user_id: number
     role: UserRole
   }

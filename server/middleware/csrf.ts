@@ -1,4 +1,5 @@
-import { createCipheriv, createDecipheriv, randomBytes, randomUUID } from 'crypto'
+import { createCipheriv, createDecipheriv, randomBytes, randomUUID } from 'node:crypto'
+import { Buffer } from 'node:buffer'
 import { getHeader, setResponseStatus } from 'h3'
 import { userSession } from '../lib/userSession'
 import { logError } from '~~/server/lib/logger'
@@ -29,7 +30,7 @@ export function verifyCSRF(secret: string, token: string) {
 
     return decrypted === secret
   }
-  catch (error) {
+  catch (error: any) {
     logError(error)
     return false
   }

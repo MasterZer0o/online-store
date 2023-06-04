@@ -1,6 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { sessions, users } from '../db/drizzle/schema/users'
-import { Session } from '../db/models/Session'
+import { sessions, users } from '../db/schema/users'
 
 type SessionReturn =
   { sessionId: string }
@@ -8,20 +7,14 @@ type SessionReturn =
 
 export async function saveSession({ userId, role, id }: UserSessionInfo): Promise<SessionReturn> {
   try {
-    const session: UserSession = {
-      id,
-      role,
-      user_id: userId
-    }
-
     await getDb().insert(sessions).values({
-      id: session.id,
+      id,
       userId
     })
 
-    logSuccess(`Session created for userID: ${session.user_id}`)
+    logSuccess(`Session created for userID: ${userId}`)
 
-    return { sessionId: session.id }
+    return { sessionId: id }
   }
   catch (error: any) {
     logError(error)
@@ -35,13 +28,7 @@ export async function saveSession({ userId, role, id }: UserSessionInfo): Promis
 export async function removeSession(sessionId: string) {
   try {
     if (sessionId)
-      await Session.destroy({
-        where: {
-          id: sessionId
-        }
-      })
-
-    await getDb().delete(sessions).where(eq(sessions.id, sessionId))
+      await getDb().delete(sessions).where(eq(sessions.id, sessionId))
   }
   catch (error: any) {
     logError(error)

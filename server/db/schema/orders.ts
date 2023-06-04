@@ -40,13 +40,12 @@ export const cartItem = pgTable('cart_items', {
 })
 
 declare global {
-  export type OrderItemDrizzle = InferModel<typeof orderItems>
+  export type OrderItem = InferModel<typeof orderItems>
   export type NewOrderItem = InferModel<typeof orderItems, 'insert'>
 
-  export type OrderDetailsDrizzle = InferModel<typeof orderDetails>
+  export type OrderDetails = InferModel<typeof orderDetails>
   export type NewOrderDetails = InferModel<typeof orderDetails, 'insert'>
 
-  export type CartItemDrizzle = InferModel<typeof orderDetails>
+  export type CartItem = InferModel<typeof orderDetails>
   export type NewCartItem = InferModel<typeof orderDetails, 'insert'>
-
 }

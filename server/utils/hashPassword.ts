@@ -23,7 +23,7 @@ export async function verifyPassword(hash: string, password: string) {
   try {
     return await argon2.verify(hash, password, { timeCost: 2, type: argon2.argon2i })
   }
-  catch (error) {
+  catch (error: any) {
     logError(error)
     return false
   }

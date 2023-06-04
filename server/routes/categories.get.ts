@@ -1,49 +1,15 @@
-import { Op } from 'sequelize'
-import { logger } from '@nuxt/kit'
-import { Category } from '../db/models/Category'
-import { logInfo } from '../lib/logger'
+import { categories } from '../db/schema/products'
 
 export default defineEventHandler(async (): Promise<CategoriesReturn> => {
-  const attributes = ['name', 'slug', 'type', 'related_to', 'id'] as const
-  const test = await Category.findAll({
-    raw: true,
-    // @ts-expect-error - wrong type
-    attributes
-  })
+  const test = await getDb().select({
+    name: categories.name,
+    slug: categories.slug,
+    type: categories.type,
+    related_to: categories.relatedTo,
+    id: categories.id
+  }).from(categories)
+
   const { BASE_URL } = useRuntimeConfig()
-
-  type CategoryObject = Omit<{
-    [k in typeof attributes[number]]: string
-  }, 'type' | 'related_to' | 'id'>
-
-  // const test2 = test.reduce((prev, curr) => {
-  //   const saveObj = {
-  //     name: curr.name,
-  //     slug: curr.slug,
-  //     link: `${BASE_URL}/category/${curr.slug}`
-  //   }
-
-  //   const shape = {
-  //     key: [{
-  //       subCat: {
-  //         name: '',
-  //         slug: ''
-  //       }
-  //     }]
-  //   }
-
-  //   if (curr.type === 'main') {
-
-  //     prev.main.push({
-
-  //     })
-  //     // prev.main.push(saveObj)
-  //   }
-
-  //   else prev.subCategories.push(saveObj)
-
-  //   return prev
-  // }, { main: [] as CategoryObject[], subCategories: [] as CategoryObject[] })
 
   const mainCategories = test.filter(category => category.type === 'main')
   const subCategories = test.filter(category => category.type === 'subcategory')
@@ -66,40 +32,6 @@ export default defineEventHandler(async (): Promise<CategoriesReturn> => {
     prev.push(obj)
     return prev
   }, [] as { name: string; subCategories: Record<'link' | 'slug' | 'name', string>[] }[])
-
-  // const test2 = test.reduce((prev, curr) => {
-  //   const saveObj = {
-  //     name: curr.name,
-  //     slug: curr.slug,
-  //     link: `${BASE_URL}/category/${curr.slug}`
-  //   }
-
-  //   if (curr.type === 'subcategory') {
-  //     if (!prev[curr.related_to]) {
-  //       prev[curr.related_to].push(curr)
-  //     }
-  //   }
-
-  //   return prev
-  // }, [] as { name: string; subCategories: CategoryObject[] }[])
-
-  // const categories = await Category.findAll({
-  //   raw: true,
-  //   attributes: ['name', 'slug', 'id'],
-  //   where: {
-  //     name: {
-  //       [Op.in]: ['Spodnie', 'Bluzy'] // ! hardcoded
-  //     }
-  //   }
-  // })
-
-  // return categories.map((category) => {
-  //   return {
-  //     name: category.name,
-  //     link: `${BASE_URL}/category/${category.slug}`,
-  //     slug: category.slug
-  //   }
-  // })
 
   return merged
 })

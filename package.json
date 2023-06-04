@@ -44,7 +44,6 @@
     "nuxt-purgecss": "^2.0.0",
     "pg": "^8.11.0",
     "primevue": "^3.29.2",
-    "sequelize": "^6.32.0",
     "validator": "^13.9.0"
   }
 }

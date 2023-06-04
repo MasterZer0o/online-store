@@ -19,10 +19,10 @@ export const filterOptions = pgTable('filter_options', {
 })
 
 declare global {
-  export type FilterOptionsDriz = InferModel<typeof filterOptions>
+  export type FilterOptions = InferModel<typeof filterOptions>
   export type NewFilterOptions = InferModel<typeof filterOptions, 'insert'>
 
-  export type FilterDriz = InferModel<typeof filterOptions>
+  export type Filter = InferModel<typeof filterOptions>
   export type NewFilter = InferModel<typeof filterOptions, 'insert'>
 
 }

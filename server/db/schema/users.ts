@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, timestamp, uuid, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core'
 import type { InferModel } from 'drizzle-orm'
 import { products } from './products'
 
@@ -16,7 +16,7 @@ export const users = pgTable('users', {
 })
 
 export const sessions = pgTable('sessions', {
-  id: uuid('id').primaryKey(),
+  id: varchar('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, {
     onDelete: 'cascade',
   }),
@@ -34,12 +34,12 @@ export const wishlist = pgTable('wishlist', {
 })
 
 declare global {
-  export type UserDrizzle = InferModel<typeof users>
+  export type User = InferModel<typeof users>
   export type NewUser = InferModel<typeof users, 'insert'>
 
-  export type SessionDrizzle = InferModel<typeof sessions>
+  export type Session = InferModel<typeof sessions>
   export type NewSession = InferModel<typeof sessions, 'insert'>
 
-  export type WishlistDriz = InferModel<typeof wishlist>
+  export type Wishlist = InferModel<typeof wishlist>
   export type NewWishlist = InferModel<typeof wishlist, 'insert'>
 }

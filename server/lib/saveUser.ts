@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { users } from '../db/drizzle/schema/users'
+import { users } from '../db/schema/users'
 import { hashPassword } from '../utils/hashPassword'
 
 /**
