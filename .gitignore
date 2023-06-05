@@ -10,6 +10,6 @@ dist
 .vscode
 
 priv
-test.js
 exports.ts
 migrations
+temp

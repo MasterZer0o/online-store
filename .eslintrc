@@ -7,7 +7,7 @@
     "@typescript-eslint/comma-dangle": "off",
     "vue/comma-dangle": "off",
     "vue/valid-v-for": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
     "max-statements-per-line": "off",
     "unused-imports/no-unused-imports": "off",
     "vue/html-self-closing": "off",
