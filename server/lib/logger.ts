@@ -9,7 +9,7 @@ export function logSuccess(messages: any, ...args: any) {
 }
 
 export function logError(message: string | Error, ...args: any[]) {
-  const instance = logger.create({ formatOptions: { colors: true, compact: false, } })
+  const instance = logger.create({ formatOptions: { colors: true, compact: false } })
 
   instance.error(message, args.join(' '))
 }

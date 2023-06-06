@@ -6,10 +6,7 @@ if (process.client) {
     theme.value = currentTheme
     const el = document.querySelector('.theme-switcher') as HTMLElement
     el.dataset.theme = theme.value
-  }
-  catch (error) {
-
-  }
+  } catch (error) {}
 }
 
 function switchTheme() {

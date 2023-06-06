@@ -1,11 +1,11 @@
 {
-  "extends": ["@antfu"],
+  "extends": ["@antfu", "prettier"],
   "rules": {
     "indent": ["warn", 2],
     "curly": "off",
     "no-console": "off",
     "@typescript-eslint/comma-dangle": "off",
-    "vue/comma-dangle": "off",
+    "vue/comma-dangle": "error",
     "vue/valid-v-for": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "max-statements-per-line": "off",
