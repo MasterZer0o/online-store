@@ -5,23 +5,33 @@ import equals from 'validator/es/lib/equals'
 import isLength from 'validator/es/lib/isLength'
 import isNumeric from 'validator/es/lib/isNumeric'
 
-const errorMessages = {
-  emptyField: 'This field cannot be empty.',
-  badEmail: 'Email has invalid format.',
-  notMatching: 'Passwords don\'t match.',
-  badCharacters: 'Please use only letters and numbers.',
-  usernameLength: 'Please keep your username between 3 and 20 characters (a-z) (0-9).',
-  passwordLength: 'Your password should contain at least 8 characters.',
-  onlyNumber: 'Username cannot be only number.',
-  firstDigit: 'Username cannot start with a digit.'
-} as const
+type ErrorKey =
+  'emptyField' |
+  'badEmail' |
+  'notMatching' |
+  'badCharacters' |
+  'usernameLength' |
+  'passwordLength' |
+  'onlyNumber' |
+  'firstDigit'
 
 /**
  * Utility function for setting error on form.
  * @param field form field `name`
  * @param type error type
  */
-export function setValidationError(field: RegisterField, validationErrorType: keyof typeof errorMessages): void {
+export function setValidationError(field: RegisterField, validationErrorType: ErrorKey): void {
+  const errorMessages: Record<ErrorKey, string> = {
+    emptyField: 'This field cannot be empty.',
+    badEmail: 'Email has invalid format.',
+    notMatching: 'Passwords don\'t match.',
+    badCharacters: 'Please use only letters and numbers.',
+    usernameLength: 'Please keep your username between 3 and 20 characters (a-z) (0-9).',
+    passwordLength: 'Your password should contain at least 8 characters.',
+    onlyNumber: 'Username cannot be only number.',
+    firstDigit: 'Username cannot start with a digit.'
+  }
+
   const store = useRegisterStore()
 
   const registerErrors = store.registerErrors
@@ -74,9 +84,9 @@ export const validateEmail = (email: string) => {
 export const validatePasswords = (password: string, passwordRepeat: string, event?: any) => {
   const isPasswordEmpty = isEmpty(password, { ignore_whitespace: true })
   const isPasswordRepeatEmpty = isEmpty(passwordRepeat, { ignore_whitespace: true })
-  const arePasswordFieldsEmpty = isPasswordEmpty && isPasswordRepeatEmpty
+  const passwordFieldsEmpty = isPasswordEmpty && isPasswordRepeatEmpty
 
-  if (arePasswordFieldsEmpty) {
+  if (passwordFieldsEmpty) {
     setValidationError('password', 'emptyField')
     setValidationError('passwordRepeat', 'emptyField')
     return

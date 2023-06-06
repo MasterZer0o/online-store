@@ -5,7 +5,7 @@ export const useProducts = defineStore('products', () => {
   const cid = ref<string | undefined>()
 
   interface CategoryMeta {
-    name: string | undefined
+    name: string
     slug: string
     productCount: number
     totalPages: number

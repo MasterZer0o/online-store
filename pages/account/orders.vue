@@ -3,8 +3,5 @@
 </script>
 
 <template>
-  <main>
-    <NuxtPage />
-  </main>
-  <Footer />
+  <h1>My orders</h1>
 </template>

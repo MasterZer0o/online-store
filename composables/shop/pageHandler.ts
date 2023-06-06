@@ -1,6 +1,6 @@
 export async function nextPage() {
   const store = useProducts()
-  if (store.currentPage === store.currentCategory.totalPages)
+  if (store.currentPage === store.currentCategory.totalPages || store.isLoadingProducts)
     return
 
   store.currentPage++
@@ -21,16 +21,16 @@ export async function previousPage() {
 }
 
 export const pageFromInput = debounce((event: InputEvent, shouldScrollTop?: boolean) => {
-  const store = useProducts()
-
   const inputElement = event.target as HTMLInputElement
   const pageValue = inputElement.valueAsNumber
-  const isValidPageNumber = isNaN(pageValue)
+  const isBadPageNumber = Number.isNaN(pageValue)
 
-  if (isValidPageNumber) {
+  if (isBadPageNumber) {
     inputElement.blur()
     return
   }
+
+  const store = useProducts()
 
   if (pageValue > store.currentCategory.totalPages || pageValue <= 0 || pageValue === store.currentPage)
     return
@@ -47,7 +47,7 @@ export const pageFromInput = debounce((event: InputEvent, shouldScrollTop?: bool
 }, 1000)
 
 export async function goToPage(page: number, meta = false) {
-  await fetchProducts(true, meta)
+  await fetchProducts(meta)
 
   return navigateTo({
     query: {

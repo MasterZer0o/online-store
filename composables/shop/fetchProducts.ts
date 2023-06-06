@@ -1,9 +1,6 @@
-export async function fetchProducts(isLoadingMore = false, withMeta = false) {
+export async function fetchProducts(withMeta = false) {
   const store = useProducts()
   const categoryName = store.currentCategory.slug
-
-  // if (isLoadingMore)
-  //   store.beginLoader()
 
   if (!store.isLoadingInitial)
     store.beginLoader()
@@ -17,13 +14,14 @@ export async function fetchProducts(isLoadingMore = false, withMeta = false) {
     }
   })
 
+  // this is the case when requested page is greater than total pages.
+  // loaded and redirecting to last possible page
   if (products.category?.totalPages < store.currentPage) {
-    // this is the case when requested page is greater than total pages.
-    // loaded and redirecting to last possible page
-
     store.currentPage = products.category?.totalPages
 
-    await navigateTo({
+    fetchProducts(true)
+
+    return navigateTo({
       path: useRoute().path,
       query: { page: store.currentPage },
       replace: true

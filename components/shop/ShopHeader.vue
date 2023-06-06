@@ -6,14 +6,13 @@ const count = 3
   <header class="shop-header">
     <div class="wrapper">
       <ShopHeaderNav />
+      <div class="action search-action">
+        <label>
+          <input type="text" placeholder="Search" spellcheck="false">
+          <IconsSearch />
+        </label>
+      </div>
       <section class="actions">
-        <div class="action search-action">
-          <label>
-            <input type="text" placeholder="Search" spellcheck="false">
-            <IconsSearch />
-          </label>
-        </div>
-
         <div class="action user-action" :data-count="count">
           <IconsCart />
           <ShopTooltip text="Show cart" />
@@ -27,11 +26,9 @@ const count = 3
 
         <div class="action">
           <IconsUserFilled />
-          <ShopTooltip text="Your account" />
+          <ShopNavbarUser />
         </div>
       </section>
-
-      <ThemeSwitcher />
     </div>
   </header>
 </template>

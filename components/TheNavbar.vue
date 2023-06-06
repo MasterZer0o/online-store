@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const userStore = useUserStore()
+const userStore = useUser()
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const userStore = useUserStore()
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink class="nav-link" to="/user/account">
+        <NuxtLink class="nav-link" to="/account">
           Account
         </NuxtLink>
       </li>

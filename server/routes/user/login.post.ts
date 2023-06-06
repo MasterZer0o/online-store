@@ -1,5 +1,4 @@
-import { saveSession } from '~~/server/lib/session'
-import { userSession } from '~~/server/lib/userSession'
+import { getSession, saveSession } from '~~/server/lib/session'
 import loginUser from '~~/server/services/loginUser'
 import { logError } from '~~/server/lib/logger'
 
@@ -11,14 +10,15 @@ export default defineEventHandler(async (event): Promise<LoginResponse> => {
     if (user === null)
       return { error: true, status: 'Login or password is incorrect.' }
 
-    const session = await userSession(event, remember)
+    const session = await getSession(event, remember)
     await saveSession({ userId: user.userId, role: user.role, id: session.id! }) // save new authenticated session to db
 
     await session.update({
       user: {
         username: user.username,
         role: user.role === 'admin' ? user.role : undefined,
-        remember
+        remember,
+        id: user.userId
       }
     })
 

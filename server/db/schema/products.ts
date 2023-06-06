@@ -39,8 +39,8 @@ export const discounts = pgTable('discounts', {
 })
 
 declare global {
-  export type Product = InferModel<typeof products>
-  export type NewProduct = InferModel<typeof products, 'insert'>
+  export type ProductModel = InferModel<typeof products>
+  export type NewProductModel = InferModel<typeof products, 'insert'>
 
   export type Category = InferModel<typeof categories>
   export type NewCategory = InferModel<typeof categories, 'insert'>

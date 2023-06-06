@@ -6,7 +6,7 @@ declare global {
     }
     items: Product[]
     category: {
-      name: string | undefined
+      name: string
       slug: string
       productCount: number
       totalPages: number

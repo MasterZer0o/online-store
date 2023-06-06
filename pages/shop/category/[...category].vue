@@ -14,7 +14,7 @@ const route = useRoute('shop-category-category')
 const page = route.query.page
 
 // if user manually went to page <=0, redirect to page 1.
-if (page && parseInt(page as string) <= 0) {
+if (page && Number.parseInt(page as string) <= 0) {
   await navigateTo({
     path: route.path,
     query: {
@@ -23,7 +23,7 @@ if (page && parseInt(page as string) <= 0) {
   })
 }
 
-if (page && !isNaN(parseInt(page as string)) && +page >= 1) {
+if (page && !Number.isNaN(Number.parseInt(page as string)) && +page >= 1) {
   store.currentPage = +page
 }
 
@@ -35,16 +35,26 @@ if (process.server) {
     throw createError({ statusCode: 404, message: 'Page not found' })
   }
 }
+
 onBeforeMount(() => {
   const route = useRoute('shop-category-category')
+  const currentSlug = route.params.category![0]
 
-  store.currentCategory.slug = route.params.category![0]
+  store.currentPage = route.query.page ? Number.parseInt(route.query.page as string) : 1
 
-  fetchProducts(false, true)
+  if (store.currentCategory.slug !== currentSlug)
+    store.resetCursor()
+
+  if (store.currentCategory.slug !== currentSlug || store.products.length === 0) {
+    store.currentCategory.slug = currentSlug
+    fetchProducts(true)
+  }
+  else
+    store.currentCategory.slug = currentSlug
 })
 
 useHead({
-  title: () => store.currentCategory.name!
+  title: () => store.currentCategory.name
 })
 </script>
 

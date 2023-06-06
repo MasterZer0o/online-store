@@ -1,7 +1,7 @@
 import { createCipheriv, createDecipheriv, randomBytes, randomUUID } from 'node:crypto'
 import { Buffer } from 'node:buffer'
 import { getHeader, setResponseStatus } from 'h3'
-import { userSession } from '../lib/userSession'
+import { getSession } from '../lib/session'
 import { logError } from '~~/server/lib/logger'
 
 const config = useRuntimeConfig().csrf
@@ -37,7 +37,7 @@ export function verifyCSRF(secret: string, token: string) {
 }
 
 export default defineEventHandler(async (event) => {
-  const session = await userSession(event)
+  const session = await getSession(event)
   const secret = session.data.csrf
 
   if (!secret)

@@ -9,7 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
       return createError({ message: 'Page not found', statusCode: 404 })
   }
   // if not navigated through URL bar
-  if (to.path !== from.path && process.client && !useUserStore().user.role)
+  if (to.path !== from.path && process.client && !useUser().user.role)
     setPageLayout('404')
     // return showError({ message: 'Page not found', statusCode: 404 })
 })

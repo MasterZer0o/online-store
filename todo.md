@@ -21,7 +21,15 @@
 - combine css (https://vitejs.dev/config/build-options.html#build-csscodesplit)
 
 ---
+- perf: prepared statements
+
+- remove TheNavbar when no longer used
+
+- important: handle __nuxt_error page 
+
 - filters
+
+- in the future: account button in ShopHeader - instead of redirecting to /login page, show modal
 
 
 - check if query params are correct in product query 

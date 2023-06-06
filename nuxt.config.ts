@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   modules: ['nuxt-purgecss', '@vueuse/nuxt', '@unocss/nuxt',
     ['@pinia/nuxt', { autoImports: ['defineStore', 'storeToRefs', 'skipHydrate'] }]
   ],
+  nitro: {
+    preset: 'node-server'
+  },
   experimental: {
     inlineSSRStyles: false,
     componentIslands: true,

@@ -4,7 +4,7 @@ useHead({
   title: () => route.meta.title as string || 'Home'
 })
 
-const store = useUserStore()
+const store = useUser()
 const event = useRequestEvent()
 
 if (process.server) {
@@ -20,6 +20,7 @@ if (process.server) {
 </script>
 
 <template>
+  <ShopHeader />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

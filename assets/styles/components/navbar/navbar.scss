@@ -1,6 +1,7 @@
 @use './theme_switcher.scss';
 @use './auth-buttons.scss';
 @use './nav_user.scss';
+
 .dark .top-navbar {
   background-color: var(--bg3);
 }
@@ -24,6 +25,7 @@
       &:hover {
         background-color: var(--bg5);
       }
+
       a.nav-link {
         font-size: 1.05em;
         display: block;

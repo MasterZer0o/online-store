@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const topbar = ref<HTMLElement>()
-const store = useUserStore()
+const store = useUser()
 const items = ref([
   {
     label: 'Update',

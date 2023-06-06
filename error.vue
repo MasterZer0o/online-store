@@ -5,7 +5,7 @@ const props = defineProps < { error: NuxtError }>()
 
 const event = useRequestEvent()
 if (process.server && event.context.user) {
-  const store = useUserStore()
+  const store = useUser()
   store.user.username = event.context.user.username
   store.user.isLoggedIn = true
   store.user.role = event.context.user.role
@@ -15,7 +15,7 @@ const layoutName = props.error?.statusCode === 404 ? '404' : 'default'
 if (process.server) {
   const { SESSION_COOKIE_NAME } = useRuntimeConfig()
   const { data: sessionData }: { data: Partial<ClientSessionData> } = event.context.sessions![SESSION_COOKIE_NAME]
-  const store = useUserStore()
+  const store = useUser()
 
   if (sessionData.user) {
     if (sessionData.user) {

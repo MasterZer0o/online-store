@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { sendRedirect } from 'h3'
+
 definePageMeta({
   title: 'Login',
   pageTransition: {
@@ -9,7 +10,7 @@ definePageMeta({
   middleware: 'logged-in'
 })
 
-const store = useUserStore()
+const store = useUser()
 
 const event = useRequestEvent()
 

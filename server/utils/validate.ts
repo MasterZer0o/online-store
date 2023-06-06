@@ -3,6 +3,7 @@ import isAlphanumeric from 'validator/es/lib/isAlphanumeric'
 import isEmail from 'validator/es/lib/isEmail'
 import isEmpty from 'validator/es/lib/isEmpty'
 import isLength from 'validator/es/lib/isLength'
+
 /**
  * @param userData data provided by user through form
  * @returns `true` if validated successfully or `{ error }` with a message.
@@ -15,10 +16,18 @@ export default function validateUserData(userData: Required<RegisterUser>): Vali
       return { error: { message: 'Username cannot be empty' } }
 
     if (!isLength(username, { min: 3, max: 20 }))
-      return { error: { message: 'Username\'s length must be between 3 and 20 characters.' } }
+      return {
+        error: {
+          message: 'Username\'s length must be between 3 and 20 characters.'
+        }
+      }
 
     if (!isAlphanumeric(username))
-      return { error: { message: 'Username should contain only alphanumeric characters (a-Z),(0-9).' } }
+      return {
+        error: {
+          message: 'Username should contain only alphanumeric characters (a-Z),(0-9).'
+        }
+      }
     return true
   }
 
@@ -35,7 +44,9 @@ export default function validateUserData(userData: Required<RegisterUser>): Vali
       return { error: { message: '' } }
 
     if (!isLength(password, { min: 8 }))
-      return { error: { message: 'Password should contain at least 8 characters.' } }
+      return {
+        error: { message: 'Password should contain at least 8 characters.' }
+      }
     if (!equals(password, passwordRepeat))
       return { error: { message: 'Passwords do not match.' } }
     return true

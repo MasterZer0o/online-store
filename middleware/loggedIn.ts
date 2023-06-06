@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(() => {
-  const store = useUserStore()
+  const store = useUser()
 
   if (store.user.isLoggedIn)
     return abortNavigation()

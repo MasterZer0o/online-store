@@ -10,7 +10,7 @@ declare global {
 
   export type UserRole = 'admin' | 'user' | 'guest'
 
-  export interface UserSession {
+  export interface getUserSession {
     id: string
     timeCreated?: string
     user_id: number
@@ -34,6 +34,7 @@ declare global {
       username: string
       role?: UserRole
       remember?: boolean
+      id: number
     }
     redirectURL?: string
     csrf: string

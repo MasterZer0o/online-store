@@ -67,7 +67,7 @@ const isDisabled = computed(() => {
       min="1"
       :max="store.currentCategory.totalPages"
       :class="isDisabled"
-      @input="pageFromInput($event as never, true as never)"
+      @input="pageFromInput($event, true)"
     >
 
     <div

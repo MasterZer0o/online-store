@@ -1,11 +1,11 @@
 export async function requestLogout() {
   try {
-    const user = useUserStore()
+    const user = useUser()
 
     await $fetch('/user/logout', { method: 'POST' })
+
     user.logout()
-    await navigateTo('/')
-    window.location.reload()
+    return navigateTo('/', { external: true })
   }
   catch (error) {
     // TODO:

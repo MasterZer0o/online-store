@@ -1,11 +1,12 @@
 {
-  "extends": ["@antfu", "prettier"],
+  "extends": ["@antfu"],
   "rules": {
     "indent": ["warn", 2],
     "curly": "off",
+    "quotes": ["error", "single"],
     "no-console": "off",
     "@typescript-eslint/comma-dangle": "off",
-    "vue/comma-dangle": "error",
+    "vue/comma-dangle": "off",
     "vue/valid-v-for": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "max-statements-per-line": "off",
@@ -16,7 +17,8 @@
     "antfu/top-level-function": "off",
     "vue/dot-location": "off",
     "vue/space-unary-ops": "off",
-    "no-restricted-globals": 0
+    "no-restricted-globals": 0,
+    "import/default": "off"
   },
   "overrides": [
     {

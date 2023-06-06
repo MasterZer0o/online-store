@@ -12,6 +12,7 @@ export async function hashPassword(password: string): Promise<string | HashError
   }
   catch (error) {
     logError('Failed to hash password', error)
+
     return {
       error: 'Failed to hash password.'
 

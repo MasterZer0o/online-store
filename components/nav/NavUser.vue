@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const store = useUserStore()
+const store = useUser()
 const dropdown = ref<HTMLElement>()
 const selectedElement = ref<HTMLElement>()
 function hide(element: any) {
@@ -20,7 +20,7 @@ function hide(element: any) {
 
     <ul ref="dropdown" class="nav-user__dropdown">
       <li @click="hide">
-        <NuxtLink to="/user/account">
+        <NuxtLink to="/account">
           Account
         </NuxtLink>
       </li>

@@ -1,15 +1,16 @@
 export async function requestLogin({ login, password, remember }: { login: string; password: string;remember?: boolean }): Promise<LoginResponse> {
   try {
-    const store = useUserStore()
+    const store = useUser()
     const { csrf } = useCsrf()
 
     const response = await $fetch('/user/login', {
       method: 'POST',
-      body: { login, password, remember: remember || undefined },
+      body: { login, password, remember },
       headers: {
         'X-CSRF': csrf
       }
     })
+
     if (!('error' in response)) {
       store.user.isLoggedIn = true
 
@@ -18,8 +19,15 @@ export async function requestLogin({ login, password, remember }: { login: strin
 
       store.user.username = response.username
 
-      await navigateTo(store.redirectURL || '/', { replace: true })
+      if (store.loginCallback) {
+        store.loginCallback.fn(...store.loginCallback.args)
+      }
+
+      await navigateTo(store.redirectURL ?? '/', { replace: true })
       store.redirectURL = null
+
+      if (useRoute().fullPath.startsWith('/wishlist'))
+        fetchWishlistIds()
     }
 
     return response
