@@ -379,6 +379,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@drizzle-team/studio@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@drizzle-team/studio/-/studio-0.0.1.tgz#7f71ae7b9c306c1a5989f007178419ba152dc8fb"
+  integrity sha512-cHgGezy2ojBFMaU6PZyBkksgFsg2CQ8IRN4mS7WdbA/Zv6xUK6fCNmpEWS/FftbxoA4B8Z0XGnuKsaTJEZsGgA==
+
 "@esbuild-kit/core-utils@^3.0.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@esbuild-kit/core-utils/-/core-utils-3.1.0.tgz#49945d533dbd5e1b7620aa0fc522c15e6ec089c5"
@@ -995,12 +1000,12 @@
     unimport "^3.0.7"
     untyped "^1.3.2"
 
-"@nuxt/kit@npm:@nuxt/kit-edge@3.6.2-28134997.87e01ccf":
-  version "3.6.2-28134997.87e01ccf"
-  resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.6.2-28134997.87e01ccf.tgz#858ea80d09721b9f9369137375e2d7ebdc14f1f7"
-  integrity sha512-wU81eoUgvrIKkpVsJ/2C2bU0/H+GgYq7WRYWf/b4la6DAjsh21u663JTgQK8fYb2CCE8SPmaLPQmS9S5b1m2pA==
+"@nuxt/kit@npm:@nuxt/kit-edge@3.6.2-28139740.9f5130d0":
+  version "3.6.2-28139740.9f5130d0"
+  resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.6.2-28139740.9f5130d0.tgz#0d76cbb5e5a5cd5a702e79180277a5cd849b707b"
+  integrity sha512-IpcEY3yLgRR/+T1O942I3ZwX/ifcok4C6LhNOJ+2aFsKcEJxKntMob1oarqHwr766T589N1adoh+j+d+IdLADw==
   dependencies:
-    "@nuxt/schema" "npm:@nuxt/schema-edge@3.6.2-28134997.87e01ccf"
+    "@nuxt/schema" "npm:@nuxt/schema-edge@3.6.2-28139740.9f5130d0"
     c12 "^1.4.2"
     consola "^3.2.2"
     defu "^6.1.2"
@@ -1048,10 +1053,10 @@
     unimport "^3.0.10"
     untyped "^1.3.2"
 
-"@nuxt/schema@npm:@nuxt/schema-edge@3.6.2-28134997.87e01ccf":
-  version "3.6.2-28134997.87e01ccf"
-  resolved "https://registry.yarnpkg.com/@nuxt/schema-edge/-/schema-edge-3.6.2-28134997.87e01ccf.tgz#ca798f7575df9294ef4058947d2229c3d642c505"
-  integrity sha512-5G8npTv3C93A7IqPGgRD1QGR8FLa3QmZU6HX2SUdESbSjqFixaYeuQGGWdUsivBiHBZ94J7q62/4ZIr5zFp0mw==
+"@nuxt/schema@npm:@nuxt/schema-edge@3.6.2-28139740.9f5130d0":
+  version "3.6.2-28139740.9f5130d0"
+  resolved "https://registry.yarnpkg.com/@nuxt/schema-edge/-/schema-edge-3.6.2-28139740.9f5130d0.tgz#aa7549f195f7e1eeab62f236f884e034eba1ee91"
+  integrity sha512-pRAhnrqZrBtFC9l/JvEQC92/0u3UDyse35Isk2HZSsWKNVtd/PLLtNd5Tb4MjInwCgWLTW3gbE2lUSFxp04adg==
   dependencies:
     defu "^6.1.2"
     hookable "^5.5.3"
@@ -1135,12 +1140,12 @@
     vite-plugin-checker "^0.6.1"
     vue-bundle-renderer "^1.0.3"
 
-"@nuxt/vite-builder@npm:@nuxt/vite-builder-edge@3.6.2-28134997.87e01ccf":
-  version "3.6.2-28134997.87e01ccf"
-  resolved "https://registry.yarnpkg.com/@nuxt/vite-builder-edge/-/vite-builder-edge-3.6.2-28134997.87e01ccf.tgz#7611b37d8f90c66c37c2eb8ce6a2f10e11208fce"
-  integrity sha512-7MR4IaiH9oRPa41snRzXLabfcY/DEmgqKm8tDdXw6HXIrN38e5m71YP/psVQtxVQM6lge3XUkQWfPWjwzet5Dw==
+"@nuxt/vite-builder@npm:@nuxt/vite-builder-edge@3.6.2-28139740.9f5130d0":
+  version "3.6.2-28139740.9f5130d0"
+  resolved "https://registry.yarnpkg.com/@nuxt/vite-builder-edge/-/vite-builder-edge-3.6.2-28139740.9f5130d0.tgz#b89a75d1a800cabdfe284f8a2e794153145aece0"
+  integrity sha512-jNl92SXvIKny4b2USImP2Ql7wJjJ0Y0BYKFRJF+ufDENC1GXNv+YGdACkGFlLs6u9Mb5Qt7PC2PU9ZzYWdYRrg==
   dependencies:
-    "@nuxt/kit" "npm:@nuxt/kit-edge@3.6.2-28134997.87e01ccf"
+    "@nuxt/kit" "npm:@nuxt/kit-edge@3.6.2-28139740.9f5130d0"
     "@rollup/plugin-replace" "^5.0.2"
     "@vitejs/plugin-vue" "^4.2.3"
     "@vitejs/plugin-vue-jsx" "^3.0.1"
@@ -1631,46 +1636,46 @@
     "@typescript-eslint/types" "5.59.9"
     eslint-visitor-keys "^3.3.0"
 
-"@unhead/dom@1.1.28":
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/@unhead/dom/-/dom-1.1.28.tgz#e5df830376f566d09fee8422280abcb941303901"
-  integrity sha512-o5w3GUo1en9OWNHpUkrkZxmlx2Xf7q++VLb5Lm0MtbHYM578lWmB1zLfmJMN13kvaNKN8RUhTYG5WMtKMzDfGw==
+"@unhead/dom@1.1.29":
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@unhead/dom/-/dom-1.1.29.tgz#02cf35a6ccf7830128f4cff7ff1944b57126df05"
+  integrity sha512-CyCblipMp3HNf6AJTABHn/F8U5bTA36FDHky/zcXX3MEaj/XzI6uxr6z813H67pxKw+tMlzYb+XM8Lfax61OvQ==
   dependencies:
-    "@unhead/schema" "1.1.28"
-    "@unhead/shared" "1.1.28"
+    "@unhead/schema" "1.1.29"
+    "@unhead/shared" "1.1.29"
 
-"@unhead/schema@1.1.28":
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/@unhead/schema/-/schema-1.1.28.tgz#400afabded62a8d67d8b31c2edf5d40d6f63f440"
-  integrity sha512-KDAPSYcYZHC3ni3Hd3Ye/piBasaHa/uQWCLICOVADwKi1Pm6hhMxCCwpsPSJtfekN31kOvIA09vZv8roPwTthQ==
+"@unhead/schema@1.1.29":
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@unhead/schema/-/schema-1.1.29.tgz#777d43a6e8c73d50b06de857aebc2825f611fda7"
+  integrity sha512-ihgzC2VlEcC7SAt4hlRZAVubgBKvunHqEfSQmWbTNEiPI/Lkjry9rJuDjswo2go54xrDpAqOu3ZOVHq03YtOWQ==
   dependencies:
     hookable "^5.5.3"
     zhead "^2.0.7"
 
-"@unhead/shared@1.1.28":
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/@unhead/shared/-/shared-1.1.28.tgz#6d6bb76b5d483966ad012cd785e21947549269e3"
-  integrity sha512-mC0k7a4Cb4vKsASjD/Ws5hrRdZfTf5uapRF+1ekVqeyo1VVISoXNB6CdxTjHgqi8vKQr5wmvoSvEt1fOoU1PQQ==
+"@unhead/shared@1.1.29":
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@unhead/shared/-/shared-1.1.29.tgz#48ad2b0309a75f5c9b5c94afe38dc49601d26781"
+  integrity sha512-jYERAozHXGYT1jh/1friuRUajqKt/tU5oeLyIBSY+GDPs9k6mSpYHcrRhimqE3PJSN/hvg3UhyeH1/ltpSbyXA==
   dependencies:
-    "@unhead/schema" "1.1.28"
+    "@unhead/schema" "1.1.29"
 
 "@unhead/ssr@^1.1.28":
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/@unhead/ssr/-/ssr-1.1.28.tgz#de5a1597c4aa0e2559af0b34d8c4148cc4597b44"
-  integrity sha512-gnSVyvpx/R1byQ8mArh2QRI1PdQ9mlRvtnt1Qiy7JUrtkJeqf/Hfn85fwZ+RhHRSDBPhMl7qD24FSlz5EwA9Zw==
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@unhead/ssr/-/ssr-1.1.29.tgz#5ef121e405454bc35d167d5538863167ff48d5fc"
+  integrity sha512-vzDhWgYHWR99sYGke0+g5L8o35eIQfU2nXuePiNGK5+qn4OLn48TuSJzVjnbT6EVKfHxQ7P0v0ZvaE/b9v09/A==
   dependencies:
-    "@unhead/schema" "1.1.28"
-    "@unhead/shared" "1.1.28"
+    "@unhead/schema" "1.1.29"
+    "@unhead/shared" "1.1.29"
 
 "@unhead/vue@^1.1.28":
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/@unhead/vue/-/vue-1.1.28.tgz#1ab1e6996800ac8fb94639f523e6873db60955e1"
-  integrity sha512-n/4UusPccA0eyLxeinEagfm7hswzg4Uud+dYNlPByHHThCBobYcHjhnOOeS9YvkMGbdZpG1l7k/kywQIcwYqgg==
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@unhead/vue/-/vue-1.1.29.tgz#591e18335ccc2f0e1d0a45ec145a4087f83ba848"
+  integrity sha512-BNNNvP3CJUmYAQw9z2SNHaemiXnbmBorPwpEdjvcb8mLC4IRBC6JHSrgsSl0SgHF6u3tulvi0zqQNHMo8MEnIQ==
   dependencies:
-    "@unhead/schema" "1.1.28"
-    "@unhead/shared" "1.1.28"
+    "@unhead/schema" "1.1.29"
+    "@unhead/shared" "1.1.29"
     hookable "^5.5.3"
-    unhead "1.1.28"
+    unhead "1.1.29"
 
 "@unocss/astro@0.53.4":
   version "0.53.4"
@@ -2572,9 +2577,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001503:
-  version "1.0.30001509"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001509.tgz#2b7ad5265392d6d2de25cd8776d1ab3899570d14"
-  integrity sha512-2uDDk+TRiTX5hMcUYT/7CSyzMZxjfGu0vAUjS2g0LSD8UoXOv0LtpH4LxGMemsiPq6LCVIUjNwVM0erkOkGCDA==
+  version "1.0.30001511"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001511.tgz#e6e2a1614275c6fb8e3acfd74a8c3a70e53ed233"
+  integrity sha512-NaWPJawcoedlghN4P7bDNeADD7K+rZaY6V8ZcME7PkEZo/nfOg+lnrUgRWiKbNxcQ4/toFKSxnS4WdbyPZnKkw==
 
 caniuse-lite@^1.0.30001464:
   version "1.0.30001495"
@@ -2608,7 +2613,7 @@ chalk@^5.1.2:
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.2.0.tgz#249623b7d66869c673699fb66d65723e54dfcfb3"
   integrity sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==
 
-chalk@^5.2.0:
+chalk@^5.2.0, chalk@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.3.0.tgz#67c20a7ebef70e7f3970a01f90fa210cb6860385"
   integrity sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==
@@ -3219,11 +3224,12 @@ dreamopt@~0.8.0:
   dependencies:
     wordwrap ">=0.0.2"
 
-drizzle-kit@^0.19.2:
-  version "0.19.2"
-  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.19.2.tgz#ee31a6489cd261f0551177a37742b4dfa0d7fa84"
-  integrity sha512-o+T/+Xc6hlLj2ocvGEo3kyWgTIAFjmsVK/HdBjU7gmbolmFZHv6T3lhaAsAD4mWfOX69uC7IggCmIqLq+zcM4Q==
+drizzle-kit@^0.19.3:
+  version "0.19.3"
+  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.19.3.tgz#eaa640b972e0b2d7dd18702e66b6134e733e0b94"
+  integrity sha512-G3Es+gPbQcTka0eKdDyzhgyDAWP5nfZpRXtKEND8Cl1Ww0Tn71yV/CYNbYk+gxg5x5+jeBIN7kM/bZ/agGBxYw==
   dependencies:
+    "@drizzle-team/studio" "^0.0.1"
     "@esbuild-kit/esm-loader" "^2.5.5"
     camelcase "^7.0.1"
     chalk "^5.2.0"
@@ -4385,10 +4391,21 @@ globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-globby@^13.1.4, globby@^13.2.0:
+globby@^13.1.4:
   version "13.2.0"
   resolved "https://registry.yarnpkg.com/globby/-/globby-13.2.0.tgz#7dd5678d765c4680c2e6d106230d86cb727cb1af"
   integrity sha512-jWsQfayf13NvqKUIL3Ta+CIqMnvlaIDFveWE/dpOZ9+3AMEJozsxDvKA02zync9UuvOM8rOXzsD5GqKP4OnWPQ==
+  dependencies:
+    dir-glob "^3.0.1"
+    fast-glob "^3.2.11"
+    ignore "^5.2.0"
+    merge2 "^1.4.1"
+    slash "^4.0.0"
+
+globby@^13.2.0:
+  version "13.2.1"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-13.2.1.tgz#986d44187ba6a9fc4aa9b16caf0ab9a04db94ae9"
+  integrity sha512-DPCBxctI7dN4EeIqjW2KGqgdcUMbrhJ9AzON+PlxCtvppWhubTLD4+a0GFxiym14ZvacUydTPjLPc2DlKz7EIg==
   dependencies:
     dir-glob "^3.0.1"
     fast-glob "^3.2.11"
@@ -5172,61 +5189,61 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lightningcss-cli-darwin-arm64@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-darwin-arm64/-/lightningcss-cli-darwin-arm64-1.21.1.tgz#32ea5cc51be66050bc5836143ffb16a337322a86"
-  integrity sha512-5HQvG0rMsAkW0XRjBZbki3GAYVnSR9Kjpreyo6xKbxs3FsR/jrZVFoL2k8ldusxfMI7BlfUEpMES45ns0g66NA==
+lightningcss-cli-darwin-arm64@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-darwin-arm64/-/lightningcss-cli-darwin-arm64-1.21.2.tgz#79417583c99be544da21df2949a767acba486b88"
+  integrity sha512-K/T/lHnfCr1wkJztFTqcKAB/S/Vus9hRT7Zd08oIBwgb2TRvQ+M5KjxyNI8l/1aw6B5OvCzE5WiXEU+v/AGEyw==
 
-lightningcss-cli-darwin-x64@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-darwin-x64/-/lightningcss-cli-darwin-x64-1.21.1.tgz#5cf38b7a165f5580c9a6b1a31c63cf40e58fa2ac"
-  integrity sha512-7TcAriVWUaC2xYtx7kTGvgvNMYJB/p73+XpqGYaYkJs9ASRf4lIbQAPykaOtCtsZg8AenwOGT7kR/ilQFYT2Mw==
+lightningcss-cli-darwin-x64@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-darwin-x64/-/lightningcss-cli-darwin-x64-1.21.2.tgz#1bf4dbf679dd80410a6766bd381904a9e1984084"
+  integrity sha512-UTYlUFV2+Twz9f9QCyb4g5fnfaG+vfj+DGI+06zCukkNDT/fEJl7UP55EqyCPIvc7jfokpWN8he3v/cBNPyraA==
 
-lightningcss-cli-linux-arm-gnueabihf@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-arm-gnueabihf/-/lightningcss-cli-linux-arm-gnueabihf-1.21.1.tgz#92a241da36201fd6b2b4d14b499dad058a2817c4"
-  integrity sha512-3D/GZzMsuQhz0mvKofiuLSm0s5Qe6Z7fmJOBtv7XqtTyiIabRz24PYgwTlFdiEwUP6U8FTGJIIXqVX3WbmC1wg==
+lightningcss-cli-linux-arm-gnueabihf@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-arm-gnueabihf/-/lightningcss-cli-linux-arm-gnueabihf-1.21.2.tgz#18d91f23556733e287ef3b474fcbfb2665653ce7"
+  integrity sha512-bJq4A5oaCmDrTFYyIOvRRhJCRrqbt9VTK8/HgF2TrenJoXTqanKCuyi1IZMDXyhL9mD7Bz0DBZ3W9vJT57ivgw==
 
-lightningcss-cli-linux-arm64-gnu@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-arm64-gnu/-/lightningcss-cli-linux-arm64-gnu-1.21.1.tgz#1d2bce5188b580beaa66d52da45d81064997e45b"
-  integrity sha512-1wN+Y4YCbfyRdthmk/XGYOPZ4j4N/DT+kf5Tw7NxQXWzVUvKpIvElgJdsz0hnmY0qGSHZIzmDNGv/8NyBG3Y8Q==
+lightningcss-cli-linux-arm64-gnu@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-arm64-gnu/-/lightningcss-cli-linux-arm64-gnu-1.21.2.tgz#4242bd190a9d2aef8def88a963451fbc5cd3a20d"
+  integrity sha512-NGnAYH2QnLFv4NpBMetaTc+B2mzptbUa8xpgFSsYVK7+SXfmeKiikMB3LzA/ppV7eqywbX8LpEsDRCQs/4sTKQ==
 
-lightningcss-cli-linux-arm64-musl@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-arm64-musl/-/lightningcss-cli-linux-arm64-musl-1.21.1.tgz#a5f29f76a3d722339e08878c8fdca433e587c803"
-  integrity sha512-9CvJrmk/2MSy2z9bmlwqtG51FSIXRBDLq8WWZTXK5hhInWNOiBZNgMLoTW29VOC+Uux+nk91sAklQMSiSlJYTQ==
+lightningcss-cli-linux-arm64-musl@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-arm64-musl/-/lightningcss-cli-linux-arm64-musl-1.21.2.tgz#16280a8635c63ac4f9362813ecf3935a54ee099f"
+  integrity sha512-x/ldId/h/A9HtzOkuFR4VAL3tw0JeFmFPRMszzNlRi63vji/25OFIaVRm+4uwbSQLLPyr+FY0RvW7rb0jv0YKg==
 
-lightningcss-cli-linux-x64-gnu@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-x64-gnu/-/lightningcss-cli-linux-x64-gnu-1.21.1.tgz#88d97dd488653b6fb3fb769e2b3cc34abd638aa7"
-  integrity sha512-sMQqtw0Muj5C/ImEBQcieCDlNx3RRselIpklpeO6yhtxEAwTW85GbP0Fd//965dxDUrgsx0GNyDn+AJqcZRBEQ==
+lightningcss-cli-linux-x64-gnu@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-x64-gnu/-/lightningcss-cli-linux-x64-gnu-1.21.2.tgz#0e277f42f295c85504a99417728d4bd1d015fcf7"
+  integrity sha512-C6etXA774q0eMmw6nCIeAOPiVUSfExuu24ohi5qRtQsMR9c3phDgYnmUV+Q9KEDFdrlr8IZvi7AaRywcayFSFg==
 
-lightningcss-cli-linux-x64-musl@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-x64-musl/-/lightningcss-cli-linux-x64-musl-1.21.1.tgz#fafbef5369c0252dc24c61b22d9f2bd15120d0d6"
-  integrity sha512-uPufX1tmtsh3ANHurriSCXAvz6CsAbO+5cO04u0XYUUZ4MVfY/p/pmYsBHGZaZUnS9W/31vcvVYEKFPQ3iC9nA==
+lightningcss-cli-linux-x64-musl@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-linux-x64-musl/-/lightningcss-cli-linux-x64-musl-1.21.2.tgz#a897ea9a33e9bf8167b0ad029c771a2f9ba914d0"
+  integrity sha512-RTnt8DUuev8qZVicBhd3Fwlwp55yty71WHnpsb6wEBo3YcySvXDxJIneByWWSq+3sS0RfTGZV3/ts37L7g0VPg==
 
-lightningcss-cli-win32-x64-msvc@1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli-win32-x64-msvc/-/lightningcss-cli-win32-x64-msvc-1.21.1.tgz#3456513e851d56c943c6f1fc926722723c130454"
-  integrity sha512-4tu9pPEDgxhM16413vqqQR2iOhU5pwIY1iIJDXuEQgTHRmdzGoRXM8vfFc0dI9B0SnzfRsIPUIFgv4vKvagjAg==
+lightningcss-cli-win32-x64-msvc@1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli-win32-x64-msvc/-/lightningcss-cli-win32-x64-msvc-1.21.2.tgz#a1adda057aa77470399d6d7f19faede4a7cc8cb2"
+  integrity sha512-u9WY8qJGcap5xSrw8dE+okvNNLpzz3vgxAr/b0h/9aZLdvHvqYapY2xWCc0FNbizonnbdLrESWJ6H6Lfh95knw==
 
-lightningcss-cli@^1.21.1:
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/lightningcss-cli/-/lightningcss-cli-1.21.1.tgz#25db03157698d4de17bc3c212986753b7e1c100c"
-  integrity sha512-3/NNkcz5Sb3wBBCo13JNLU6CGOi8h8a/tgF/HIGJDk/D0w1yswBmxEUGJwdl3rMgoguySnVzIcsK23eFVyByVA==
+lightningcss-cli@^1.21.2:
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/lightningcss-cli/-/lightningcss-cli-1.21.2.tgz#eed0d94eac018e4fd9d3c5925ae735148b747363"
+  integrity sha512-diTYTsOh2G/em5yo9qlqim2GtMiezBQMKPnFRqjLIlHl59B3BhlEFf8E17uE9wqc1UF2jtxCsTkvJJqz83Ya8w==
   dependencies:
     detect-libc "^1.0.3"
   optionalDependencies:
-    lightningcss-cli-darwin-arm64 "1.21.1"
-    lightningcss-cli-darwin-x64 "1.21.1"
-    lightningcss-cli-linux-arm-gnueabihf "1.21.1"
-    lightningcss-cli-linux-arm64-gnu "1.21.1"
-    lightningcss-cli-linux-arm64-musl "1.21.1"
-    lightningcss-cli-linux-x64-gnu "1.21.1"
-    lightningcss-cli-linux-x64-musl "1.21.1"
-    lightningcss-cli-win32-x64-msvc "1.21.1"
+    lightningcss-cli-darwin-arm64 "1.21.2"
+    lightningcss-cli-darwin-x64 "1.21.2"
+    lightningcss-cli-linux-arm-gnueabihf "1.21.2"
+    lightningcss-cli-linux-arm64-gnu "1.21.2"
+    lightningcss-cli-linux-arm64-musl "1.21.2"
+    lightningcss-cli-linux-x64-gnu "1.21.2"
+    lightningcss-cli-linux-x64-musl "1.21.2"
+    lightningcss-cli-win32-x64-msvc "1.21.2"
 
 lilconfig@^2.1.0:
   version "2.1.0"
@@ -5745,10 +5762,10 @@ nitropack@^2.5.1:
     unimport "^3.0.8"
     unstorage "^1.7.0"
 
-"nitropack@npm:nitropack-edge@^2.5.2-28132662.126574d":
-  version "2.5.2-28132662.126574d"
-  resolved "https://registry.yarnpkg.com/nitropack-edge/-/nitropack-edge-2.5.2-28132662.126574d.tgz#72f8dcbcfecdf9233f7a47b939bc1b6c26b264aa"
-  integrity sha512-ktnzzwJB4hKqHKzdxlT3EQ2hayUHFMoT8QdOtKgOI87c6Zfi2SEzLNMyL83W5S6/viwq92+7glmMZkmi0rGdoQ==
+"nitropack@npm:nitropack-edge@^2.6.0-28139663.4a20b4f":
+  version "2.6.0-28139663.4a20b4f"
+  resolved "https://registry.yarnpkg.com/nitropack-edge/-/nitropack-edge-2.6.0-28139663.4a20b4f.tgz#245fdf6cee23d2161df1de59cee72f51135d4faf"
+  integrity sha512-MSS4RNse8uQ0ttLF/roWm94NxdxKu2CtXc4QeemyJ2lgM6qHoGCyT06FEEu0Y/sTpSm4Cs5ohiMY0PlYbxH25Q==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.3.0"
     "@netlify/functions" "^1.6.0"
@@ -5765,7 +5782,7 @@ nitropack@^2.5.1:
     "@vercel/nft" "^0.22.6"
     archiver "^5.3.1"
     c12 "^1.4.2"
-    chalk "^5.2.0"
+    chalk "^5.3.0"
     chokidar "^3.5.3"
     citty "^0.1.1"
     consola "^3.2.2"
@@ -5812,7 +5829,7 @@ nitropack@^2.5.1:
     ufo "^1.1.2"
     uncrypto "^0.1.3"
     unenv "^1.5.1"
-    unimport "^3.0.10"
+    unimport "^3.0.11"
     unstorage "^1.7.0"
 
 node-addon-api@^5.0.0:
@@ -5938,10 +5955,10 @@ nuxi@3.6.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-"nuxi@npm:nuxi-edge@3.6.2-28134997.87e01ccf":
-  version "3.6.2-28134997.87e01ccf"
-  resolved "https://registry.yarnpkg.com/nuxi-edge/-/nuxi-edge-3.6.2-28134997.87e01ccf.tgz#17b5bdaba80ac4afd1a4cceea4cdb982792063c9"
-  integrity sha512-sGnRh8Cpe1F6IhKAxr4kQ2eaIO/2l0E4JsOMab3IncGPUVfwLSK9eBW9uQTxobn98cSb9KHOK67dt+BuRG5WhA==
+"nuxi@npm:nuxi-edge@3.6.2-28139740.9f5130d0":
+  version "3.6.2-28139740.9f5130d0"
+  resolved "https://registry.yarnpkg.com/nuxi-edge/-/nuxi-edge-3.6.2-28139740.9f5130d0.tgz#992fd785cefa4153e77c9f6e3c8bf74faf98bd54"
+  integrity sha512-rnNo6YTbRdHoq03QeMuFPtwJyQcurUHfoCogWHsGqyKJC0qFq4Vj08GdUTrvpJ/mdkb8PhZKg1e+2zV5f+lRnA==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -6015,16 +6032,16 @@ nuxt@^3.6.1:
     vue-router "^4.2.2"
 
 "nuxt@npm:nuxt3@latest":
-  version "3.6.2-28134997.87e01ccf"
-  resolved "https://registry.yarnpkg.com/nuxt3/-/nuxt3-3.6.2-28134997.87e01ccf.tgz#fd5a6f67106399e1c2b3308ce20a6535841a42b5"
-  integrity sha512-0GwHtuzvUJa6RDBaEMtXoXH+xkDUdTukR7+jpUDhadmkMYwq0tantKlwy3CmwsNGoLXMRPj4v8oZy6SB1D2/tg==
+  version "3.6.2-28139740.9f5130d0"
+  resolved "https://registry.yarnpkg.com/nuxt3/-/nuxt3-3.6.2-28139740.9f5130d0.tgz#2265ae8a50acaafc4ebb25158c500ed36ae69d0a"
+  integrity sha512-yiKGzS9No05t5tEVrTtk+PMJzLhEudFM6qFZ0PMevEhAGr0r38fp0izSI/SDC5F7nFeyqqp0ymzbxQSEOkgdqw==
   dependencies:
     "@nuxt/devalue" "^2.0.2"
-    "@nuxt/kit" "npm:@nuxt/kit-edge@3.6.2-28134997.87e01ccf"
-    "@nuxt/schema" "npm:@nuxt/schema-edge@3.6.2-28134997.87e01ccf"
+    "@nuxt/kit" "npm:@nuxt/kit-edge@3.6.2-28139740.9f5130d0"
+    "@nuxt/schema" "npm:@nuxt/schema-edge@3.6.2-28139740.9f5130d0"
     "@nuxt/telemetry" "^2.2.0"
     "@nuxt/ui-templates" "^1.2.0"
-    "@nuxt/vite-builder" "npm:@nuxt/vite-builder-edge@3.6.2-28134997.87e01ccf"
+    "@nuxt/vite-builder" "npm:@nuxt/vite-builder-edge@3.6.2-28139740.9f5130d0"
     "@unhead/ssr" "^1.1.28"
     "@unhead/vue" "^1.1.28"
     "@vue/shared" "^3.3.4"
@@ -6048,8 +6065,8 @@ nuxt@^3.6.1:
     local-pkg "^0.4.3"
     magic-string "^0.30.0"
     mlly "^1.4.0"
-    nitropack "npm:nitropack-edge@^2.5.2-28132662.126574d"
-    nuxi "npm:nuxi-edge@3.6.2-28134997.87e01ccf"
+    nitropack "npm:nitropack-edge@^2.6.0-28139663.4a20b4f"
+    nuxi "npm:nuxi-edge@3.6.2-28139740.9f5130d0"
     nypm "^0.2.2"
     ofetch "^1.1.1"
     ohash "^1.1.2"
@@ -7872,14 +7889,14 @@ unenv@^1.5.1:
     node-fetch-native "^1.1.1"
     pathe "^1.1.0"
 
-unhead@1.1.28:
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/unhead/-/unhead-1.1.28.tgz#ca6c92c610409cc8e1f0e2a2cac22b63d7086215"
-  integrity sha512-lJqXq5YMAD3p+Nhnvb7fNJwkU91kJNhrnZNcEuAlaTB+0L4es69UvMzekT/wvoE7pde4Yxs0upcTyL4BBz4vQw==
+unhead@1.1.29:
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/unhead/-/unhead-1.1.29.tgz#3d191ffafca5c0571956035c5634f994c0efe551"
+  integrity sha512-EmFma66Bn0YXIeW4VLHQInSAGNEjmIRnBMGbhpF2T6OEhNnNVbSeMd36xp2d7KwUKajEirZLWmg0ZxLGzaAVXA==
   dependencies:
-    "@unhead/dom" "1.1.28"
-    "@unhead/schema" "1.1.28"
-    "@unhead/shared" "1.1.28"
+    "@unhead/dom" "1.1.29"
+    "@unhead/schema" "1.1.29"
+    "@unhead/shared" "1.1.29"
     hookable "^5.5.3"
 
 unimport@^3.0.10, unimport@^3.0.11, unimport@^3.0.8:
@@ -7893,23 +7910,6 @@ unimport@^3.0.10, unimport@^3.0.11, unimport@^3.0.8:
     local-pkg "^0.4.3"
     magic-string "^0.30.0"
     mlly "^1.4.0"
-    pathe "^1.1.1"
-    pkg-types "^1.0.3"
-    scule "^1.0.0"
-    strip-literal "^1.0.1"
-    unplugin "^1.3.1"
-
-unimport@^3.0.7:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/unimport/-/unimport-3.0.8.tgz#f77faa0468f3390844899040849c051570736e3f"
-  integrity sha512-AOt6xj3QMwqcTZRPB+NhFkyVEjCKnpTVoPm5x6424zz2NYYtCfym2bpJofzPHIJKPNIh5ko2/t2q46ZIMgdmbw==
-  dependencies:
-    "@rollup/pluginutils" "^5.0.2"
-    escape-string-regexp "^5.0.0"
-    fast-glob "^3.2.12"
-    local-pkg "^0.4.3"
-    magic-string "^0.30.0"
-    mlly "^1.3.0"
     pathe "^1.1.1"
     pkg-types "^1.0.3"
     scule "^1.0.0"
@@ -8074,14 +8074,14 @@ validator@^13.9.0:
   integrity sha512-B+dGG8U3fdtM0/aNK4/X8CXq/EcxU2WPrPEkJGslb47qyHsxmbggTWK0yEA4qnYVNF+nxNlN88o14hIcPmSIEA==
 
 vite-node@^0.32.2:
-  version "0.32.2"
-  resolved "https://registry.yarnpkg.com/vite-node/-/vite-node-0.32.2.tgz#bfccdfeb708b2309ea9e5fe424951c75bb9c0096"
-  integrity sha512-dTQ1DCLwl2aEseov7cfQ+kDMNJpM1ebpyMMMwWzBvLbis8Nla/6c9WQcqpPssTwS6Rp/+U6KwlIj8Eapw4bLdA==
+  version "0.32.4"
+  resolved "https://registry.yarnpkg.com/vite-node/-/vite-node-0.32.4.tgz#7b3f94af5a87c631fbc380ba662914bafbd04d80"
+  integrity sha512-L2gIw+dCxO0LK14QnUMoqSYpa9XRGnTTTDjW2h19Mr+GR0EFj4vx52W41gFXfMLqpA00eK4ZjOVYo1Xk//LFEw==
   dependencies:
     cac "^6.7.14"
     debug "^4.3.4"
-    mlly "^1.2.0"
-    pathe "^1.1.0"
+    mlly "^1.4.0"
+    pathe "^1.1.1"
     picocolors "^1.0.0"
     vite "^3.0.0 || ^4.0.0"
 

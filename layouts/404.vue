@@ -6,7 +6,7 @@ function clear() {
 </script>
 
 <template>
-  <TheNavbar v-if="!nonav" />
+  <ShopHeader v-if="!nonav" />
   <div class="page-not-found">
     <h1>{{ message || "PAGE NOT FOUND" }}</h1>
 

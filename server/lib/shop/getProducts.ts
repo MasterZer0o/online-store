@@ -112,16 +112,16 @@ type Products = {
 
 export function prepareProducts(products: Products) {
   return products.map((item: Omit<Products[number], 'price'> & ({ price: number | Product['price'] })) => {
-    const discount = item.discountValue ?? null
+    const discount = item.discountValue
     const price = item.price as number
 
     if (discount) {
-      const discountType = item.discountType
+      const isTypeAmount = item.discountType === 'amount'
 
       item.price = {
         amount: price,
-        discountLabel: discountType === 'amount' ? `-${discount}` : `-${discount}%`,
-        discountedAmount: discountType === 'amount' ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99
+        discountLabel: isTypeAmount ? `-${discount}` : `-${discount}%`,
+        discountedAmount: isTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99
       }
     }
     else {

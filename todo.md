@@ -29,6 +29,8 @@
 
 - filters
 
+- test for SQL injections
+
 - in the future: account button in ShopHeader - instead of redirecting to /login page, show modal
 
 

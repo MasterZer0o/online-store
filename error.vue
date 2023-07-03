@@ -2,6 +2,7 @@
 import type { NuxtError } from '#app'
 
 const props = defineProps < { error: NuxtError }>()
+// console.log({ ...props })
 
 const event = useRequestEvent()
 if (process.server && event.context.user) {
@@ -31,7 +32,7 @@ if (process.server) {
   <Head>
     <Title>{{ error?.message || "Error" }}</Title>
   </Head>
-  <TheNavbar v-if="layoutName !== '404'" />
+  <ShopHeader v-if="layoutName !== '404'" />
 
   <NuxtLayout v-if="error?.statusCode === 404" name="404" :message="props.error.message" />
   <div v-else>
