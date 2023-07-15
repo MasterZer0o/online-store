@@ -8,7 +8,7 @@ definePageMeta({
 const productId = useRoute('p-id-product').params.id!
 
 const response = await useFetch(`/product/${productId}`)
-console.log(response.data.value)
+// info(response.data.value)
 
 if (response.error.value?.data) {
   throw createError({

@@ -1,15 +1,15 @@
-import { logger } from '@nuxt/kit'
+import { logger } from 'nuxt/kit'
 
-export function logInfo(messages: any, ...args: any) {
-  const instance = logger.create({ formatOptions: { colors: true, compact: 15, columns: 4, depth: 5 } })
-  instance.info(messages, ...args)
-}
-export function logSuccess(messages: any, ...args: any) {
-  logger.success(messages, ...args)
-}
+const instance = logger.create({
+  formatOptions: {
+    colors: true,
+    columns: 4,
+    compact: false,
+    date: false
+  }
+})
 
-export function logError(message: string | Error, ...args: any[]) {
-  const instance = logger.create({ formatOptions: { colors: true, compact: false, } })
-
-  instance.error(message, args.join(' '))
-}
+export const logInfo = instance.info
+export const logWarn = instance.warn
+export const logError = instance.error
+export const logSuccess = instance.success
