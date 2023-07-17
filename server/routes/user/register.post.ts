@@ -1,4 +1,3 @@
-import { logError } from '~~/server/lib/logger'
 import saveUser, { checkAvailability } from '~~/server/lib/saveUser'
 import validateUser from '~~/server/utils/validate'
 

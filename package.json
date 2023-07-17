@@ -17,7 +17,7 @@
     "seed": "node --loader @swc-node/register/esm ./server/db/seeders/seed.ts"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.7",
+    "@antfu/eslint-config": "^0.39.8",
     "@ngneat/falso": "^6.4.0",
     "@swc-node/register": "^1.6.6",
     "@swc/cli": "^0.1.62",
@@ -28,7 +28,7 @@
     "@unocss/transformer-compile-class": "^0.53.5",
     "autoprefixer": "^10.4.14",
     "consola": "^3.2.3",
-    "drizzle-kit": "^0.19.5",
+    "drizzle-kit": "^0.19.6",
     "drizzle-orm": "^0.27.2",
     "eslint": "^8.45.0",
     "knitwork": "^1.0.0",

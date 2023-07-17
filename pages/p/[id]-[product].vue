@@ -7,28 +7,33 @@ definePageMeta({
 
 const productId = useRoute('p-id-product').params.id!
 
-const response = await useFetch(`/product/${productId}`)
-// info(response.data.value)
+const { data: product, error } = await useLazyFetch<ProductDetails>(`/product/${productId}`)
+logInfo(product.value)
 
-if (response.error.value?.data) {
+// logInfo(data.value)
+
+if (error.value?.data) {
   throw createError({
-    message: response.error.value?.data.error.message || 'Page not found',
-    statusCode: response.error.value?.data.error.statusCode,
+    message: error.value?.data.error.message || 'Page not found',
+    statusCode: error.value?.data.error.statusCode,
     fatal: true
   })
 }
+// product.value = data.value
 </script>
 
 <template>
   <main class="product-details">
     <div>
-      <ProductDetailsDisplay />
+      <ProductDetailsDisplay :image-src="product!.image" :name="product!.name" />
+      <ProductDetailsImageGallery />
     </div>
 
     <div>
       <ProductDetailsPath />
-      <ProductDetailsName />
-      <ProductDetailsPrice />
+      <ProductDetailsName :name="product!.name" />
+      <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" />
+      <ProductDetailsRating :rating="product!.rating" />
       <ProductDetailsConfiguration />
       <ProductDetailsBuy />
       <ProductDetailsDelivery />

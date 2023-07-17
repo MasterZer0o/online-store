@@ -18,7 +18,8 @@
     "vue/dot-location": "off",
     "vue/space-unary-ops": "off",
     "no-restricted-globals": 0,
-    "import/default": "off"
+    "import/default": "off",
+    "n/prefer-global/process": "off"
   },
   "overrides": [
     {

@@ -9,7 +9,7 @@ const instance = consola.create({
   }
 })
 
-export const info = instance.info
-export const warn = instance.warn
-export const error = instance.error
-export const success = instance.success
+export const logInfo = instance.info
+export const logWarn = instance.warn
+export const logError = instance.error
+export const logSuccess = instance.success

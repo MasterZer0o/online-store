@@ -1,6 +1,5 @@
 import { getSession, saveSession } from '~~/server/lib/session'
 import loginUser from '~~/server/services/loginUser'
-import { logError } from '~~/server/lib/logger'
 
 export default defineEventHandler(async (event): Promise<LoginResponse> => {
   try {

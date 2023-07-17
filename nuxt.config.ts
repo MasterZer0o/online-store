@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/sanitize.css/1.0.0/sanitize.min.css', referrerpolicy: 'no-referrer', integrity: 'sha512-vtbEZ04AJGFVupeZAJvxGaqZtmFWhLTM2r2DASGabYumle+ke43G/PrqpFcSQXIunnQ0CjliRx+IMCJy/iPbPw==', crossorigin: 'anonymous' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400&display=swap' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter&display=swap' }
       ],
       // theme script
       script: [{

@@ -2,7 +2,6 @@ import { createCipheriv, createDecipheriv, randomBytes, randomUUID } from 'node:
 import { Buffer } from 'node:buffer'
 import { getHeader, setResponseStatus } from 'h3'
 import { getSession } from '../lib/session'
-import { logError } from '~~/server/lib/logger'
 
 const config = useRuntimeConfig().csrf
 

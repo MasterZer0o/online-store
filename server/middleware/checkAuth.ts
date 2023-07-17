@@ -1,7 +1,5 @@
 import { findUserSession, getSession } from '../lib/session'
 
-import { logError, logInfo } from '~~/server/lib/logger'
-
 export default defineEventHandler(async (event) => {
   try {
     const session = await getSession(event)
