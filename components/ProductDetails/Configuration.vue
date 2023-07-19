@@ -20,6 +20,8 @@ const colors = [{
   hex: '#ECDECC'
 }
 ]
+
+const sizes = ['Small', 'Medium', 'Large', 'Extra Large', 'XXL']
 // TODO: handle color variant - select current
 function selectColor(event: MouseEvent) {
   const target = event.target as HTMLElement
@@ -28,6 +30,16 @@ function selectColor(event: MouseEvent) {
     return
 
   document.querySelector('.color-pick.selected')?.classList.remove('selected')
+  target.classList.add('selected')
+}
+
+function selectSize(event: MouseEvent) {
+  const target = event.target as HTMLElement
+
+  if (target.classList.contains('selected'))
+    return
+
+  document.querySelector('.size-pick.selected')?.classList.remove('selected')
   target.classList.add('selected')
 }
 </script>
@@ -39,6 +51,14 @@ function selectColor(event: MouseEvent) {
       <div class="color-picks">
         <div v-for="color in colors" :key="color.hex" class="color-pick" :style="`color:${color.hex}`" @click="selectColor">
           <strong>{{ color.name }}</strong>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span>Choose a size</span>
+      <div class="size-picks">
+        <div v-for="size in sizes" :key="size" class="size-pick" @click="selectSize">
+          {{ size }}
         </div>
       </div>
     </div>
