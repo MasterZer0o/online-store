@@ -4,8 +4,8 @@ main.product-details {
   margin: 4rem auto 0 auto;
   display: flex;
 
-  $section-spacing: 30px;
-  :where(.details-price, .details-config > div:nth-child(2), .details-buy) {
+  $section-spacing: 25px;
+  :where(.details-price, .details-config > div, .details-buy) {
     padding-top: $section-spacing;
   }
 
@@ -62,10 +62,10 @@ main.product-details {
 
   .details-path {
     display: flex;
-    background-color: #edf0f8;
+    background-color: hsl(222, 16%, 30%);
     width: fit-content;
     border-radius: 4px;
-    color: #a3a9c2;
+    color: #d8dee9;
     padding: 8px 12px;
     gap: 3px;
 
@@ -89,10 +89,16 @@ main.product-details {
         height: fit-content;
         margin-left: auto;
         gap: 5px;
-        color: #d46f77;
-        background-color: #fff0f0;
+        color: #f6606c;
+        background-color: #a33838b6;
         padding: 4px 6px;
         border-radius: 5px;
+        cursor: pointer;
+        transition: opacity 150ms ease-in-out;
+
+        &:hover {
+          background-color: hsla(0, 49%, 43%, 1);
+        }
       }
     }
     // brand name
@@ -139,20 +145,21 @@ main.product-details {
         padding: 7px 10px;
         cursor: pointer;
         transition: opacity 100ms ease-in-out;
+
         &:hover {
           opacity: 0.85;
         }
       }
       // rating
       & > div:first-child {
-        background-color: #fbf3ea;
-        color: #d48d3b;
+        background-color: #3b4252;
+        color: #ebcb8b;
       }
 
       // Reviews box
       & > div:nth-child(2) {
-        background: #edf0f8;
-        color: #3a4980;
+        background: #404859;
+        color: #d8dee9;
       }
     }
   }
@@ -225,8 +232,8 @@ main.product-details {
 
       .size-pick {
         padding: 7px 10px;
-        background-color: #f3f3f3;
-        color: #726c6c;
+        background-color: hsl(222, 16%, 30%);
+        color: #d8dee9;
         border-radius: 7px;
         display: flex;
         align-items: center;
@@ -238,9 +245,9 @@ main.product-details {
         &.selected {
           font-weight: bold;
           &::before {
-            background-color: #726c6c;
+            background-color: #d8dee9;
             outline-offset: 2px;
-            outline-color: #726c6c;
+            outline-color: #d8dee9;
           }
         }
 
@@ -254,7 +261,7 @@ main.product-details {
           display: block;
           width: 13px;
           height: 13px;
-          border: 2px solid #726c6c;
+          border: 2px solid #d8dee9;
           outline: 1px solid transparent;
           transition: background-color 150ms ease-in-out, outline-color 150ms ease-in-out;
         }
@@ -265,14 +272,14 @@ main.product-details {
   .details-buy {
     display: flex;
     gap: 2em;
-    color: var(--text-invert);
+    color: #eceff4;
     .quantity {
       display: flex;
       align-items: center;
       position: relative;
       border-radius: 10px;
       padding: 0.3em 0.5em;
-      background-color: #f3f3f3;
+      background-color: hsl(222, 16%, 30%);
 
       span:first-of-type {
         display: inline-block;
@@ -315,4 +322,14 @@ main.product-details {
       }
     }
   }
+}
+
+.show-in-enter-active,
+.show-in-leave-active {
+  transition: opacity 250ms ease-in-out;
+}
+
+.show-in-enter-from,
+.show-in-leave-to {
+  opacity: 0;
 }

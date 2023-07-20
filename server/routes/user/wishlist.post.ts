@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
 
     const db = getDb()
     await db.insert(wishlist).values({ productId, userId: user!.id }).onConflictDoNothing()
-
     sendNoContent(event, 201)
   }
   catch (error) {

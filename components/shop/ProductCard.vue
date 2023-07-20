@@ -5,7 +5,7 @@ defineProps<{ product: Product }>()
 <template>
   <article class="product-card">
     <ShopProductDiscount v-if="product.price.discountLabel" :label="product.price.discountLabel" />
-    <img :src="product.productImage" :alt="product.name" height="400">
+    <img :src="product.image" :alt="product.name" height="400">
     <div class="product-card__bottom">
       <div class="product-card__info">
         <span :title="product.name" class="product-card__title">{{ product.name }}</span>

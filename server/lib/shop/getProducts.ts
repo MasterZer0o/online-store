@@ -36,7 +36,7 @@ export async function getProducts(options: Params) {
     id: products.id,
     name: products.name,
     price: products.price,
-    productImage: products.image,
+    image: products.image,
     discountValue: discounts.value,
     discountType: discounts.type,
   }
@@ -104,7 +104,7 @@ type Products = {
   id: number
   name: string
   price: number
-  productImage: string
+  image: string
   discountValue: number | null
   discountType: 'amount' | 'percentage' | null
   count?: string
@@ -145,6 +145,6 @@ declare global {
       discountLabel?: string
       discountedAmount?: number
     }
-    productImage: string
+    image: string
   }
 }

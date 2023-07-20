@@ -8,7 +8,7 @@ definePageMeta({
 const productId = useRoute('p-id-product').params.id!
 
 const { data: product, error } = await useLazyFetch<ProductDetails>(`/product/${productId}`)
-logInfo(product.value)
+// logInfo(product.value)
 
 // logInfo(data.value)
 
@@ -19,7 +19,6 @@ if (error.value?.data) {
     fatal: true
   })
 }
-// product.value = data.value
 </script>
 
 <template>
@@ -31,9 +30,8 @@ if (error.value?.data) {
 
     <div>
       <ProductDetailsPath />
-      <ProductDetailsName :name="product!.name" />
-      <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" />
-      <ProductDetailsRating :rating="product!.rating" />
+      <ProductDetailsName :product="product!" />
+      <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
       <ProductDetailsConfiguration />
       <ProductDetailsBuy />
       <ProductDetailsDelivery />

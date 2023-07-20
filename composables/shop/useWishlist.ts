@@ -1,7 +1,7 @@
 export async function fetchWishlist() {
   const store = wishlistStore()
 
-  const wishlist = await $fetch('/user/wishlist') as Product[] | { error: string }
+  const wishlist = await $fetch<Product[] | { error: string }>('/user/wishlist')
 
   if ('error' in wishlist) {
     store.error = wishlist.error
@@ -35,8 +35,10 @@ export async function addToWishlist(product: Product) {
     return navigateTo('/login')
   }
 
-  if (isInWishlist(product.id))
-    return removeFromWishlist(product.id)
+  if (isInWishlist(product.id)) {
+    await removeFromWishlist(product.id)
+    return { added: false }
+  }
 
   await $fetch('/user/wishlist', {
     method: 'POST',
@@ -47,6 +49,8 @@ export async function addToWishlist(product: Product) {
 
   store.ids.add(product.id)
   console.log('Added ', product, ' to wishlist')
+
+  return { added: true }
 }
 
 function isInWishlist(productId: Product['id']) {

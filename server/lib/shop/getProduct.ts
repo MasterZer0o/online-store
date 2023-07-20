@@ -19,6 +19,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
   }
 
   const _product = (await db.select({
+    id: products.id,
     name: products.name,
     description: products.description,
     price: products.price,
@@ -72,6 +73,8 @@ export async function getProduct(productId: string | number): Promise<ProductDet
 
     return {
       ...product,
+      reviewCount: 33,
+      desiredCount: 109,
       rating: {
         average: 3.4,
         count: 231
@@ -79,10 +82,14 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     }
 }
 // TODO: implement rating
+// TODO: implement reviews
+// TODO: implement in-wishlist
 declare global {
   export interface ProductDetails {
-    id?: number
+    id: number
     name: string
+    reviewCount: number
+    desiredCount: number
     price: {
       amount: number
       discountLabel?: string
