@@ -20,6 +20,9 @@
 
 - combine css (https://vitejs.dev/config/build-options.html#build-csscodesplit)
 
+- IMPORTANT handle slug with special characters - slug is coming from product name which contains special characters
+
+
 ---
 - perf: prepared statements
 

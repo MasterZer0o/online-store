@@ -108,38 +108,92 @@ type Products = {
   discountValue: number | null
   discountType: 'amount' | 'percentage' | null
   count?: string
-}[]
 
+}[]
+type PreparedProduct = Omit<Products[number], 'price'>
+  & {
+  price: number | Product['price']
+  uri: Product['uri']
+  }
+
+// export function prepareProducts(products: Products) {
+//   return products.map((item: TransformedProduct) => {
+//     const discount = item.discountValue
+//     const price = item.price as number
+
+//     item.uri = generateSlug(item.name)
+
+//     if (discount) {
+//       const isTypeAmount = item.discountType === 'amount'
+
+//       item.price = {
+//         amount: price,
+//         discountLabel: isTypeAmount ? `-${discount}` : `-${discount}%`,
+//         discountedAmount: isTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99
+//       }
+//     }
+//     else {
+//       item.price = {
+//         amount: price
+//       }
+//     }
+
+//     // remove properties that are not needed for response
+//     (['discountValue', 'discountType'] as const).forEach(key => delete item[key])
+//     return item
+//   }) as Product[]
+// }
 export function prepareProducts(products: Products) {
-  return products.map((item: Omit<Products[number], 'price'> & ({ price: number | Product['price'] })) => {
-    const discount = item.discountValue
-    const price = item.price as number
+  const prepared: PreparedProduct[] = []
+
+  for (const product of products) {
+    const discount = product.discountValue
+    const productPrice = product.price
+    let price
 
     if (discount) {
-      const isTypeAmount = item.discountType === 'amount'
+      const isTypeAmount = product.discountType === 'amount'
 
-      item.price = {
-        amount: price,
+      price = {
+        amount: productPrice,
         discountLabel: isTypeAmount ? `-${discount}` : `-${discount}%`,
-        discountedAmount: isTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99
+        discountedAmount: isTypeAmount ? productPrice - discount : Math.floor(productPrice - (productPrice * discount / 100)) + 0.99
       }
     }
     else {
-      item.price = {
-        amount: price
+      price = {
+        amount: productPrice
       }
     }
 
+    Object.defineProperties(product, {
+      price: {
+        value: price
+      },
+      uri: {
+        value: generateSlug(product.name, product.id),
+        enumerable: true
+      }
+    });
+
     // remove properties that are not needed for response
-    (['discountValue', 'discountType'] as const).forEach(key => delete item[key])
-    return item
-  }) as Product[]
+    (['discountValue', 'discountType'] as const).forEach(key => delete product[key])
+
+    prepared.push(product as PreparedProduct)
+  }
+
+  return prepared
+}
+function generateSlug(name: string, id: number): string {
+  // TODO: get slug from db
+  return `/p/${id}-${name.split(' ').join('-').toLowerCase().replaceAll('/', '')}`
 }
 
 declare global {
   export interface Product {
     id: number
     name: string
+    uri: string
     price: {
       amount: number
       discountLabel?: string

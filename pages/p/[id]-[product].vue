@@ -5,12 +5,9 @@ definePageMeta({
   }
 })
 
-const productId = useRoute('p-id-product').params.id!
+const productId = useRoute('p-id-product').params.id
 
-const { data: product, error } = await useLazyFetch<ProductDetails>(`/product/${productId}`)
-// logInfo(product.value)
-
-// logInfo(data.value)
+const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
 
 if (error.value?.data) {
   throw createError({

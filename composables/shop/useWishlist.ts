@@ -48,7 +48,7 @@ export async function addToWishlist(product: Product) {
   })
 
   store.ids.add(product.id)
-  console.log('Added ', product, ' to wishlist')
+  logSuccess(`Added ${product.name} to wishlist`)
 
   return { added: true }
 }
@@ -80,5 +80,5 @@ export async function removeFromWishlist(productId: Product['id']) {
 
   store.ids.delete(productId)
   store.items.delete(productId)
-  console.log('Removed ', productId, ' from wishlist')
+  logSuccess(`Removed ${productId} to wishlist`)
 }

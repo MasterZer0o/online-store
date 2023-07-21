@@ -12,13 +12,22 @@
   }
 
   .product-card {
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--bg4);
-    border-radius: 4px;
-    overflow: hidden;
     position: relative;
+
+    img:hover .product-card__actions {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    & > a {
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--bg4);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
 
     .product-discount {
       position: absolute;
@@ -97,6 +106,7 @@
       flex-direction: column;
       gap: 3px;
       opacity: 0;
+      z-index: 99999;
       width: fit-content;
       transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
     }
