@@ -1,5 +1,6 @@
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { discounts, products } from '../../db/schema/products'
+import { wishlist } from '../../db/schema/users'
 
 export async function getProduct(productId: string | number): Promise<ProductDetails | { error: {
   message: 'Product not found'
@@ -27,6 +28,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     ratingCount: products.ratingCount,
     discountValue: discounts.value,
     discountType: discounts.type,
+    desiredCount: sql<number>`(SELECT COUNT(*) FROM ${wishlist} WHERE ${wishlist.productId} = ${productId})`
   })
     .from(products)
     .leftJoin(discounts, eq(discounts.productId, products.id))
@@ -34,6 +36,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     .limit(1))[0]
 
   const price = _product.price as number
+  const desiredCount = Number.parseInt(_product.desiredCount as unknown as string)
 
   type Price = Omit<typeof _product, 'price' | 'discountType' | 'discountValue'> & {
     price: {
@@ -51,6 +54,8 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     type Combined = Omit<typeof _product, 'price' | 'discountType' | 'discountValue'> & Price & Discount
 
     const product = _product as unknown as Combined
+
+    product.desiredCount = desiredCount
 
     if (product.discountValue !== null) {
       const discount = product.discountValue!
@@ -74,7 +79,6 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     return {
       ...product,
       reviewCount: 33,
-      desiredCount: 109,
       rating: {
         average: 3.4,
         count: 231
@@ -83,7 +87,8 @@ export async function getProduct(productId: string | number): Promise<ProductDet
 }
 // TODO: implement rating
 // TODO: implement reviews
-// TODO: implement in-wishlist
+// TODO: implement stock (quantity)
+// TODO: implement variants (colors, size)
 declare global {
   export interface ProductDetails {
     id: number

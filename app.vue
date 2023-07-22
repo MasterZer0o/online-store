@@ -7,6 +7,17 @@ useHead({
 const store = useUser()
 const event = useRequestEvent()
 
+const nuxtApp = useNuxtApp()
+
+const isLoadingPage = ref(false)
+nuxtApp.hook('page:start', () => {
+  isLoadingPage.value = true
+})
+
+nuxtApp.hook('page:finish', () => {
+  setTimeout(() => isLoadingPage.value = false, 400)
+})
+
 if (process.server) {
   const { SESSION_COOKIE_NAME } = useRuntimeConfig()
 
@@ -20,6 +31,10 @@ if (process.server) {
 </script>
 
 <template>
+  <NuxtLoadingIndicator
+    color="linear-gradient(to right, red, yellow, red,yellow, red)"
+    :height="2" :duration="2000" :style="`opacity:${isLoadingPage ? 1 : 0};`"
+  />
   <ShopHeader />
   <NuxtLayout>
     <NuxtPage />

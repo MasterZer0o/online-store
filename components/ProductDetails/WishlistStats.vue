@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{ product: ProductDetails & Product }>()
-
+const props = defineProps<{ product: ProductDetails }>()
 const store = wishlistStore()
 onMounted(() => {
   store.currentlyViewedProductId = props.product.id
 }
 )
-
+const count = ref(props.product.desiredCount)
 const showRemove = ref(false)
 
 function enter() {
@@ -20,14 +19,22 @@ function leave() {
 }
 
 async function updateWishlist() {
-  const response = await addToWishlist(props.product) as { added: boolean }
-  showRemove.value = false
+  try {
+    const response = await addToWishlist(props.product) as { added: boolean }
+
+    count.value = count.value + (response.added ? 1 : -1)
+
+    showRemove.value = false
+  }
+  catch (error) {
+
+  }
 }
 onUnmounted(() => store.currentlyViewedProductId = -1)
 </script>
 
 <template>
-  <span @mouseenter="enter" @mouseleave="leave" @click="updateWishlist">
+  <div @mouseenter="enter" @mouseleave="leave" @click="updateWishlist">
     <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 
@@ -45,12 +52,14 @@ onUnmounted(() => store.currentlyViewedProductId = -1)
 
         </template>
       </template>
+
       <template v-else>
         <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-
       </template>
 
     </svg>
-    <strong>{{ product.desiredCount }}</strong>
-  </span>
+    <strong>{{ count }}</strong>
+    <ShopTooltip v-if="count >= 2" :text="`${store.isCurrentProductIn ? `You and ${count - 1}` : `${count}`} others want it`" />
+    <ShopTooltip v-else :text="store.isCurrentProductIn ? 'In your wishlist' : 'Add to wishlist'" />
+  </div>
 </template>

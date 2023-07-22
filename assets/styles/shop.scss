@@ -19,6 +19,7 @@
 
   &::before,
   &::after {
+    z-index: 99999;
     pointer-events: none;
     opacity: 0;
     transition: var(--transition);

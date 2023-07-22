@@ -22,10 +22,10 @@ export function fetchWishlistIds() {
     if (!('error' in res)) {
       store.ids = new Set(res as number[])
     }
-  }).catch(err => () => store.error = err)
+  }).catch(err => store.error = err)
 }
 
-export async function addToWishlist(product: Product) {
+export async function addToWishlist(product: Product | ProductDetails) {
   const store = wishlistStore()
   const user = useUser()
 

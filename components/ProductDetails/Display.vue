@@ -7,6 +7,6 @@ defineProps<{
 
 <template>
   <section class="details-display">
-    <img :src="imageSrc" :alt="name">
+    <img :src="imageSrc" :alt="name" width="400" height="350">
   </section>
 </template>

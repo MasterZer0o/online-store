@@ -7,8 +7,6 @@ export default defineEventHandler(async (event) => {
 
   if ('error' in product) {
     setResponseStatus(event, product.error.statusCode)
-
-    return product
   }
 
   return product

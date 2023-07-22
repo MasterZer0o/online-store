@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ product: Product }>()
-
-logInfo(props)
+defineProps<{ product: Product }>()
 </script>
 
 <template>

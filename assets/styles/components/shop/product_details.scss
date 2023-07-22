@@ -84,10 +84,12 @@ main.product-details {
       }
 
       display: flex;
-      span {
+      & > div {
+        position: relative;
         display: flex;
         height: fit-content;
         margin-left: auto;
+        min-width: 48px;
         gap: 5px;
         color: #f6606c;
         background-color: #a33838b6;
@@ -98,6 +100,11 @@ main.product-details {
 
         &:hover {
           background-color: hsla(0, 49%, 43%, 1);
+
+          & .tooltip::after {
+            pointer-events: all;
+            opacity: 1;
+          }
         }
       }
     }
