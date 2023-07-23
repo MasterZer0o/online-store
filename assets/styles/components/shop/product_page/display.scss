@@ -1,0 +1,49 @@
+@import '@egjs/vue3-flicking/dist/flicking.css';
+$imageBorderRadius: 8px;
+
+.details-display {
+  img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: $imageBorderRadius;
+  }
+}
+
+.details-gallery {
+  margin: 1rem 0rem 0 0rem;
+
+  img {
+    $gap: 7px;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    background-color: gray;
+    width: calc(25% - $gap);
+    border-radius: 8px;
+    margin-right: $gap;
+  }
+
+  button {
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    top: 0;
+    height: 100%;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 4px;
+    transition: background-color 100ms ease-in-out;
+
+    &:hover {
+      background-color: rgba(165, 162, 162, 0.25);
+    }
+
+    &.flicking-arrow-prev {
+      left: 0;
+    }
+
+    &.flicking-arrow-next {
+      right: 0;
+    }
+  }
+}

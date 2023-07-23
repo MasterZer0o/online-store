@@ -38,7 +38,9 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@nuxtjs/html-validator": "1.5.1",
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/vue3-flicking": "^4.10.8",
+    "@nuxtjs/html-validator": "1.5.2",
     "@pinia/nuxt": "^0.4.10",
     "@vueuse/core": "^10.2.1",
     "@vueuse/nuxt": "^10.2.1",
