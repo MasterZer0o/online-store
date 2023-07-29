@@ -19,7 +19,8 @@
     "vue/space-unary-ops": "off",
     "no-restricted-globals": 0,
     "import/default": "off",
-    "n/prefer-global/process": "off"
+    "n/prefer-global/process": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "overrides": [
     {

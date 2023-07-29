@@ -15,7 +15,7 @@ const items = computed(() => store.items)
 
 <template>
   <div class="wishlist">
-    <h1>Wish list</h1>
+    <h1>Wishlist</h1>
     <ul v-if="items.size !== 0 && !store.error" class="entries">
       <ShopWishlistItem v-for="item in store.items.values()" :product="item" />
     </ul>
@@ -54,7 +54,7 @@ const items = computed(() => store.items)
     flex-direction: column;
     gap: 15px;
 
-    li {
+    li a{
       font-size: 1.15em;
       display: flex;
       align-items: center;

@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { categories } from '~/server/db/schema/products'
+import { categories } from '../../db/schema/products'
 
 export async function getCategory(slug: string) {
   try {

@@ -1,5 +1,5 @@
 import { and, asc, desc, eq, gt, gte, sql } from 'drizzle-orm'
-import { discounts, products } from '~/server/db/schema/products'
+import { discounts, products } from '../../db/schema/products'
 
 interface Params {
   categoryId: number
@@ -51,8 +51,8 @@ export async function getProducts(options: Params) {
       .from(products)
       .leftJoin(...join)
       .where(where)
-      .limit(MAX_PRODUCTS_PER_PAGE)
       .orderBy(asc(products.id))
+      .limit(MAX_PRODUCTS_PER_PAGE)
 
     return {
       items: prepareProducts(items),
@@ -69,8 +69,8 @@ export async function getProducts(options: Params) {
     .from(products)
     .where(where)
     .leftJoin(...join)
-    .limit(MAX_PRODUCTS_PER_PAGE)
     .orderBy(asc(products.id))
+    .limit(MAX_PRODUCTS_PER_PAGE)
 
   let [results, [{ count: productCount }]] = await Promise.all([data.execute(), countQuery.execute()])
 
@@ -116,33 +116,6 @@ type PreparedProduct = Omit<Products[number], 'price'>
   uri: Product['uri']
   }
 
-// export function prepareProducts(products: Products) {
-//   return products.map((item: TransformedProduct) => {
-//     const discount = item.discountValue
-//     const price = item.price as number
-
-//     item.uri = generateSlug(item.name)
-
-//     if (discount) {
-//       const isTypeAmount = item.discountType === 'amount'
-
-//       item.price = {
-//         amount: price,
-//         discountLabel: isTypeAmount ? `-${discount}` : `-${discount}%`,
-//         discountedAmount: isTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99
-//       }
-//     }
-//     else {
-//       item.price = {
-//         amount: price
-//       }
-//     }
-
-//     // remove properties that are not needed for response
-//     (['discountValue', 'discountType'] as const).forEach(key => delete item[key])
-//     return item
-//   }) as Product[]
-// }
 export function prepareProducts(products: Products) {
   const prepared: PreparedProduct[] = []
 
@@ -157,7 +130,7 @@ export function prepareProducts(products: Products) {
       price = {
         amount: productPrice,
         discountLabel: isTypeAmount ? `-${discount}` : `-${discount}%`,
-        discountedAmount: isTypeAmount ? productPrice - discount : Math.floor(productPrice - (productPrice * discount / 100)) + 0.99
+        discounted: isTypeAmount ? productPrice - discount : Math.floor(productPrice - (productPrice * discount / 100)) + 0.99
       }
     }
     else {
@@ -197,7 +170,7 @@ declare global {
     price: {
       amount: number
       discountLabel?: string
-      discountedAmount?: number
+      discounted?: number
     }
     image: string
   }

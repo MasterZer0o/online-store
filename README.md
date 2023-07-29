@@ -1,4 +1,4 @@
-# An attempt on creating basic online store
+# e-commerce store
 
 Using: 
 - postgres as primary DB with drizzle ORM,

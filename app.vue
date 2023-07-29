@@ -5,7 +5,6 @@ useHead({
 })
 
 const store = useUser()
-const event = useRequestEvent()
 
 const nuxtApp = useNuxtApp()
 
@@ -19,6 +18,7 @@ nuxtApp.hook('page:finish', () => {
 })
 
 if (process.server) {
+  const event = useRequestEvent()
   const { SESSION_COOKIE_NAME } = useRuntimeConfig()
 
   const { data: sessionData }: { data: Partial<ClientSessionData> } = event.context.sessions![SESSION_COOKIE_NAME]

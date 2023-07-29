@@ -23,10 +23,14 @@
       height: 400px;
       display: flex;
       flex-direction: column;
-      border: 1px solid var(--bg4);
+      outline: 1px solid var(--bg4);
       border-radius: 4px;
       overflow: hidden;
       position: relative;
+
+      &:hover {
+        outline-color: var(--accent);
+      }
     }
 
     .product-discount {
@@ -108,7 +112,9 @@
       opacity: 0;
       z-index: 99999;
       width: fit-content;
-      transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+      transition:
+        opacity 150ms ease-in-out,
+        transform 150ms ease-in-out;
     }
 
     &__action {

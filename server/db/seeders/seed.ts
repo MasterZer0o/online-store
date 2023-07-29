@@ -22,7 +22,7 @@ async function seedProducts() {
       image: product.image,
       categoryId: 10,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      price: parseFloat(`${product.price}`),
+      price: Number.parseFloat(`${product.price}`),
       SKU: 'sku',
     }
   }) as NewProduct[]
@@ -37,7 +37,7 @@ async function seedProducts() {
       image: product.image,
       categoryId: 8,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      price: parseFloat(`${product.price}`),
+      price: Number.parseFloat(`${product.price}`),
       SKU: 'sku',
     }
   }) as NewProduct[]

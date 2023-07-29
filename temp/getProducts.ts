@@ -133,7 +133,7 @@ function prepareProducts(products: DataFromDatabase): Product[] {
       item.price = {
         amount: item.price,
         discountLabel: discountType === 'amount' ? `-${discount}` : `-${discount}%`,
-        discountedAmount: discountType === 'amount' ? item.price - discount : Math.floor(item.price - (item.price * discount / 100)) + 0.99
+        discounted: discountType === 'amount' ? item.price - discount : Math.floor(item.price - (item.price * discount / 100)) + 0.99
       } as any
     }
     else {

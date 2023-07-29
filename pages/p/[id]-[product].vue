@@ -1,18 +1,21 @@
 <script setup lang="ts">
+const productId = useRoute('p-id-product').params.id
+
+const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
+
 definePageMeta({
   validate(route: any) {
     return !Number.isNaN(Number.parseInt(route.params.id))
   }
 })
+useHead({
+  titleTemplate: () => product.value!.name
+})
 
-const productId = useRoute('p-id-product').params.id
-
-const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
-
-if (error.value?.data) {
+if (error.value !== null) {
   throw createError({
-    message: error.value?.data.error.message || 'Page not found',
-    statusCode: error.value?.data.error.statusCode,
+    message: error.value.data.error.message || 'Page not found',
+    statusCode: error.value.data.error.statusCode,
     fatal: true
   })
 }
@@ -22,7 +25,7 @@ if (error.value?.data) {
   <main class="product-details">
     <div>
       <ProductDetailsDisplay :image-src="product!.image" :name="product!.name" />
-      <ProductDetailsImageGallery />
+      <ProductDetailsImageGallery :images="product!.images" />
     </div>
 
     <div>

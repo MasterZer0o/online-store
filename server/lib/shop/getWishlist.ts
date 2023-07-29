@@ -9,7 +9,7 @@ export async function getWishlist(userId: number) {
       id: products.id,
       name: products.name,
       price: products.price,
-      productImage: products.image,
+      image: products.image,
       discountValue: discounts.value,
       discountType: discounts.type,
     })

@@ -22,6 +22,7 @@
 
 - IMPORTANT handle slug with special characters - slug is coming from product name which contains special characters
 
+- page transitions
 
 ---
 - perf: prepared statements

@@ -1,10 +1,9 @@
-import { getSession } from '~~/server/lib/session'
-
 export default defineNuxtRouteMiddleware(async (to) => {
   const store = useUser()
 
   // server side case when GET /user/account
   if (process.server) {
+    const { getSession } = await import('~~/server/lib/session')
     const event = useRequestEvent()
     const session = await getSession(event)
 
