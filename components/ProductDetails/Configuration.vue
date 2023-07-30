@@ -47,7 +47,7 @@ function selectSize(event: MouseEvent) {
 <template>
   <section class="details-config">
     <div>
-      <span>Choose a color</span>
+      <span>Choose color</span>
       <div class="color-picks">
         <div v-for="color in colors" :key="color.hex" class="color-pick" :style="`color:${color.hex}`" @click="selectColor">
           <strong>{{ color.name }}</strong>
@@ -55,7 +55,7 @@ function selectSize(event: MouseEvent) {
       </div>
     </div>
     <div>
-      <span>Choose a size</span>
+      <span>Choose size</span>
       <div class="size-picks">
         <div v-for="size in sizes" :key="size" class="size-pick" @click="selectSize">
           {{ size }}

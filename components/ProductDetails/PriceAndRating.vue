@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   price: ProductDetails['price']
-  rating: ProductDetails['rating']
+  rating: ProductDetails['rating'] | null
   reviews: ProductDetails['reviewCount']
 }>()
 </script>

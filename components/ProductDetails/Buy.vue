@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineProps<{ stock: number }>()
+// TODO: ^^^
 const selectedQuantity = ref(1)
 const productQuantity = ref(5)
 const limitExceeded = ref(false)

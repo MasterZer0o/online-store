@@ -33,7 +33,7 @@ if (error.value !== null) {
       <ProductDetailsName :product="product!" />
       <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
       <ProductDetailsConfiguration />
-      <ProductDetailsBuy />
+      <ProductDetailsBuy :stock="product!.stock" />
       <ProductDetailsDelivery />
     </div>
   </main>

@@ -1,5 +1,5 @@
 import { eq, sql } from 'drizzle-orm'
-import { discounts, images, products, reviews } from '../../db/schema/products'
+import { discounts, images, products, reviews, stock } from '../../db/schema/products'
 import { wishlist } from '../../db/schema/users'
 
 export async function getProduct(productId: string | number): Promise<ProductDetails | {
@@ -20,7 +20,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     }
   }
 
-  const [_product] = await db.select({
+  const [product] = await db.select({
     id: products.id,
     name: products.name,
     description: products.description,
@@ -31,57 +31,36 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     desiredCount: sql<string>`(SELECT COUNT(*) FROM ${wishlist} WHERE ${wishlist.productId} = ${productId})`,
     images: sql<string[]>`array(SELECT ${images.url} from ${images} WHERE ${images.productId} = ${productId})`,
     reviewCount: sql<number>`(SELECT COUNT(*) FROM ${reviews} WHERE ${reviews.comment} IS NOT NULL AND ${reviews.productId} = ${productId})`,
-    ratings: sql<number[]>`array(SELECT rating from ${reviews} WHERE ${reviews.productId} = ${productId})`
+    ratings: sql<number[]>`array(SELECT rating from ${reviews} WHERE ${reviews.productId} = ${productId})`,
+    stock: stock.quantity
   })
     .from(products)
     .leftJoin(discounts, eq(discounts.productId, products.id))
+    .leftJoin(stock, eq(stock.productId, productId))
     .where(eq(products.id, productId))
     .limit(1)
 
-  logInfo(_product)
+  logInfo({ product })
 
-  type Price = Omit<typeof _product, 'price' | 'discountType' | 'discountValue'> & {
+  const price = product.price
+  const discount = product.discountValue
+  const isTypeAmount = product.discountType === 'amount'
+
+  return <ProductDetails>{
+    id: product.id,
+    name: product.name,
+    image: product.image,
+    desiredCount: product.desiredCount,
+    images: product.images,
+    stock:product.stock
     price: {
-      amount: number
-      discountLabel?: string
-      discounted?: number
-    }
+      amount: price,
+      discountLabel: discount ? `-${isTypeAmount ? discount : `${discount}%`}` : undefined,
+      discounted: discount ? (isTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99) : undefined
+    },
+    rating: product.ratings.reduce((acc, curr) => acc + curr, 0) / product.ratings.length,
+    reviewCount: product.reviewCount
   }
-
-  type Discount = Omit<typeof _product, 'discountValue' | 'discountType' | 'price'> & {
-    discountValue?: typeof _product['discountValue']
-    discountType?: typeof _product['discountType']
-  }
-    type Combined = Omit<typeof _product, 'price' | 'discountType' | 'discountValue'> & Price & Discount
-
-    const product = _product as unknown as Combined
-
-    const price = _product.price
-
-    if (product.discountValue !== null) {
-      const discount = product.discountValue!
-      const isTypeAmount = product.discountType === 'amount'
-
-      product.price = {
-        amount: price,
-        discountLabel: isTypeAmount ? `-${discount}` : `-${discount}%`,
-        discounted: isTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99
-      }
-
-      delete product.discountValue
-      delete product.discountType
-    }
-    else {
-      product.price = {
-        amount: price
-      }
-    }
-    product.rating = product.ratings.reduce((acc, curr) => acc + curr, 0) / product.ratings.length
-    delete product.ratings
-    // FIXME: fix types
-    return {
-      ...product,
-    }
 }
 // TODO: implement rating
 // TODO: implement reviews
@@ -99,6 +78,7 @@ declare global {
     }
     rating: number
     reviewCount: number | string
+    stock: number
     image: string
     images: string[]
   }
