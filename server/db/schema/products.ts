@@ -24,6 +24,17 @@ export const products = pgTable('products', {
   updatedAt: timestamp('updated_at', { withTimezone: true })
 })
 
+export const variants = pgTable('variants', {
+  id: serial('id').primaryKey(),
+  productId: integer('product_id').notNull().references(() => products.id),
+  price: real('price').notNull(),
+  size: varchar('size', { length: 25 }).notNull(),
+  colorName: varchar('color_name', { length: 25 }).notNull(),
+  colorCode: varchar('color_code', { length: 25 }).notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+})
+
 export const discounts = pgTable('discounts', {
   id: serial('id').primaryKey(),
   name: varchar('name').notNull(),
@@ -48,9 +59,7 @@ export const stock = pgTable('stock', {
   id: serial('id').primaryKey(),
   productId: integer('product_id').notNull().references(() => products.id),
   quantity: integer('quantity').notNull(),
-  updatedAt: timestamp('updated_at', {
-    withTimezone: true
-  })
+  updatedAt: timestamp('updated_at', { withTimezone: true })
 })
 
 export const images = pgTable('images', {
@@ -77,6 +86,7 @@ export const productRelations = relations(products, ({ many, one }) => ({
     fields: [products.id],
     references: [discounts.productId]
   }),
+  variants: many(variants),
   reviews: many(reviews)
 }))
 
@@ -112,4 +122,7 @@ declare global {
 
   export type Review = InferModel<typeof reviews>
   export type NewReview = InferModel<typeof reviews, 'insert'>
+
+  export type Variant = InferModel<typeof variants>
+  export type NewVariant = InferModel<typeof variants, 'insert'>
 }

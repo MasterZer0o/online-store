@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const productId = useRoute('p-id-product').params.id
-
-const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
-
 definePageMeta({
   validate(route: any) {
     return !Number.isNaN(Number.parseInt(route.params.id))
   }
 })
+const productId = useRoute('p-id-product').params.id
+
+const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
+
 useHead({
   titleTemplate: () => product.value!.name
 })
@@ -32,7 +32,7 @@ if (error.value !== null) {
       <ProductDetailsPath />
       <ProductDetailsName :product="product!" />
       <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
-      <ProductDetailsConfiguration />
+      <ProductDetailsConfiguration :variants="product!.variants" />
       <ProductDetailsBuy :stock="product!.stock" />
       <ProductDetailsDelivery />
     </div>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const props = defineProps<{ variants: ProductDetails['variants'] }>()
+// TODO: ^^^
 const colors = [{
   name: 'color1',
   hex: '#BBD278'

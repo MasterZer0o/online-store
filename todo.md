@@ -20,6 +20,8 @@
 
 - combine css (https://vitejs.dev/config/build-options.html#build-csscodesplit)
 
+- uninstall knitwork in migrate.ts and put raw strings
+
 - IMPORTANT handle slug with special characters - slug is coming from product name which contains special characters
 
 - page transitions
