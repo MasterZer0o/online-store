@@ -1,48 +1,26 @@
 <script setup lang="ts">
 const props = defineProps<{ variants: ProductDetails['variants'] }>()
-// TODO: ^^^
-const colors = [{
-  name: 'color1',
-  hex: '#BBD278'
-},
-{
-  name: 'color2',
-  hex: '#BBC1F8'
-},
-{
-  name: 'color3',
-  hex: '#BBD278'
-},
-{
-  name: 'color4',
-  hex: '#FFD3F8'
-},
-{
-  name: 'color5',
-  hex: '#ECDECC'
-}
-]
 
-const sizes = ['Small', 'Medium', 'Large', 'Extra Large', 'XXL']
+const sizes: string[] = []
+const colors: { code: string; name: string }[] = []
+
+for (const variant of props.variants) {
+  sizes.push(variant.size)
+  colors.push({
+    code: variant.colorCode,
+    name: variant.colorName
+  })
+}
+const selectedSize = ref<string>()
+const selectedColor = ref<string>()
+
 // TODO: handle color variant - select current
-function selectColor(event: MouseEvent) {
-  const target = event.target as HTMLElement
-
-  if (target.classList.contains('selected'))
-    return
-
-  document.querySelector('.color-pick.selected')?.classList.remove('selected')
-  target.classList.add('selected')
+function selectColor(colorName: typeof colors[number]['name']) {
+  selectedColor.value = colorName
 }
 
-function selectSize(event: MouseEvent) {
-  const target = event.target as HTMLElement
-
-  if (target.classList.contains('selected'))
-    return
-
-  document.querySelector('.size-pick.selected')?.classList.remove('selected')
-  target.classList.add('selected')
+function selectSize(size: typeof sizes[number]) {
+  selectedSize.value = size
 }
 </script>
 
@@ -51,7 +29,7 @@ function selectSize(event: MouseEvent) {
     <div>
       <span>Choose color</span>
       <div class="color-picks">
-        <div v-for="color in colors" :key="color.hex" class="color-pick" :style="`color:${color.hex}`" @click="selectColor">
+        <div v-for="color in colors" :key="color.name" class="color-pick" :class="{ selected: selectedColor === color.name }" :style="`color:${color.code}`" @click="selectColor(color.name)">
           <strong>{{ color.name }}</strong>
         </div>
       </div>
@@ -59,7 +37,7 @@ function selectSize(event: MouseEvent) {
     <div>
       <span>Choose size</span>
       <div class="size-picks">
-        <div v-for="size in sizes" :key="size" class="size-pick" @click="selectSize">
+        <div v-for="size in sizes" :key="size" class="size-pick" :class="{ selected: selectedSize === size }" @click="selectSize(size)">
           {{ size }}
         </div>
       </div>

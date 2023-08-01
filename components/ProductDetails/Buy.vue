@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ stock: number }>()
+defineProps<{ stock: number | null }>()
 // TODO: ^^^
 const selectedQuantity = ref(1)
 const productQuantity = ref(5)

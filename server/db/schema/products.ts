@@ -1,4 +1,4 @@
-import { integer, pgTable, real, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, real, serial, text, timestamp, uniqueIndex, varchar } from 'drizzle-orm/pg-core'
 import { type InferModel, relations } from 'drizzle-orm'
 import { users } from './users'
 
