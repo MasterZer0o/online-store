@@ -174,7 +174,7 @@ main.product-details {
         border-radius: 50%;
         background-color: currentColor;
         width: $color-circle-size;
-        font-size: .95em;
+        font-size: 0.95em;
         height: $color-circle-size;
         cursor: pointer;
         position: relative;
@@ -297,7 +297,7 @@ main.product-details {
     }
 
     // add to cart button
-    & > button {
+    & > button.add-to-cart {
       color: white;
       background-color: hsl(227, 38%, 36%);
       border-radius: 10px;
@@ -310,6 +310,41 @@ main.product-details {
 
       &:hover {
         background-color: hsl(227, 38%, 40%);
+      }
+    }
+
+    button.wishlist-btn {
+      border: 2px solid var(--bg5);
+      border-radius: 10px;
+      background-color: transparent;
+      padding: 0 1em;
+      position: relative;
+
+      & .tooltip {
+        left: 0;
+
+        &::before {
+          content: unset;
+        }
+
+        &::after {
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+
+      &:hover .tooltip::after {
+        pointer-events: all;
+        opacity: 1;
+      }
+
+      svg {
+        color: #f6606c;
+        transition: transform 150ms ease-in-out;
+      }
+
+      &:hover svg {
+        transform: scale(1.1);
       }
     }
   }

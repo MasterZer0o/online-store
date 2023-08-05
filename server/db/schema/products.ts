@@ -1,4 +1,4 @@
-import { integer, pgTable, real, serial, text, timestamp, uniqueIndex, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, real, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 import { type InferModel, relations } from 'drizzle-orm'
 import { users } from './users'
 
@@ -19,7 +19,6 @@ export const products = pgTable('products', {
   price: real('price').notNull(),
   image: varchar('image').notNull(),
   categoryId: integer('category_id').notNull().references(() => categories.id),
-  SKU: varchar('SKU').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true })
 })
@@ -28,9 +27,11 @@ export const variants = pgTable('variants', {
   id: serial('id').primaryKey(),
   productId: integer('product_id').notNull().references(() => products.id),
   price: real('price').notNull(),
+  SKU: varchar('SKU').notNull(),
   size: varchar('size', { length: 25 }).notNull(),
   colorName: varchar('color_name', { length: 25 }).notNull(),
   colorCode: varchar('color_code', { length: 25 }).notNull(),
+  stock: integer('stock').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true })
 })
@@ -111,7 +112,7 @@ declare global {
   export type Category = InferModel<typeof categories>
   export type NewCategory = InferModel<typeof categories, 'insert'>
 
-  export type Discount = InferModel<typeof discounts>
+  export type DiscountModel = InferModel<typeof discounts>
   export type NewDiscount = InferModel<typeof discounts, 'insert'>
 
   export type Stock = InferModel<typeof stock>

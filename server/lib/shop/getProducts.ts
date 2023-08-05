@@ -170,7 +170,7 @@ declare global {
     price: {
       amount: number
       discountLabel?: string
-      discounted?: number
+      discountedAmount?: number
     }
     image: string
   }

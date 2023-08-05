@@ -19,6 +19,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
       }
     }
   }
+
   const [product] = await db.select({
     id: products.id,
     name: products.name,
@@ -28,9 +29,9 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     discountValue: discounts.value,
     discountType: discounts.type,
     desiredCount: sql<string>`(SELECT COUNT(*) FROM ${wishlist} WHERE ${wishlist.productId} = ${productId})`,
-    images: sql<string[]>`array(SELECT ${images.url} from ${images} WHERE ${images.productId} = ${productId})`,
+    images: sql<string[]>`array(SELECT ${images.url} FROM ${images} WHERE ${images.productId} = ${productId})`,
     reviewCount: sql<number>`(SELECT COUNT(*) FROM ${reviews} WHERE ${reviews.comment} IS NOT NULL AND ${reviews.productId} = ${productId})`,
-    ratings: sql<number[]>`array(SELECT rating from ${reviews} WHERE ${reviews.productId} = ${productId})`,
+    ratings: sql<number[]>`array(SELECT ${reviews.rating} FROM ${reviews} WHERE ${reviews.productId} = ${productId})`,
     stock: stock.quantity,
     variants: sql<{ colorCode: string; colorName: string; size: string }[]>`array(SELECT json_build_object('colorName', color_name, 'colorCode', color_code, 'size', size) FROM ${variants} WHERE ${variants.productId} = ${productId})`
   })
@@ -44,23 +45,33 @@ export async function getProduct(productId: string | number): Promise<ProductDet
   const discount = product.discountValue
   const isDiscountTypeAmount = product.discountType === 'amount'
 
-  return <ProductDetails>{
+  const final: ProductDetails = {
     id: product.id,
     name: product.name,
     image: product.image,
     desiredCount: product.desiredCount,
     images: product.images,
-    stock: product.stock,
+    available: product.stock !== null,
     price: {
       amount: price,
       discountLabel: discount ? `-${isDiscountTypeAmount ? discount : `${discount}%`}` : undefined,
-      discounted: discount ? (isDiscountTypeAmount ? price - discount : Math.floor(price - (price * discount / 100)) + 0.99) : undefined
+      discountedAmount: discount ? calculateDiscount({ isTypeAmount: isDiscountTypeAmount, value: discount }, product.price) : undefined
     },
-    rating: product.ratings.reduce((acc, curr) => acc + curr, 0) / product.ratings.length,
+    rating: calculateRating(product.ratings),
     reviewCount: product.reviewCount,
     variants: product.variants
   }
+
+  return final
 }
+function calculateDiscount(discount: { isTypeAmount: boolean; value: number }, price: number) {
+  return discount.isTypeAmount ? price - discount.value : Math.floor(price - (price * discount.value / 100)) + 0.99
+}
+
+function calculateRating(ratings: number[]) {
+  return ratings.reduce((acc, curr) => acc + curr, 0) / ratings.length
+}
+
 // TODO: implement rating
 // TODO: implement reviews
 // TODO: implement stock (quantity)
@@ -73,11 +84,11 @@ declare global {
     price: {
       amount: number
       discountLabel?: string
-      discounted?: number
+      discountedAmount?: number
     }
     rating: number
     reviewCount: number | string
-    stock: number
+    available: boolean
     image: string
     images: string[]
     variants: {

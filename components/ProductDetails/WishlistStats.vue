@@ -5,7 +5,7 @@ onMounted(() => {
   store.currentlyViewedProductId = props.product.id
 }
 )
-const count = ref(props.product.desiredCount)
+const count = ref(Number.parseInt(props.product.desiredCount))
 const showRemove = ref(false)
 
 function enter() {

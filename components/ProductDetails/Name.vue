@@ -9,7 +9,7 @@ defineProps<{ product: ProductDetails }>()
       <p>
         {{ product.name }}
       </p>
-      <ProductDetailsWishlistStats :product="product" />
+      <!-- <ProductDetailsWishlistStats :product="product" /> -->
     </div>
     <p>Random brand name</p>
   </section>

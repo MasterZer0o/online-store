@@ -27,7 +27,7 @@ const showHeartIcon = ref(true)
         <span v-if="product.price.discountLabel">
           <span class=":uno: text-green">{{ product.price.discountLabel }}
           </span>
-          <strong>&nbsp;{{ product.price.discounted }} zł</strong></span>
+          <strong>&nbsp;{{ product.price.discountedAmount }} zł</strong></span>
       </div>
     </NuxtLink>
   </li>

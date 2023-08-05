@@ -14,7 +14,6 @@ for (const variant of props.variants) {
 const selectedSize = ref<string>()
 const selectedColor = ref<string>()
 
-// TODO: handle color variant - select current
 function selectColor(colorName: typeof colors[number]['name']) {
   selectedColor.value = colorName
 }

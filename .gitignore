@@ -13,3 +13,4 @@ priv
 exports.ts
 migrations
 temp
+options.md

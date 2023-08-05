@@ -9,8 +9,8 @@ defineProps<{
 <template>
   <section class="details-price">
     <div class="price-amount">
-      <strong>{{ price.discounted || price.amount }} zł</strong>
-      <span v-if="price.discounted" class="price-amount--discounted">{{ price.amount }} zł</span>
+      <strong>{{ price.discountedAmount || price.amount }} zł</strong>
+      <span v-if="price.discountedAmount" class="price-amount--discounted">{{ price.amount }} zł</span>
     </div>
     <ProductDetailsRating :review-count="reviews" :rating="rating" />
   </section>

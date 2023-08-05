@@ -7,6 +7,7 @@ definePageMeta({
 const productId = useRoute('p-id-product').params.id
 
 const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
+onMounted(() => wishlistStore().currentlyViewedProductId = product.value!.id)
 
 useHead({
   titleTemplate: () => product.value!.name
@@ -33,7 +34,7 @@ if (error.value !== null) {
       <ProductDetailsName :product="product!" />
       <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
       <ProductDetailsConfiguration :variants="product!.variants" />
-      <ProductDetailsBuy :stock="product!.stock" />
+      <ProductDetailsBuy :product="product!" />
       <ProductDetailsDelivery />
     </div>
   </main>
