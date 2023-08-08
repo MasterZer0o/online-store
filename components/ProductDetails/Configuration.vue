@@ -26,6 +26,29 @@ function selectSize(size: typeof sizes[number]) {
 <template>
   <section class="details-config">
     <div>
+      <span>
+        Color
+        <IconsChevron />
+      </span>
+      <ul>
+        <li v-for="i in 5" :key="i">
+          Color {{ i }}
+          <span style="background-color: red;"></span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <span>
+        Size
+        <IconsChevron />
+      </span>
+      <ul>
+        <li v-for="i in 5" :key="i">
+          Size {{ i }}
+        </li>
+      </ul>
+    </div>
+    <!-- <div>
       <span>Choose color</span>
       <div class="color-picks">
         <div v-for="color in colors" :key="color.name" class="color-pick" :class="{ selected: selectedColor === color.name }" :style="`color:${color.code}`" @click="selectColor(color.name)">
@@ -40,6 +63,6 @@ function selectSize(size: typeof sizes[number]) {
           {{ size }}
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>

@@ -26,6 +26,8 @@
 
 - page transitions
 
+- move function `calculateDiscount` to utils and use it in both `getProducts` and `getProduct`
+
 ---
 - perf: prepared statements
 

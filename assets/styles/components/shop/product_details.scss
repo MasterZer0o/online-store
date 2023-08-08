@@ -7,18 +7,18 @@ main.product-details {
   display: flex;
 
   $section-spacing: 25px;
-  :where(.details-price, .details-config > div, .details-buy) {
+  :where(.details-price, .details-buy) {
     padding-top: $section-spacing;
   }
 
-  :where(.details-name, .details-price, .details-config > div) {
+  :where(.details-name, .details-price) {
     position: relative;
 
     &::after {
       content: '';
       height: 1px;
       width: 100%;
-      background-color: #e4e4e48d;
+      background-color: #e4e4e453;
       position: absolute;
       bottom: -30px;
     }
@@ -152,109 +152,193 @@ main.product-details {
     }
   }
 
+  // .details-config {
+  //   display: flex;
+  //   gap: $section-spacing;
+  //   flex-direction: column;
+
+  //   & > div {
+  //     & > span {
+  //       margin-bottom: 20px;
+  //       display: inline-block;
+  //     }
+  //   }
+
+  //   .color-picks {
+  //     padding-bottom: 10px;
+  //     display: flex;
+  //     gap: 12px;
+  //     .color-pick {
+  //       $color-circle-size: 40px;
+
+  //       border-radius: 50%;
+  //       background-color: currentColor;
+  //       width: $color-circle-size;
+  //       font-size: 0.95em;
+  //       height: $color-circle-size;
+  //       cursor: pointer;
+  //       position: relative;
+
+  //       &:hover strong {
+  //         display: block;
+  //       }
+
+  //       // color name under circle
+  //       strong {
+  //         color: var(--text-color);
+  //         position: absolute;
+  //         top: 115%;
+  //         left: 50%;
+  //         transform: translateX(-50%);
+  //         display: none;
+  //       }
+
+  //       &.selected {
+  //         outline: 3px solid currentColor;
+  //         outline-offset: 3px;
+
+  //         strong {
+  //           display: block;
+
+  //           &::after {
+  //             content: '';
+  //             position: absolute;
+  //             bottom: -2px;
+  //             left: 0;
+  //             height: 2px;
+  //             width: 100%;
+  //             background-color: currentColor;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .size-picks {
+  //     display: flex;
+  //     gap: 5px;
+  //     flex-wrap: wrap;
+
+  //     .size-pick {
+  //       padding: 7px 10px;
+  //       background-color: hsl(222, 16%, 30%);
+  //       color: #d8dee9;
+  //       border-radius: 7px;
+  //       display: flex;
+  //       align-items: center;
+  //       gap: 5px;
+  //       cursor: pointer;
+  //       transition: opacity 100ms ease-in-out;
+  //       user-select: none;
+
+  //       &.selected {
+  //         font-weight: bold;
+  //         &::before {
+  //           background-color: #d8dee9;
+  //           outline-offset: 2px;
+  //           outline-color: #d8dee9;
+  //         }
+  //       }
+
+  //       &:not(.selected):hover {
+  //         opacity: 0.85;
+  //       }
+
+  //       &::before {
+  //         content: '';
+  //         border-radius: 50%;
+  //         display: block;
+  //         width: 13px;
+  //         height: 13px;
+  //         border: 2px solid #d8dee9;
+  //         outline: 1px solid transparent;
+  //         transition:
+  //           background-color 150ms ease-in-out,
+  //           outline-color 150ms ease-in-out;
+  //       }
+  //     }
+  //   }
+  // }
+
   .details-config {
     display: flex;
-    gap: $section-spacing;
-    flex-direction: column;
+    gap: 20px;
+    margin: 40px 0;
 
-    & > div {
+    div {
+      position: relative;
+      background-color: #3b4252;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 5px;
+
+      &:hover {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+
+        ul {
+          opacity: 1;
+          pointer-events: initial;
+        }
+      }
+
       & > span {
-        margin-bottom: 20px;
-        display: inline-block;
+        display: block;
+        overflow: hidden;
+        padding: 8px 23px;
+        font-size: 1.1em;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        &:hover {
+          background-color: #434c5e;
+        }
       }
-    }
 
-    .color-picks {
-      padding-bottom: 10px;
-      display: flex;
-      gap: 12px;
-      .color-pick {
-        $color-circle-size: 40px;
+      ul {
+        position: absolute;
+        padding: 4px;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
+        top: 100%;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        width: 100%;
+        background-color: #3b4252;
 
-        border-radius: 50%;
-        background-color: currentColor;
-        width: $color-circle-size;
-        font-size: 0.95em;
-        height: $color-circle-size;
-        cursor: pointer;
-        position: relative;
+        li {
+          padding: 5px;
+          background-color: #3b4252;
+          border-radius: 5px;
+          position: relative;
 
-        &:hover strong {
-          display: block;
-        }
+          &:has(span) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
 
-        // color name under circle
-        strong {
-          color: var(--text-color);
-          position: absolute;
-          top: 115%;
-          left: 50%;
-          transform: translateX(-50%);
-          display: none;
-        }
-
-        &.selected {
-          outline: 3px solid currentColor;
-          outline-offset: 3px;
-
-          strong {
+          span {
             display: block;
-
-            &::after {
-              content: '';
-              position: absolute;
-              bottom: -2px;
-              left: 0;
-              height: 2px;
-              width: 100%;
-              background-color: currentColor;
-            }
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
           }
-        }
-      }
-    }
 
-    .size-picks {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
-
-      .size-pick {
-        padding: 7px 10px;
-        background-color: hsl(222, 16%, 30%);
-        color: #d8dee9;
-        border-radius: 7px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        cursor: pointer;
-        transition: opacity 100ms ease-in-out;
-        user-select: none;
-
-        &.selected {
-          font-weight: bold;
           &::before {
-            background-color: #d8dee9;
-            outline-offset: 2px;
-            outline-color: #d8dee9;
+            content: '';
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: -2px;
+            background-color: #434c5e;
+            height: 1px;
           }
-        }
 
-        &:not(.selected):hover {
-          opacity: 0.85;
-        }
-
-        &::before {
-          content: '';
-          border-radius: 50%;
-          display: block;
-          width: 13px;
-          height: 13px;
-          border: 2px solid #d8dee9;
-          outline: 1px solid transparent;
-          transition:
-            background-color 150ms ease-in-out,
-            outline-color 150ms ease-in-out;
+          &:hover {
+            background-color: #434c5e;
+          }
         }
       }
     }
