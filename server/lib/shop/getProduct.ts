@@ -33,7 +33,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     reviewCount: sql<number>`(SELECT COUNT(*) FROM ${reviews} WHERE ${reviews.comment} IS NOT NULL AND ${reviews.productId} = ${productId})`,
     ratings: sql<number[]>`array(SELECT ${reviews.rating} FROM ${reviews} WHERE ${reviews.productId} = ${productId})`,
     stock: stock.quantity,
-    variants: sql<{ colorCode: string; colorName: string; size: string }[]>`array(SELECT json_build_object('colorName', color_name, 'colorCode', color_code, 'size', size, 'stock', stock) FROM ${variants} WHERE ${variants.productId} = ${productId})`
+    variants: sql<{ colorCode: string; colorName: string; size: string; price: number }[]>`array(SELECT json_build_object('colorName', color_name, 'colorCode', color_code, 'size', size, 'stock', stock, 'price', price) FROM ${variants} WHERE ${variants.productId} = ${productId})`
   })
     .from(products)
     .leftJoin(discounts, eq(discounts.productId, products.id))
@@ -41,7 +41,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     .where(eq(products.id, productId))
     .limit(1)
 
-  logInfo(product)
+  // logInfo(product)
 
   const price = product.price
   const discount = product.discountValue
@@ -53,11 +53,11 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     image: product.image,
     desiredCount: product.desiredCount,
     images: product.images,
-    available: product.stock !== null,
+    available: product.stock !== null, // TODO: remove
     price: {
       amount: price,
       discountLabel: discount ? `-${isDiscountTypeAmount ? discount : `${discount}%`}` : undefined,
-      discountedAmount: discount ? calculateDiscount({ isTypeAmount: isDiscountTypeAmount, value: discount }, product.price) : undefined
+      discountedAmount: discount ? calculateDiscount({ isTypeAmount: isDiscountTypeAmount, value: discount }, price) : undefined
     },
     rating: calculateRating(product.ratings),
     reviewCount: product.reviewCount,
@@ -98,6 +98,7 @@ declare global {
       size: string
       colorName: string
       colorCode: string
+      price: number
     }[]
   }
 }

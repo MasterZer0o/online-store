@@ -116,11 +116,16 @@ main.product-details {
         &:hover {
           text-decoration: none;
         }
+        & + span {
+          margin-left: 8px;
+        }
       }
     }
 
     .details-rating {
       align-self: flex-start;
+      margin-left: auto;
+      margin-right: auto;
       display: flex;
       gap: 10px;
       div {
@@ -265,83 +270,142 @@ main.product-details {
     gap: 20px;
     margin: 40px 0;
 
-    div {
-      position: relative;
-      background-color: #3b4252;
-      cursor: pointer;
-      user-select: none;
-      border-radius: 5px;
-
-      &:hover {
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-
-        ul {
-          opacity: 1;
-          pointer-events: initial;
-        }
-      }
-
+    .config-choices {
       & > span {
         display: block;
-        overflow: hidden;
-        padding: 8px 23px;
-        font-size: 1.1em;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-
-        &:hover {
-          background-color: #434c5e;
-        }
+        font-size: 1.3em;
+        margin-bottom: 1.3em;
       }
 
-      ul {
-        position: absolute;
-        padding: 4px;
-        margin: 0;
-        opacity: 0;
-        pointer-events: none;
-        top: 100%;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        width: 100%;
-        background-color: #3b4252;
+      .color-choices {
+        display: flex;
+        gap: 12px;
 
-        li {
-          padding: 5px;
-          background-color: #3b4252;
+        .color-choice {
+          width: 30px;
+          height: 30px;
           border-radius: 5px;
+          cursor: pointer;
+          outline: 2px solid transparent;
+          outline-offset: 2px;
+          transition: outline-color 100ms ease-in-out;
           position: relative;
 
-          &:has(span) {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-
-          span {
-            display: block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-          }
-
-          &::before {
-            content: '';
-            width: 100%;
-            position: absolute;
+          .tooltip {
+            top: 120%;
             left: 0;
-            top: -2px;
-            background-color: #434c5e;
-            height: 1px;
+            right: unset;
+
+            &::after {
+              right: unset;
+            }
           }
 
-          &:hover {
-            background-color: #434c5e;
+          &:hover .tooltip::after {
+            opacity: 1;
+          }
+
+          &.selected {
+            transform: scale(1.1);
+            outline-color: hsl(218, 27%, 90%);
           }
         }
       }
     }
+
+    // div {
+    //   position: relative;
+    //   background-color: #3b4252;
+    //   cursor: pointer;
+    //   user-select: none;
+    //   border-radius: 5px;
+
+    //   &:hover {
+    //     border-bottom-left-radius: 0px;
+    //     border-bottom-right-radius: 0px;
+
+    //     ul {
+    //       opacity: 1;
+    //       pointer-events: initial;
+    //     }
+    //   }
+
+    //   & > span {
+    //     display: flex;
+    //     gap: 5px;
+    //     overflow: hidden;
+    //     padding: 8px 13px 8px 23px;
+    //     font-size: 1.1em;
+    //     border-top-left-radius: 5px;
+    //     border-top-right-radius: 5px;
+    //     position: relative;
+    //     align-items: center;
+
+    //     &:hover {
+    //       background-color: #434c5e;
+    //     }
+
+    //     svg {
+    //       margin-left: 10px;
+    //     }
+    //   }
+
+    //   .color-dot {
+    //     width: 10px;
+    //     height: 10px;
+    //     border-radius: 50%;
+    //     display: block;
+    //     position: absolute;
+    //     left: 7px;
+    //   }
+
+    //   ul {
+    //     position: absolute;
+    //     padding: 4px;
+    //     margin: 0;
+    //     opacity: 0;
+    //     pointer-events: none;
+    //     top: 100%;
+    //     border-bottom-left-radius: 5px;
+    //     border-bottom-right-radius: 5px;
+    //     width: 100%;
+    //     background-color: #3b4252;
+
+    //     li {
+    //       padding: 5px;
+    //       background-color: #3b4252;
+    //       border-radius: 5px;
+    //       position: relative;
+
+    //       &:has(span) {
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: space-between;
+    //       }
+
+    //       span {
+    //         display: block;
+    //         width: 10px;
+    //         height: 10px;
+    //         border-radius: 50%;
+    //       }
+
+    //       &::before {
+    //         content: '';
+    //         width: 100%;
+    //         position: absolute;
+    //         left: 0;
+    //         top: -2px;
+    //         background-color: #434c5e;
+    //         height: 1px;
+    //       }
+
+    //       &:hover {
+    //         background-color: #434c5e;
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   .details-buy {

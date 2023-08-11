@@ -16,6 +16,8 @@
 
 - handle (detect) when using back button (for example when page param change)
 
+- remove desiredCount
+
 - add message and timeout to fetching products, if timeout, show message to try again.
 
 - combine css (https://vitejs.dev/config/build-options.html#build-csscodesplit)
