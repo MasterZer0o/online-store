@@ -33,7 +33,7 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     reviewCount: sql<number>`(SELECT COUNT(*) FROM ${reviews} WHERE ${reviews.comment} IS NOT NULL AND ${reviews.productId} = ${productId})`,
     ratings: sql<number[]>`array(SELECT ${reviews.rating} FROM ${reviews} WHERE ${reviews.productId} = ${productId})`,
     stock: stock.quantity,
-    variants: sql<{ colorCode: string; colorName: string; size: string; price: number }[]>`array(SELECT json_build_object('colorName', color_name, 'colorCode', color_code, 'size', size, 'stock', stock, 'price', price) FROM ${variants} WHERE ${variants.productId} = ${productId})`
+    variants: sql<{ colorCode: string; colorName: string; size: string; price: number;stock: number }[]>`array(SELECT json_build_object('colorName', color_name, 'colorCode', color_code, 'size', size, 'stock', stock, 'price', price) FROM ${variants} WHERE ${variants.productId} = ${productId})`
   })
     .from(products)
     .leftJoin(discounts, eq(discounts.productId, products.id))
@@ -53,7 +53,6 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     image: product.image,
     desiredCount: product.desiredCount,
     images: product.images,
-    available: product.stock !== null, // TODO: remove
     price: {
       amount: price,
       discountLabel: discount ? `-${isDiscountTypeAmount ? discount : `${discount}%`}` : undefined,
@@ -61,7 +60,11 @@ export async function getProduct(productId: string | number): Promise<ProductDet
     },
     rating: calculateRating(product.ratings),
     reviewCount: product.reviewCount,
-    variants: product.variants
+    variants: product.variants.map(variant => ({
+      ...variant,
+      stock: undefined,
+      available: variant.stock !== 0
+    }))
   }
 
   return final
@@ -91,7 +94,6 @@ declare global {
     }
     rating: number
     reviewCount: number | string
-    available: boolean
     image: string
     images: string[]
     variants: {
@@ -99,6 +101,7 @@ declare global {
       colorName: string
       colorCode: string
       price: number
+      available: boolean
     }[]
   }
 }

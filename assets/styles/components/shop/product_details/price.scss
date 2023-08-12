@@ -1,0 +1,26 @@
+.details-price {
+  display: flex;
+  gap: 40px;
+
+  .price-amount {
+    & > * {
+      display: block;
+    }
+    & > strong {
+      font-size: 1.8em;
+    }
+
+    &--discounted {
+      font-size: 1.3em;
+      text-decoration: line-through;
+
+      &:hover {
+        text-decoration: none;
+      }
+      & + span {
+        margin-left: 8px;
+        color: #a3be8c;
+      }
+    }
+  }
+}

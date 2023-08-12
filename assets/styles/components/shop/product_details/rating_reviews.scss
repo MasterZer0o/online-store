@@ -1,0 +1,33 @@
+.details-rating {
+  align-self: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 10px;
+  div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    justify-content: center;
+    border-radius: 7px;
+    width: fit-content;
+    padding: 7px 10px;
+    cursor: pointer;
+    transition: opacity 100ms ease-in-out;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+  // rating
+  & > div:first-child {
+    background-color: #3b4252;
+    color: #ebcb8b;
+  }
+
+  // Reviews box
+  & > div:nth-child(2) {
+    background: #404859;
+    color: #d8dee9;
+  }
+}

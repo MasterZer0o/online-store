@@ -1,0 +1,13 @@
+.details-path {
+  display: flex;
+  background-color: hsl(222, 16%, 30%);
+  width: fit-content;
+  border-radius: 4px;
+  color: #d8dee9;
+  padding: 8px 12px;
+  gap: 3px;
+
+  svg {
+    margin-left: 5px;
+  }
+}

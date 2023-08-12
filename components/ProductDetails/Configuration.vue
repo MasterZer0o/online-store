@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const props = defineProps<{ variants: ProductDetails['variants'] }>()
-
-const sizes: Set<string> = new Set()
+logInfo(props.variants)
 type ColorCode = string
 type ColorName = string
 
+const sizes: Set<string> = new Set()
 const colors: Map<ColorName, ColorCode> = new Map()
 
 for (const variant of props.variants) {
@@ -15,75 +15,84 @@ for (const variant of props.variants) {
 const selectedSize = ref<string | null>(null)
 const selectedColor = ref({}) as Ref<{ name: string; code: string }>
 
-function selectColor(variant: typeof props.variants[number]) {
-  selectedColor.value.name = variant.colorName
-  selectedColor.value.code = variant.colorCode
+const availableSizes = computed(() => {
+  const filtered = props.variants.reduce<string[]>((acc, variant) => {
+    if (variant.colorName === selectedColor.value.name && variant.available)
+      acc.push(variant.size)
+
+    return acc
+  }, [])
+  return filtered
+})
+
+function selectColor(colorName: typeof props.variants[number]['colorName']) {
+  selectedColor.value.name = colorName
+
+  const selectedColorSizes = props.variants.reduce<string[]>((acc, variant) => {
+    if (variant.colorName === colorName)
+      acc.push(variant.size)
+
+    return acc
+  }, [])
+
+  if (!selectedColorSizes.includes(selectedSize.value as string))
+    selectedSize.value = null
 }
 
 function selectSize(size: string) {
+  if (!availableSizes.value.includes(size) || selectedSize.value === size)
+    return
+
   selectedSize.value = size
 }
 </script>
 
 <template>
+  <pre>{{ availableSizes }}</pre>
   <section class="details-config">
     <div class="config-choices">
       <span>Color: <strong>{{ selectedColor.name }}</strong></span>
-      <div class="color-choices">
-        <div v-for="[colorName, colorCode] in colors.entries()" :key="colorName" class="color-choice" :class="{ selected: selectedColor.name === colorName }" :style="`background-color:${colorCode};`" @click="selectedColor.name = colorName">
+      <ul class="color-choices">
+        <li
+          v-for="[colorName, colorCode] in colors.entries()" :key="colorName"
+          class="color-choice"
+          :class="{ selected: selectedColor.name === colorName }" :style="`background-color:${colorCode};`" @click="selectColor(colorName)"
+        >
           <ShopTooltip :text="colorName" />
-        </div>
-      </div>
-    </div>
-    <div class="size-choices"></div>
-    <!-- @@@@ -->
-    <!-- <div>
-      <span>
-        <template v-if="selectedColor.name">
-          <span class="color-dot" :style="`background-color: ${selectedColor.code}`"></span>
-          Color: <strong>{{ selectedColor.name }}</strong>
-        </template>
-        <span v-else>Color</span>
-        <IconsChevron />
-      </span>
-      <ul>
-        <li v-for="[colorName, colorCode] in colors.entries()" :key="colorCode" @click="selectColor(colors.get(colorName))">
-          {{ colorName }}
-          <span :style="`background-color: ${colorCode};`"></span>
         </li>
       </ul>
     </div>
-    <div>
-      <span>
-        <template v-if="selectedSize">
-          Size: <strong>{{ selectedSize }}</strong>
-        </template>
-        <span v-else>Size</span>
+    <div class="size-choices">
+      <div>
+        Size:
+        <ul>
+          <li
+            v-for="size in sizes.values()"
+            :key="size"
+            :class="{
+              selected: selectedSize === size,
+              disabled: !availableSizes.includes(size)
+            }"
+            @click="selectSize(size)"
+          >
+            {{ size }}
+          </li>
+        </ul>
         <IconsChevron />
-      </span>
-      <ul>
-        <li v-for="size in sizes" :key="size" @click="selectSize(size)">
-          {{ size }}
-        </li>
-      </ul>
-    </div> -->
-    <!-- @@@@ -->
 
-    <!-- <div>
-      <span>Choose color</span>
-      <div class="color-picks">
-        <div v-for="color in colors" :key="color.name" class="color-pick" :class="{ selected: selectedColor === color.name }" :style="`color:${color.code}`" @click="selectColor(color.name)">
-          <strong>{{ color.name }}</strong>
-        </div>
+        <ul class="sizes-dropdown">
+          <li
+            v-for="size in sizes.values()"
+            :key="size"
+            :class="{
+              disabled: !availableSizes.includes(size)
+            }"
+            @click="selectSize(size)"
+          >
+            <strong>{{ size }}</strong>
+          </li>
+        </ul>
       </div>
     </div>
-    <div>
-      <span>Choose size</span>
-      <div class="size-picks">
-        <div v-for="size in sizes" :key="size" class="size-pick" :class="{ selected: selectedSize === size }" @click="selectSize(size)">
-          {{ size }}
-        </div>
-      </div>
-    </div> -->
   </section>
 </template>
