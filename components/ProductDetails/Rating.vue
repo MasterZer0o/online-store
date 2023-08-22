@@ -1,8 +1,13 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   rating: ProductDetails['rating'] | null
   reviewCount: ProductDetails['reviewCount']
 }>()
+
+async function openReviews() {
+  if (props.reviewCount === 0)
+    return
+}
 </script>
 
 <template>

@@ -37,5 +37,7 @@ if (error.value !== null) {
       <ProductDetailsBuy :product="product!" />
       <ProductDetailsDelivery />
     </div>
+
+    <ProductDetailsReviewsPanel />
   </main>
 </template>

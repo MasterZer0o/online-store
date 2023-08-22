@@ -40,6 +40,8 @@ ul.nav-links {
 
 .shop-header {
   background-color: var(--bg2);
+  z-index: 999;
+  position: relative;
 
   nav {
     margin-left: auto;

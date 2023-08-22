@@ -1,0 +1,41 @@
+.reviews-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 998;
+  overflow: hidden;
+}
+
+.reviews-panel {
+  background-color: var(--bg2);
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 25em;
+  margin-left: auto;
+  margin-top: 5em;
+  transform: translateX(0);
+
+  & > button {
+    background: none;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 0;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: var(--bg4);
+    }
+  }
+}
+
+.reviews-slide-enter-active,
+.reviews-slide-leave-active {
+  transition: transform 250ms ease;
+}
+
+.reviews-slide-enter-from,
+.reviews-slide-leave-to {
+  transform: translateX(100%);
+}

@@ -5,6 +5,7 @@
 @use 'product_details/name.scss';
 @use 'product_details/price.scss';
 @use 'product_details/path.scss';
+@use 'product_details/reviews_panel.scss';
 
 main.product-details {
   all: unset;
@@ -13,7 +14,7 @@ main.product-details {
   display: flex;
 
   $section-spacing: 25px;
-  :where(.details-price,  .details-config) {
+  :where(.details-price, .details-config) {
     padding-top: $section-spacing;
   }
 

@@ -20,7 +20,8 @@
     "no-restricted-globals": 0,
     "import/default": "off",
     "n/prefer-global/process": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "unicorn/prefer-number-properties": "off"
   },
   "overrides": [
     {

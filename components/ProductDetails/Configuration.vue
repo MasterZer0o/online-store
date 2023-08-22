@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{ variants: ProductDetails['variants'] }>()
-logInfo(props.variants)
+
 type ColorCode = string
 type ColorName = string
 
@@ -16,13 +16,15 @@ const selectedSize = ref<string | null>(null)
 const selectedColor = ref({}) as Ref<{ name: string; code: string }>
 
 const availableSizes = computed(() => {
-  const filtered = props.variants.reduce<string[]>((acc, variant) => {
+  if (!selectedColor.value.name)
+    return Array.from(sizes)
+
+  return props.variants.reduce<string[]>((acc, variant) => {
     if (variant.colorName === selectedColor.value.name && variant.available)
       acc.push(variant.size)
 
     return acc
   }, [])
-  return filtered
 })
 
 function selectColor(colorName: typeof props.variants[number]['colorName']) {
@@ -40,7 +42,7 @@ function selectColor(colorName: typeof props.variants[number]['colorName']) {
 }
 
 function selectSize(size: string) {
-  if (!availableSizes.value.includes(size) || selectedSize.value === size)
+  if (!availableSizes.value.includes(size) || selectedSize.value === size || !selectedColor.value.name)
     return
 
   selectedSize.value = size
@@ -48,7 +50,6 @@ function selectSize(size: string) {
 </script>
 
 <template>
-  <pre>{{ availableSizes }}</pre>
   <section class="details-config">
     <div class="config-choices">
       <span>Color: <strong>{{ selectedColor.name }}</strong></span>
@@ -56,7 +57,9 @@ function selectSize(size: string) {
         <li
           v-for="[colorName, colorCode] in colors.entries()" :key="colorName"
           class="color-choice"
-          :class="{ selected: selectedColor.name === colorName }" :style="`background-color:${colorCode};`" @click="selectColor(colorName)"
+          :class="{ selected: selectedColor.name === colorName }"
+          :style="`background-color:${colorCode};`"
+          @click="selectColor(colorName)"
         >
           <ShopTooltip :text="colorName" />
         </li>

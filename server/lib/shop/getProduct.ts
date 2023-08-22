@@ -86,7 +86,7 @@ declare global {
   export interface ProductDetails {
     id: number
     name: string
-    desiredCount: string
+    desiredCount: string // FIXME remove this
     price: {
       amount: number
       discountLabel?: string
