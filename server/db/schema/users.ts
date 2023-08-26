@@ -1,5 +1,5 @@
 import { integer, pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core'
-import type { InferModel } from 'drizzle-orm'
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm'
 import { products } from './products'
 
 const roles = ['admin', 'user', 'guest'] as const
@@ -34,12 +34,12 @@ export const wishlist = pgTable('wishlist', {
 })
 
 declare global {
-  export type User = InferModel<typeof users>
-  export type NewUser = InferModel<typeof users, 'insert'>
+  export type User = InferSelectModel<typeof users>
+  export type NewUser = InferInsertModel<typeof users>
 
-  export type Session = InferModel<typeof sessions>
-  export type NewSession = InferModel<typeof sessions, 'insert'>
+  export type Session = InferSelectModel<typeof sessions>
+  export type NewSession = InferInsertModel<typeof sessions>
 
-  export type Wishlist = InferModel<typeof wishlist>
-  export type NewWishlist = InferModel<typeof wishlist, 'insert'>
+  export type Wishlist = InferSelectModel<typeof wishlist>
+  export type NewWishlist = InferInsertModel<typeof wishlist>
 }

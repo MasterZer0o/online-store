@@ -1,5 +1,5 @@
 import { integer, pgTable, real, timestamp, uuid, varchar } from 'drizzle-orm/pg-core'
-import type { InferModel } from 'drizzle-orm'
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm'
 import { products } from './products'
 import { users } from './users'
 
@@ -40,12 +40,12 @@ export const cartItem = pgTable('cart_items', {
 })
 
 declare global {
-  export type OrderItem = InferModel<typeof orderItems>
-  export type NewOrderItem = InferModel<typeof orderItems, 'insert'>
+  export type OrderItem = InferSelectModel<typeof orderItems>
+  export type NewOrderItem = InferInsertModel<typeof orderItems>
 
-  export type OrderDetails = InferModel<typeof orderDetails>
-  export type NewOrderDetails = InferModel<typeof orderDetails, 'insert'>
+  export type OrderDetails = InferSelectModel<typeof orderDetails>
+  export type NewOrderDetails = InferInsertModel<typeof orderDetails>
 
-  export type CartItem = InferModel<typeof orderDetails>
-  export type NewCartItem = InferModel<typeof orderDetails, 'insert'>
+  export type CartItem = InferSelectModel<typeof orderDetails>
+  export type NewCartItem = InferInsertModel<typeof orderDetails>
 }

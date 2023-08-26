@@ -7,6 +7,7 @@ definePageMeta({
 const productId = useRoute('p-id-product').params.id
 
 const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
+
 onMounted(() => wishlistStore().currentlyViewedProductId = product.value!.id)
 
 useHead({
@@ -20,6 +21,13 @@ if (error.value !== null) {
     fatal: true
   })
 }
+
+const reviewsOpen = ref<boolean>(false)
+provide('reviewsOpen', {
+  isOpen: reviewsOpen,
+  open: () => reviewsOpen.value = true,
+  close: () => reviewsOpen.value = false
+})
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 .details-config {
   display: flex;
+  align-items: center;
 
   .config-choices {
     & > span {
@@ -47,7 +48,6 @@
     }
   }
   .size-choices {
-    margin-top: 2em;
     font-size: 1.2em;
     margin-left: auto;
 
@@ -89,6 +89,7 @@
           background-color: var(--bg5);
           border-radius: 4px;
           outline: 1px solid var(--bg3);
+          transition: opacity 100ms ease-in-out;
 
           &:not(.disabled, .selected):hover {
             outline: 1px solid rgba(255, 255, 255, 0.3);

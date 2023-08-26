@@ -1,5 +1,6 @@
 import { integer, pgTable, real, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
-import { type InferModel, relations } from 'drizzle-orm'
+import { relations } from 'drizzle-orm'
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm'
 import { users } from './users'
 
 export const categories = pgTable('categories', {
@@ -106,24 +107,24 @@ export const reviewRelations = relations(users, ({ one }) => ({
 }))
 
 declare global {
-  export type ProductModel = InferModel<typeof products>
-  export type NewProductModel = InferModel<typeof products, 'insert'>
+  export type ProductModel = InferSelectModel<typeof products>
+  export type NewProductModel = InferInsertModel<typeof products>
 
-  export type Category = InferModel<typeof categories>
-  export type NewCategory = InferModel<typeof categories, 'insert'>
+  export type Category = InferSelectModel<typeof categories>
+  export type NewCategory = InferInsertModel<typeof categories>
 
-  export type DiscountModel = InferModel<typeof discounts>
-  export type NewDiscount = InferModel<typeof discounts, 'insert'>
+  export type DiscountModel = InferSelectModel<typeof discounts>
+  export type NewDiscount = InferInsertModel<typeof discounts>
 
-  export type Stock = InferModel<typeof stock>
-  export type NewStock = InferModel<typeof stock, 'insert'>
+  export type Stock = InferSelectModel<typeof stock>
+  export type NewStock = InferInsertModel<typeof stock>
 
-  export type Image = InferModel<typeof images>
-  export type NewImage = InferModel<typeof images, 'insert'>
+  export type Image = InferSelectModel<typeof images>
+  export type NewImage = InferInsertModel<typeof images>
 
-  export type Review = InferModel<typeof reviews>
-  export type NewReview = InferModel<typeof reviews, 'insert'>
+  export type Review = InferSelectModel<typeof reviews>
+  export type NewReview = InferInsertModel<typeof reviews>
 
-  export type Variant = InferModel<typeof variants>
-  export type NewVariant = InferModel<typeof variants, 'insert'>
+  export type Variant = InferSelectModel<typeof variants>
+  export type NewVariant = InferInsertModel<typeof variants>
 }

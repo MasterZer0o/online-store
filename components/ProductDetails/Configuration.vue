@@ -52,7 +52,7 @@ function selectSize(size: string) {
 <template>
   <section class="details-config">
     <div class="config-choices">
-      <span>Color: <strong>{{ selectedColor.name }}</strong></span>
+      <span v-if="selectedColor.name">Color: <strong>{{ selectedColor.name }}</strong></span>
       <ul class="color-choices">
         <li
           v-for="[colorName, colorCode] in colors.entries()" :key="colorName"

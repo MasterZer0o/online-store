@@ -1,4 +1,4 @@
-import type { InferModel } from 'drizzle-orm'
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm'
 import { integer, pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core'
 import { categories } from './products'
 
@@ -19,10 +19,10 @@ export const filterOptions = pgTable('filter_options', {
 })
 
 declare global {
-  export type FilterOptions = InferModel<typeof filterOptions>
-  export type NewFilterOptions = InferModel<typeof filterOptions, 'insert'>
+  export type FilterOptions = InferSelectModel<typeof filterOptions>
+  export type NewFilterOptions = InferInsertModel<typeof filterOptions>
 
-  export type Filter = InferModel<typeof filterOptions>
-  export type NewFilter = InferModel<typeof filterOptions, 'insert'>
+  export type Filter = InferSelectModel<typeof filterOptions>
+  export type NewFilter = InferInsertModel<typeof filterOptions>
 
 }

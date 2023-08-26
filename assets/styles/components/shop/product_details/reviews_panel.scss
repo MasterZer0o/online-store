@@ -32,7 +32,7 @@
 
 .reviews-slide-enter-active,
 .reviews-slide-leave-active {
-  transition: transform 250ms ease;
+  transition: transform 250ms ease-in-out;
 }
 
 .reviews-slide-enter-from,

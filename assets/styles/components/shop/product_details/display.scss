@@ -14,26 +14,26 @@ $imageBorderRadius: 8px;
 .details-gallery {
   margin: 1rem 0rem 0 0rem;
 
+  $border-radius: 8px;
   img {
     $gap: 7px;
     object-fit: cover;
     aspect-ratio: 1/1;
     background-color: gray;
     width: calc(25% - $gap);
-    border-radius: 8px;
+    border-radius: $border-radius;
     margin-right: $gap;
     cursor: pointer;
   }
 
   button {
     position: absolute;
-    cursor: pointer;
     z-index: 2;
     top: 0;
     height: 100%;
     background-color: transparent;
     padding: 0;
-    border-radius: 4px;
+    border-radius: $border-radius;
     transition: background-color 100ms ease-in-out;
 
     &:hover {
