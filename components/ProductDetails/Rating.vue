@@ -17,7 +17,7 @@ function openReviews() {
   <div class="details-rating">
     <div>
       <IconsRatingStar />
-      <strong>{{ rating ?? 'No rating' }}</strong>
+      <strong>{{ rating?.toFixed(2) ?? 'No rating' }}</strong>
     </div>
     <div @click="openReviews">
       <IconsReviews />

@@ -16,6 +16,26 @@
   margin-top: 5em;
   transform: translateX(0);
 
+  .wrapper {
+    display: grid;
+    width: fit-content;
+    margin: auto;
+    margin-top: 70px;
+    place-items: center;
+    position: sticky;
+    top: 50%;
+  }
+
+  .loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid #fff;
+    border-right: 3px solid transparent;
+    animation: rotation 800ms linear infinite;
+  }
+
   & > button {
     background: none;
     position: absolute;

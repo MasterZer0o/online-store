@@ -1,6 +1,7 @@
 // shop
 export { fetchProducts } from './shop/fetchProducts'
 export { fetchMeta } from './shop/fetchMeta'
+export * from './shop/fetchReviews'
 export { nextPage, previousPage, pageFromInput, goToPage } from './shop/pageHandler'
 
 // user

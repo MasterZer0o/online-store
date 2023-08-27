@@ -16,5 +16,6 @@ export default defineEventHandler(async (event) => {
     .from(reviewsSchema)
     .where(and(eq(reviewsSchema.productId, productId), isNotNull(reviewsSchema.comment)))
 
+  await new Promise(resolve => setTimeout(resolve, 1500))
   return reviews
 })
