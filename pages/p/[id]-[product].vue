@@ -38,7 +38,7 @@ provide('reviewsOpen', {
     </div>
 
     <div>
-      <ProductDetailsPath />
+      <!-- <ProductDetailsPath /> -->
       <ProductDetailsName :product="product!" />
       <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
       <ProductDetailsConfiguration :variants="product!.variants" />

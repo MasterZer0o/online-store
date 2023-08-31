@@ -1,8 +1,7 @@
 export async function fetchReviews(productId: number | string) {
-  try {
-    await $fetch(`/product/${productId}/reviews`)
-  }
-  catch (error) {
-
-  }
+  return await $fetch<{
+    username: string
+    comment: string | null
+    rating: number | null
+}[]>(`/product/${productId}/reviews`)
 }

@@ -18,6 +18,8 @@
 
 - remove desiredCount
 
+- handle timezones - reviews etc.
+
 - create one loader component with <style> tag, remove duplicates
 
 - add message and timeout to fetching products, if timeout, show message to try again.
