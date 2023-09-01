@@ -46,6 +46,6 @@ provide('reviewsOpen', {
       <ProductDetailsDelivery />
     </div>
 
-    <ProductDetailsReviewsPanel />
+    <ProductDetailsReviewsPanel :count="product!.reviewCount as string" />
   </main>
 </template>

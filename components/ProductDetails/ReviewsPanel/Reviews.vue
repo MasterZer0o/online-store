@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineProps<{ count: string }>()
+
 const reviews = [
   {
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu fermentum quam. Vivamus vestibulum, tortor vitae dapibus bibendum, mi nulla consectetur felis, at laoreet dolor odio id mauris. Vivamus gravida eget neque quis facilisis. In sit amet sollicitudin nibh, sed hendrerit lectus. Fusce sit amet aliquam augue. In egestas vitae.',
@@ -31,7 +33,7 @@ const starFilter = ref(null)
 <template>
   <div class="flex items-center">
     <p class=":uno: text-2xl my-3">
-      User Reviews <span class=":uno: text-lg">(123)</span>
+      User Reviews <span class=":uno: text-lg">({{ count }})</span>
     </p>
     <div class="star-dropdown">
       <button>
@@ -51,6 +53,6 @@ const starFilter = ref(null)
     </div>
   </div>
   <section class="reviews-content">
-    <ProductDetailsReviewsPanelReviewPanelReview v-for="review in reviews" :key="review.username" :review="review" />
+    <ProductDetailsReviewsPanelReview v-for="review in reviews" :key="review.username" :review="review" />
   </section>
 </template>

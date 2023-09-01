@@ -21,9 +21,11 @@
         height: 30px;
         border-radius: 5px;
         cursor: pointer;
-        outline: 2px solid transparent;
+        outline: 0px solid transparent;
         outline-offset: 2px;
-        transition: outline-color 100ms ease-in-out;
+        transition:
+          outline 100ms ease-in-out,
+          transform 100ms ease-in-out;
         position: relative;
 
         .tooltip {
@@ -36,13 +38,17 @@
           }
         }
 
+        &:not(.selected):hover {
+          outline: 1px solid var(--bg-invert);
+        }
+
         &:hover .tooltip::after {
           opacity: 1;
         }
 
         &.selected {
           transform: scale(1.1);
-          outline-color: hsl(218, 27%, 90%);
+          outline: 2px solid hsl(218, 27%, 90%);
         }
       }
     }

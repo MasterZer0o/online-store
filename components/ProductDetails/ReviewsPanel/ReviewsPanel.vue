@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineProps<{ count: string }>()
+
 const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')!
 
 const isOpen = ref(reviews.isOpen.value)
@@ -40,7 +42,7 @@ watch(reviews.isOpen, async (opened) => {
         </div>
         <template v-else>
           <ProductDetailsReviewsPanelRating />
-          <ProductDetailsReviewsPanelReviewPanelReviews />
+          <ProductDetailsReviewsPanelReviews :count="count" />
         </template>
 
         <button @click="closeReviews">
