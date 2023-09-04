@@ -1,0 +1,43 @@
+<script setup lang="ts">
+const currentPage = ref(1)
+
+type PageNumber = number
+const reviewsMap = new Map<PageNumber, any>()
+
+async function getReviewsPage(page: number) {
+  try {
+    const results = await $fetch('/product/:productId/reviews', {
+      query: {
+        page
+      }
+    })
+  }
+  catch (error) {
+    /* eslint-disable no-alert */
+    alert('Error from fetching more reviews')
+    logError(error)
+  }
+}
+
+const lastPage = 27
+</script>
+
+<template>
+  <section class="reviews-pagination">
+    <button @click="getReviewsPage(currentPage + 1)">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14" width="20" height="20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
+      </svg>
+    </button>
+    <div>
+      <button>{{ currentPage }}</button>
+      <span>...</span>
+      <button>{{ lastPage }}</button>
+    </div>
+    <button @click="getReviewsPage(currentPage - 1)">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14" width="20" height="20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1" />
+      </svg>
+    </button>
+  </section>
+</template>

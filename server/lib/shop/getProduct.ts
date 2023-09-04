@@ -74,7 +74,7 @@ function calculateDiscount(discount: { isTypeAmount: boolean; value: number }, p
 }
 
 function calculateRating(ratings: number[]) {
-  return ratings.reduce((acc, curr) => acc + curr, 0) / ratings.length
+  return Number((ratings.reduce((acc, curr) => acc + curr, 0) / ratings.length).toFixed(2))
 }
 
 // TODO: implement rating

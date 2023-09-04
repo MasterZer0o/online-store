@@ -1,0 +1,43 @@
+.reviews-pagination {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  gap: 1em;
+
+  button {
+    background: none;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05em;
+
+    & > button:first-child:hover {
+      text-decoration: underline;
+    }
+
+    // last page indicator
+    & button:last-child {
+      background-color: var(--bg4);
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+
+      &:hover {
+        background-color: var(--bg5);
+      }
+    }
+  }
+
+  & > button {
+    padding: 0.4em;
+    line-height: 1;
+    border-radius: 50%;
+
+    &:hover {
+      background: var(--bg4);
+    }
+  }
+}

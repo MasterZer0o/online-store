@@ -6,23 +6,31 @@ const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')
 const isOpen = ref(reviews.isOpen.value)
 const overlayShow = ref(reviews.isOpen.value)
 const isLoading = ref(true)
+const aborted = ref(false)
 
 function closeReviews() {
+  aborted.value = true
   reviews.isOpen.value = false
 }
 const productId = useRoute('p-id-product').params.id
 
-const data = ref(null) as unknown as Ref<Awaited<ReturnType<typeof fetchReviews>>>
+const data = ref(null) as unknown as Ref<Awaited<ReturnType<typeof fetchReviews>> | null>
 
 watch(reviews.isOpen, async (opened) => {
   if (opened) {
     overlayShow.value = true
     isOpen.value = true
 
+    if (aborted.value) {
+      aborted.value = false
+    }
+
     if (data.value !== null)
       return
 
-    data.value = await fetchReviews(productId)
+    isLoading.value = true
+
+    data.value = await fetchReviews(productId, aborted)
     isLoading.value = false
     return
   }
@@ -42,7 +50,7 @@ watch(reviews.isOpen, async (opened) => {
         </div>
         <template v-else>
           <ProductDetailsReviewsPanelRating />
-          <ProductDetailsReviewsPanelReviews :count="count" />
+          <ProductDetailsReviewsPanelReviews :count="count" :reviews="data" />
         </template>
 
         <button @click="closeReviews">

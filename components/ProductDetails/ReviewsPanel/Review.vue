@@ -1,36 +1,25 @@
 <script setup lang="ts">
 const { review } = defineProps<{
-  review: {
-    content: string
-    username: string
-    rating: number
-    time: string
-  }
+  review: NonNullable<Awaited<ReturnType<typeof fetchReviews>>>[number]
 }>()
+
 const stars = {
   full: Math.floor(review.rating),
-  half: review.rating.toString().endsWith('.5') ? 1 : 0,
-  get remaining() {
-    return 5 - this.full - this.half
-  }
+  half: review.rating.toString().endsWith('.5') ? 1 : 0
 }
+
+const postedAt = new Date(review.postedAt).toLocaleDateString(navigator?.language || 'en').replaceAll('/', '.')
 </script>
 
 <template>
   <article>
     <div>
       <span>{{ review.username }}</span>
-      <span class=":uno: text-xs">{{ review.time }}</span>
-      <div class="stars">
-        <svg v-for="i in stars.full" :key="i" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" height="17" width="17" fill="gold"><path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z" /></svg>
-
-        <svg v-if="stars.half" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" fill="gold" height="17" width="17"><path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59-3.8a.5.5,0,0,1-.4-.3l-22-55.5a16.3,16.3,0,0,0-30.4,0l-22,55.5a.5.5,0,0,1-.4.3L31.4,86A16.4,16.4,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.2,37.6a.8.8,0,0,1,.2.8L53.9,207a18.6,18.6,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.8,16.8,0,0,0,9.5-3.1,16.6,16.6,0,0,0,6.3-17.7l-14.5-57.3a.8.8,0,0,1,.2-.8L234,115.5A16.8,16.8,0,0,0,239.2,97.4Zm-15.4,5.8-45.3,37.6a16.8,16.8,0,0,0-5.4,17l14.5,57.3c.1.4.1.5,0,.6a.7.7,0,0,1-.3.3h-.2L136.7,184a16,16,0,0,0-8.7-2.5V32c.1,0,.2,0,.3.3l22.1,55.5a16.4,16.4,0,0,0,14.1,10.4l59.1,3.8c.1,0,.2,0,.3.4S223.9,103.1,223.8,103.2Z" /></svg>
-
-        <svg v-for="i in stars.remaining" :key="i" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" height="17" width="17" fill="#ffffff95"><path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z" /></svg>
-      </div>
+      <ProductDetailsReviewsPanelReviewStars :full="stars.full" :half="stars.half" />
     </div>
     <p class=":uno: text-sm">
-      {{ review.content }}
+      {{ review.comment }}
     </p>
+    <span>{{ postedAt }}</span>
   </article>
 </template>

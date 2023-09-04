@@ -1,7 +1,20 @@
-export async function fetchReviews(productId: number | string) {
-  return await $fetch<{
-    username: string
-    comment: string | null
-    rating: number | null
-}[]>(`/product/${productId}/reviews`)
+export async function fetchReviews(productId: number | string, aborted: Ref<boolean>) {
+  const abortController = new AbortController()
+
+  const unwatch = watch(aborted, (didAbort) => {
+    if (didAbort)
+      abortController.abort()
+  })
+
+  try {
+    const data = await $fetch(`/product/${productId}/reviews`, {
+      signal: abortController.signal
+    })
+    unwatch()
+
+    return data
+  }
+  catch (error) {
+    return null
+  }
 }
