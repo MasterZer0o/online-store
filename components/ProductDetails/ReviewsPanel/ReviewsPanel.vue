@@ -1,22 +1,21 @@
 <script setup lang="ts">
 defineProps<{ count: string }>()
 
-const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')!
+// const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')!
+const { reviewsPanel, closeReviews: closePanel, displayedReviews } = toRefs(productDetailsStore())
 
-const isOpen = ref(reviews.isOpen.value)
-const overlayShow = ref(reviews.isOpen.value)
+const isOpen = ref(reviewsPanel.value.isOpen)
+const overlayShow = ref(reviewsPanel.value.isOpen)
 const isLoading = ref(true)
 const aborted = ref(false)
 
 function closeReviews() {
   aborted.value = true
-  reviews.isOpen.value = false
+  closePanel.value()
 }
 const productId = useRoute('p-id-product').params.id
 
-const data = ref(null) as unknown as Ref<Awaited<ReturnType<typeof fetchReviews>> | null>
-
-watch(reviews.isOpen, async (opened) => {
+watch(reviewsPanel.value, async (opened) => {
   if (opened) {
     overlayShow.value = true
     isOpen.value = true
@@ -25,12 +24,9 @@ watch(reviews.isOpen, async (opened) => {
       aborted.value = false
     }
 
-    if (data.value !== null)
-      return
-
     isLoading.value = true
 
-    data.value = await fetchReviews(productId, aborted)
+    displayedReviews.value = await fetchReviews(productId, aborted) as ReviewData[]
     isLoading.value = false
     return
   }
@@ -50,7 +46,7 @@ watch(reviews.isOpen, async (opened) => {
         </div>
         <template v-else>
           <ProductDetailsReviewsPanelRating />
-          <ProductDetailsReviewsPanelReviews :count="count" :reviews="data" />
+          <ProductDetailsReviewsPanelReviews :count="count" />
         </template>
 
         <button @click="closeReviews">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { review } = defineProps<{
-  review: NonNullable<Awaited<ReturnType<typeof fetchReviews>>>[number]
+  review: ReviewData
 }>()
 
 const stars = {

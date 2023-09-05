@@ -1,22 +1,40 @@
 <script setup lang="ts">
 const currentPage = ref(1)
+const store = productDetailsStore()
 
 type PageNumber = number
-const reviewsMap = new Map<PageNumber, any>()
+const reviewsPageMap = new Map<PageNumber, ReviewData[]>()
+
+reviewsPageMap.set(currentPage.value, store.displayedReviews)
 
 async function getReviewsPage(page: number) {
-  try {
-    const results = await $fetch('/product/:productId/reviews', {
-      query: {
-        page
-      }
-    })
+  if (page === 0)
+    return
+
+  if (!reviewsPageMap.get(page)) {
+    try {
+      store.reviewsPanel.isLoadingMore = true
+      const results = await $fetch<ReviewData[]>(`/product/${store.productId}/reviews`, {
+        query: {
+          page
+        }
+      })
+
+      reviewsPageMap.set(page, results)
+
+      store.reviewsPanel.isLoadingMore = false
+
+      currentPage.value = page
+    }
+    catch (error) {
+      /* eslint-disable no-alert */
+      alert('Error from fetching more reviews')
+      logError(error)
+    }
+    return
   }
-  catch (error) {
-    /* eslint-disable no-alert */
-    alert('Error from fetching more reviews')
-    logError(error)
-  }
+  store.displayedReviews = reviewsPageMap.get(page)!
+  currentPage.value = page
 }
 
 const lastPage = 27
@@ -24,7 +42,7 @@ const lastPage = 27
 
 <template>
   <section class="reviews-pagination">
-    <button @click="getReviewsPage(currentPage + 1)">
+    <button @click="getReviewsPage(currentPage - 1)">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14" width="20" height="20">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
       </svg>
@@ -34,7 +52,7 @@ const lastPage = 27
       <span>...</span>
       <button>{{ lastPage }}</button>
     </div>
-    <button @click="getReviewsPage(currentPage - 1)">
+    <button @click="getReviewsPage(currentPage + 1)">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14" width="20" height="20">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1" />
       </svg>

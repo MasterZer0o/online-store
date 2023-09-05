@@ -3,6 +3,21 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+
+    .loader {
+      position: sticky;
+      top: 50%;
+    }
+  }
 
   article {
     padding: 1em;

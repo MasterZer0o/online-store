@@ -15,12 +15,12 @@
     gap: 8px;
     font-size: 1.05em;
 
-    & > button:first-child:hover {
-      text-decoration: underline;
-    }
+    // & > button:first-child:hover {
+    //   text-decoration: underline;
+    // }
 
     // last page indicator
-    & button:last-child {
+    & button:first-child {
       background-color: var(--bg4);
       border-radius: 50%;
       aspect-ratio: 1/1;

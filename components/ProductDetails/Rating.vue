@@ -3,13 +3,15 @@ const props = defineProps<{
   rating: ProductDetails['rating'] | null
   reviewCount: ProductDetails['reviewCount']
 }>()
-const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')!
+const { openReviews: openReviewsPanel } = productDetailsStore()
+
+// const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')!
 
 function openReviews() {
   if (props.reviewCount === 0)
     return
 
-  reviews.open()
+  openReviewsPanel()
 }
 </script>
 

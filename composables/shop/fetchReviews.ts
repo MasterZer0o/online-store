@@ -7,9 +7,10 @@ export async function fetchReviews(productId: number | string, aborted: Ref<bool
   })
 
   try {
-    const data = await $fetch(`/product/${productId}/reviews`, {
+    const data = await $fetch<ReviewData[]>(`/product/${productId}/reviews`, {
       signal: abortController.signal
     })
+
     unwatch()
 
     return data

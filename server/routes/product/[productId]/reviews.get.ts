@@ -10,13 +10,17 @@ export default defineEventHandler(async (event) => {
   if (Number.isNaN(productId))
     throw createError({ statusCode: 404 })
 
-  const reviews = await getReviews(productId) as {
-    username: string
-    comment: string
-    rating: number
-    postedAt: Date
-  }[]
+  const reviews = await getReviews(productId) as ReviewData[]
 
   // await new Promise(resolve => setTimeout(resolve, 1000))
   return reviews
 })
+
+declare global {
+  interface ReviewData {
+    username: string
+    comment: string
+    rating: number
+    postedAt: Date
+  }
+}

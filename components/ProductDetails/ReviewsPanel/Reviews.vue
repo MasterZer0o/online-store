@@ -1,5 +1,6 @@
 <script setup lang="ts">
-defineProps<{ count: string;reviews: Awaited<ReturnType<typeof fetchReviews>> }>()
+defineProps<{ count: string }>()
+const store = productDetailsStore()
 </script>
 
 <template>
@@ -11,6 +12,9 @@ defineProps<{ count: string;reviews: Awaited<ReturnType<typeof fetchReviews>> }>
     <ProductDetailsReviewsPanelStarsFilterDropdown />
   </div>
   <section class="reviews-content">
-    <ProductDetailsReviewsPanelReview v-for="review in reviews" :key="review.username" :review="review" />
+    <div v-if="store.reviewsPanel.isLoadingMore" class="overlay">
+      <span class="loader"></span>
+    </div>
+    <ProductDetailsReviewsPanelReview v-for="review in store.displayedReviews" :key="review.username" :review="review" />
   </section>
 </template>

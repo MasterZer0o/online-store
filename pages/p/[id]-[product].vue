@@ -4,7 +4,10 @@ definePageMeta({
     return !Number.isNaN(Number.parseInt(route.params.id))
   }
 })
+const store = productDetailsStore()
+
 const productId = useRoute('p-id-product').params.id
+store.productId = productId
 
 const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
 
@@ -22,12 +25,14 @@ if (error.value !== null) {
   })
 }
 
-const reviewsOpen = ref<boolean>(false)
-provide('reviewsOpen', {
-  isOpen: reviewsOpen,
-  open: () => reviewsOpen.value = true,
-  close: () => reviewsOpen.value = false
-})
+// const reviewsOpen = ref<boolean>(false)
+// provide('reviewsOpen', {
+//   isOpen: reviewsOpen,
+//   open: () => reviewsOpen.value = true,
+//   close: () => reviewsOpen.value = false
+// })
+
+// provide('productDetailsProductId', productId)
 </script>
 
 <template>
