@@ -1,21 +1,20 @@
 <script setup lang="ts">
 defineProps<{ count: string }>()
 
-// const reviews = inject<{ open: () => any; isOpen: Ref<boolean> }>('reviewsOpen')!
-const { reviewsPanel, closeReviews: closePanel, displayedReviews } = toRefs(productDetailsStore())
+const store = productDetailsStore()
 
-const isOpen = ref(reviewsPanel.value.isOpen)
-const overlayShow = ref(reviewsPanel.value.isOpen)
+const isOpen = ref(store.reviewsPanel.isOpen)
+const overlayShow = ref(store.reviewsPanel.isOpen)
 const isLoading = ref(true)
 const aborted = ref(false)
 
 function closeReviews() {
   aborted.value = true
-  closePanel.value()
+  store.closeReviews()
 }
 const productId = useRoute('p-id-product').params.id
 
-watch(reviewsPanel.value, async (opened) => {
+watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
   if (opened) {
     overlayShow.value = true
     isOpen.value = true
@@ -26,7 +25,7 @@ watch(reviewsPanel.value, async (opened) => {
 
     isLoading.value = true
 
-    displayedReviews.value = await fetchReviews(productId, aborted) as ReviewData[]
+    store.displayedReviews = (await fetchReviews(productId, aborted) as ReviewData | null)?.data ?? []
     isLoading.value = false
     return
   }

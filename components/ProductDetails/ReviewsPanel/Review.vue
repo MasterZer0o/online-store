@@ -1,12 +1,7 @@
 <script setup lang="ts">
 const { review } = defineProps<{
-  review: ReviewData
+  review: ReviewData['data'][number]
 }>()
-
-const stars = {
-  full: Math.floor(review.rating),
-  half: review.rating.toString().endsWith('.5') ? 1 : 0
-}
 
 const postedAt = new Date(review.postedAt).toLocaleDateString(navigator?.language || 'en').replaceAll('/', '.')
 </script>
@@ -15,7 +10,7 @@ const postedAt = new Date(review.postedAt).toLocaleDateString(navigator?.languag
   <article>
     <div>
       <span>{{ review.username }}</span>
-      <ProductDetailsReviewsPanelReviewStars :full="stars.full" :half="stars.half" />
+      <ProductDetailsReviewsPanelReviewStars :rating="review.rating" />
     </div>
     <p class=":uno: text-sm">
       {{ review.comment }}

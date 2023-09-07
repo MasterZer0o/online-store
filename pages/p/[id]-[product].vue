@@ -24,15 +24,6 @@ if (error.value !== null) {
     fatal: true
   })
 }
-
-// const reviewsOpen = ref<boolean>(false)
-// provide('reviewsOpen', {
-//   isOpen: reviewsOpen,
-//   open: () => reviewsOpen.value = true,
-//   close: () => reviewsOpen.value = false
-// })
-
-// provide('productDetailsProductId', productId)
 </script>
 
 <template>

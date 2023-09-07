@@ -15,6 +15,6 @@ const store = productDetailsStore()
     <div v-if="store.reviewsPanel.isLoadingMore" class="overlay">
       <span class="loader"></span>
     </div>
-    <ProductDetailsReviewsPanelReview v-for="review in store.displayedReviews" :key="review.username" :review="review" />
+    <ProductDetailsReviewsPanelReview v-for="review in store.displayedReviews" :key="review.id" :review="review" />
   </section>
 </template>

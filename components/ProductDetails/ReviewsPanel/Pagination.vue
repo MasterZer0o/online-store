@@ -3,7 +3,7 @@ const currentPage = ref(1)
 const store = productDetailsStore()
 
 type PageNumber = number
-const reviewsPageMap = new Map<PageNumber, ReviewData[]>()
+const reviewsPageMap = new Map<PageNumber, ReviewData['data']>()
 
 reviewsPageMap.set(currentPage.value, store.displayedReviews)
 
@@ -14,15 +14,13 @@ async function getReviewsPage(page: number) {
   if (!reviewsPageMap.get(page)) {
     try {
       store.reviewsPanel.isLoadingMore = true
-      const results = await $fetch<ReviewData[]>(`/product/${store.productId}/reviews`, {
+      const results = await $fetch<ReviewData>(`/product/${store.productId}/reviews`, {
         query: {
           page
         }
       })
 
-      reviewsPageMap.set(page, results)
-
-      store.reviewsPanel.isLoadingMore = false
+      reviewsPageMap.set(page, results.data)
 
       currentPage.value = page
     }
@@ -31,9 +29,9 @@ async function getReviewsPage(page: number) {
       alert('Error from fetching more reviews')
       logError(error)
     }
-    return
   }
   store.displayedReviews = reviewsPageMap.get(page)!
+  store.reviewsPanel.isLoadingMore = false
   currentPage.value = page
 }
 

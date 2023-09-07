@@ -1,15 +1,15 @@
 export const productDetailsStore = defineStore('productDetails', () => {
   const productId = ref<number | string>(0)
 
-  const displayedReviews = ref<ReviewData[]>([])
+  const displayedReviews = ref<ReviewData['data']>([])
 
-  const reviewsPanel = ref({
+  const reviewsPanel = reactive({
     isOpen: false,
     isLoadingMore: false
   })
 
-  const openReviews = () => reviewsPanel.value.isOpen = true
-  const closeReviews = () => reviewsPanel.value.isOpen = false
+  const openReviews = () => reviewsPanel.isOpen = true
+  const closeReviews = () => reviewsPanel.isOpen = false
 
   return {
     productId,
