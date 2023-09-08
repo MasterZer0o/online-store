@@ -5,7 +5,8 @@ export const productDetailsStore = defineStore('productDetails', () => {
 
   const reviewsPanel = reactive({
     isOpen: false,
-    isLoadingMore: false
+    isLoadingMore: false,
+    perPage: 0
   })
 
   const openReviews = () => reviewsPanel.isOpen = true

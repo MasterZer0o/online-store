@@ -42,6 +42,6 @@ if (error.value !== null) {
       <ProductDetailsDelivery />
     </div>
 
-    <ProductDetailsReviewsPanel :count="product!.reviewCount as string" />
+    <ProductDetailsReviewsPanel :count="parseInt(product!.reviewCount as string)" />
   </main>
 </template>

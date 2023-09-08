@@ -1,14 +1,19 @@
 <script setup lang="ts">
+const { count } = defineProps<{ count: number }>()
 const currentPage = ref(1)
+
 const store = productDetailsStore()
 
 type PageNumber = number
 const reviewsPageMap = new Map<PageNumber, ReviewData['data']>()
 
+const totalPagesRaw = count / store.reviewsPanel.perPage
+const lastPage = Number.isInteger(totalPagesRaw) ? totalPagesRaw : Math.floor(totalPagesRaw) + 1
+
 reviewsPageMap.set(currentPage.value, store.displayedReviews)
 
 async function getReviewsPage(page: number) {
-  if (page === 0)
+  if (page === 0 || page === lastPage + 1)
     return
 
   if (!reviewsPageMap.get(page)) {
@@ -34,8 +39,6 @@ async function getReviewsPage(page: number) {
   store.reviewsPanel.isLoadingMore = false
   currentPage.value = page
 }
-
-const lastPage = 27
 </script>
 
 <template>

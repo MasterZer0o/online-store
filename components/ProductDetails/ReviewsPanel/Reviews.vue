@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineProps<{ count: string }>()
+defineProps<{ count: number }>()
 const store = productDetailsStore()
 </script>
 
 <template>
-  <ProductDetailsReviewsPanelPagination />
+  <ProductDetailsReviewsPanelPagination :count="count" />
   <div class=":uno: flex items-center">
     <p class=":uno: text-2xl my-3">
       User Reviews <span class=":uno: text-lg">({{ count }})</span>

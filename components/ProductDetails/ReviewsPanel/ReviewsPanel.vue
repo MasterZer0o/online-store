@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ count: string }>()
+defineProps<{ count: number }>()
 
 const store = productDetailsStore()
 
@@ -23,9 +23,14 @@ watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
       aborted.value = false
     }
 
-    isLoading.value = true
+    if (store.displayedReviews.length !== 0)
+      return
 
-    store.displayedReviews = (await fetchReviews(productId, aborted) as ReviewData | null)?.data ?? []
+    isLoading.value = true
+    const response = await fetchReviews(productId, aborted)
+    store.displayedReviews = response?.data ?? []
+
+    store.reviewsPanel.perPage = response?.perPage ?? 0
     isLoading.value = false
     return
   }

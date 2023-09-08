@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 
   const products = await getProducts({ categoryId: category.id!, page, cid, meta: meta === 'true' })
 
-  await new Promise<void>(resolve => setTimeout(() => resolve(), 500)) // fake 500ms delay
+  await wait(500)
 
   return {
     meta: {
