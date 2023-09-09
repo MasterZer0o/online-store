@@ -24,6 +24,8 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
 
   page === 1 && (response.perPage = MAX_REVIEWS_PER_PAGE)
 
+  await wait(500)
+
   return response
 })
 

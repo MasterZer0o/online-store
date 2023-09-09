@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const { count } = defineProps<{ count: number }>()
+const props = defineProps<{
+  count: number
+  elementToScroll: HTMLElement
+}>()
 const currentPage = ref(1)
 
 const store = productDetailsStore()
@@ -7,7 +10,7 @@ const store = productDetailsStore()
 type PageNumber = number
 const reviewsPageMap = new Map<PageNumber, ReviewData['data']>()
 
-const totalPagesRaw = count / store.reviewsPanel.perPage
+const totalPagesRaw = props.count / store.reviewsPanel.perPage
 const lastPage = Number.isInteger(totalPagesRaw) ? totalPagesRaw : Math.floor(totalPagesRaw) + 1
 
 reviewsPageMap.set(currentPage.value, store.displayedReviews)
@@ -31,12 +34,14 @@ async function getReviewsPage(page: number) {
     }
     catch (error) {
       /* eslint-disable no-alert */
-      alert('Error from fetching more reviews')
+      alert('Error from fetching more reviews, check console.')
       logError(error)
     }
   }
   store.displayedReviews = reviewsPageMap.get(page)!
   store.reviewsPanel.isLoadingMore = false
+
+  props.elementToScroll.scrollIntoView({ behavior: 'smooth' })
   currentPage.value = page
 }
 </script>
@@ -51,7 +56,9 @@ async function getReviewsPage(page: number) {
     <div>
       <button>{{ currentPage }}</button>
       <span>...</span>
-      <button>{{ lastPage }}</button>
+      <button @click="getReviewsPage(lastPage)">
+        {{ lastPage }}
+      </button>
     </div>
     <button @click="getReviewsPage(currentPage + 1)">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14" width="20" height="20">

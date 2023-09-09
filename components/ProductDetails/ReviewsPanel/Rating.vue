@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO:
 const ratings = {
   average: 4.5,
   allRatings: 72,

@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises'
+import { sql } from 'drizzle-orm'
 import { getDb } from '../../utils/getDb'
 import { logError, logInfo, logSuccess } from '../../utils/logger'
 
@@ -59,7 +60,7 @@ async function seedReviews() {
 
     texts.push(undefined as any)
 
-    const ratings = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
+    const ratings = [1, 2, 2, 3, 4, 5]
 
     const objs: NewReview[] = []
     const userIds = await db.select({ id: users.id }).from(users)
@@ -74,6 +75,8 @@ async function seedReviews() {
     }
     const p1 = performance.now()
 
+    await db.execute(sql`ALTER SEQUENCE reviews_id_seq RESTART WITH 1;`)
+
     await db.insert(reviews).values(objs)
 
     const p2 = performance.now()
@@ -84,3 +87,4 @@ async function seedReviews() {
     logError(error)
   }
 }
+// seedReviews()

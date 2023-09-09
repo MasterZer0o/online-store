@@ -20,9 +20,12 @@
       gap: 5px;
       padding: $spacing;
       margin-right: -$spacing;
+      outline-color: transparent;
+      transition: all 150ms ease-in-out;
 
       &:hover {
         background-color: var(--bg3);
+        outline: 1px solid var(--bg4);
       }
     }
   }
