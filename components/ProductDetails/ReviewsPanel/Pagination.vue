@@ -22,11 +22,7 @@ async function getReviewsPage(page: number) {
   if (!reviewsPageMap.get(page)) {
     try {
       store.reviewsPanel.isLoadingMore = true
-      const results = await $fetch<ReviewData>(`/product/${store.productId}/reviews`, {
-        query: {
-          page
-        }
-      })
+      const results = await fetchReviews({ productId: store.productId, page })
 
       reviewsPageMap.set(page, results.data)
 

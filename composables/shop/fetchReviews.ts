@@ -1,4 +1,20 @@
-export async function fetchReviews(productId: number | string, aborted: Ref<boolean>) {
+interface FetchReviewsOptions {
+  productId: string | number
+  page?: number | string
+  filters?: any
+}
+
+export async function fetchReviews({ productId, page, filters }: FetchReviewsOptions, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
+  const data = await $fetch<ReviewData>(`/product/${productId}/reviews`, {
+    ...fetchOptions,
+    query: {
+      page
+    }
+  })
+
+  return data
+}
+export async function fetchInitialReviews(productId: FetchReviewsOptions['productId'], aborted: Ref<boolean>) {
   const abortController = new AbortController()
 
   const unwatch = watch(aborted, (didAbort) => {
@@ -7,7 +23,7 @@ export async function fetchReviews(productId: number | string, aborted: Ref<bool
   })
 
   try {
-    const data = await $fetch<ReviewData>(`/product/${productId}/reviews`, {
+    const data = await fetchReviews({ productId }, {
       signal: abortController.signal
     })
 
@@ -16,6 +32,7 @@ export async function fetchReviews(productId: number | string, aborted: Ref<bool
   catch (error) {
     return null
   }
+
   finally {
     unwatch()
   }

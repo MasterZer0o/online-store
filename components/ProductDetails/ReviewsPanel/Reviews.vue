@@ -9,7 +9,7 @@ const store = productDetailsStore()
     <p class=":uno: text-2xl my-3">
       User Reviews <span class=":uno: text-lg">({{ count }})</span>
     </p>
-    <ProductDetailsReviewsPanelStarsFilterDropdown />
+    <ProductDetailsReviewsPanelStarsFilterDropdown :total-review-count="count" />
   </div>
   <section class="reviews-content">
     <div v-if="store.reviewsPanel.isLoadingMore" class="overlay">

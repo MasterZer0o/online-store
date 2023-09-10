@@ -27,7 +27,7 @@ watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
       return
 
     isLoading.value = true
-    const response = await fetchReviews(productId, aborted)
+    const response = await fetchInitialReviews(productId, aborted)
     store.displayedReviews = response?.data ?? []
 
     store.reviewsPanel.perPage = response?.perPage ?? 0
