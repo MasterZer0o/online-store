@@ -2,7 +2,7 @@ import { getReviews } from '~/server/lib/shop/getReviews'
 
 export default defineEventHandler(async (event): Promise<ReviewData> => {
   const productId = Number(getRouterParams(event).productId)
-  let { page }: { page: string | number } = getQuery<{ page: string }>(event)
+  let { page, cid }: { page: string | number;cid: string } = getQuery<{ page: string;cid: string }>(event)
 
   const MAX_REVIEWS_PER_PAGE = 20
 
@@ -12,7 +12,7 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
   if (Number.isNaN(productId))
     throw createError({ statusCode: 404 })
 
-  const reviews = await getReviews(productId, page, MAX_REVIEWS_PER_PAGE) as (ReviewData['data'][number] & { id?: number })[]
+  const reviews = await getReviews({ productId, page, perPage: MAX_REVIEWS_PER_PAGE, cid }) as (ReviewData['data'][number] & { id?: number })[]
 
   const response: ReviewData = {
     cid: reviews.at(-1)?.id ?? null,

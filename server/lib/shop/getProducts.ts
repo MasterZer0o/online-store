@@ -25,7 +25,7 @@ export async function getProducts(options: Params) {
     whereConditions.filters.push(gt(products.id, Number.parseInt(options.cid)))
   }
   else {
-    // CASE: fresh products request, calculate the offset from the page
+    // CASE: fresh GET products request, calculate the offset from the page
     const offset = (requestedPage - 1) * MAX_PRODUCTS_PER_PAGE || 0
 
     whereConditions.filters.push(gte(products.id,

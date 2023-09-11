@@ -22,7 +22,6 @@ watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
     if (aborted.value) {
       aborted.value = false
     }
-
     if (store.displayedReviews.length !== 0)
       return
 
@@ -39,6 +38,8 @@ watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
 
   setTimeout(() => overlayShow.value = false, 250)
 })
+
+onUnmounted(() => store.resetReviews())
 </script>
 
 <template>

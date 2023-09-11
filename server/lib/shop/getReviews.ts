@@ -1,8 +1,15 @@
-import { and, asc, eq, gte, isNotNull, sql } from 'drizzle-orm'
+import { and, asc, eq, gt, gte, isNotNull, sql } from 'drizzle-orm'
 import { reviews as reviewsSchema } from '~/server/db/schema/products'
 import { users } from '~/server/db/schema/users'
 
-export async function getReviews(productId: number, page: number, perPage: number) {
+interface FnParams {
+  productId: number
+  page: number
+  perPage: number
+  cid?: string
+}
+
+export async function getReviews({ productId, page, perPage, cid }: FnParams) {
   const db = getDb()
 
   const whereConditions = [eq(reviewsSchema.productId, productId), isNotNull(reviewsSchema.comment)]
@@ -10,8 +17,13 @@ export async function getReviews(productId: number, page: number, perPage: numbe
   if (page !== 1) {
     const offset = (page - 1) * perPage
 
-    whereConditions.push(gte(reviewsSchema.id,
-      sql`(SELECT MIN(id) + ${offset} FROM ${reviewsSchema} WHERE ${reviewsSchema.id} <= (SELECT MAX(${reviewsSchema.id}) FROM ${reviewsSchema}) AND ${reviewsSchema.productId} = ${productId})`))
+    if (cid) {
+      whereConditions.push(gt(reviewsSchema.id, Number.parseInt(cid)))
+    }
+    else {
+      whereConditions.push(gte(reviewsSchema.id,
+        sql`(SELECT MIN(id) + ${offset} FROM ${reviewsSchema} WHERE ${reviewsSchema.id} <= (SELECT MAX(${reviewsSchema.id}) FROM ${reviewsSchema}) AND ${reviewsSchema.productId} = ${productId})`))
+    }
   }
   const selectFields = {
     id: reviewsSchema.id,
