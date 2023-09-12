@@ -15,7 +15,7 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
   const reviews = await getReviews({ productId, page, perPage: MAX_REVIEWS_PER_PAGE, cid }) as (ReviewData['data'][number] & { id?: number })[]
 
   const response: ReviewData = {
-    cid: reviews.at(-1)?.id ?? null,
+    cid: reviews.at(-1)?.id ?? undefined,
     data: reviews.reduce<ReviewData['data']>((acc, val) => {
       acc.push(val)
       return acc
@@ -44,7 +44,7 @@ declare global {
     /**
      * Last review `id` of the current page for pagination.
      */
-    cid: number | null
+    cid?: number
     perPage?: number
 
   }

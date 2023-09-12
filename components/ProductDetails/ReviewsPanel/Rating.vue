@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// TODO:
 const ratings = {
   average: 4.5,
   allRatings: 72,
@@ -26,6 +25,13 @@ const ratings = {
     },
   ]
 }
+const store = productDetailsStore()
+async function fetchWithStars(rating: number) {
+  store.reviewsCid = undefined
+
+  await loadReviews({ page: 1, rating })
+  store.reviewsPage = 1
+}
 </script>
 
 <template>
@@ -48,7 +54,7 @@ const ratings = {
         <ul>
           <li v-for="star in ratings.stars" :key="star.label">
             <span>{{ star.label }}</span>
-            <div>
+            <div @click="fetchWithStars(+star.label)">
               <span :data-amount="star.amount" :style="{ width: `${(star.amount / ratings.allRatings * 100).toFixed(2)}%` }"></span>
             </div>
             <span>{{ (star.amount / ratings.allRatings * 100).toFixed(1) }}%</span>

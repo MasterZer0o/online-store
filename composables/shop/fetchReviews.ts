@@ -1,50 +1,53 @@
-interface FetchReviewsOptions {
-  productId: string | number
-  page?: number | string
-  rating?: any
-  cid?: number | string
+export async function loadReviews({ page, rating }: { page: number; rating: number }) {
+  const store = productDetailsStore()
+
+  store.reviewsRatingFilter = rating
+  let data
+
+  const cached = store.getCachedReviews({ page: 1 })
+  if (cached) {
+    data = cached
+  }
+  else {
+    store.reviewsPanel.isLoadingMore = true
+    const results = await fetchReviews({ page })
+    store.setCachedReviews({ page: 1, rating, reviews: results.data })
+    store.reviewsCid = results.cid
+    data = results.data
+  }
+  store.reviewsRatingFilter = rating
+  store.displayedReviews = data
+  store.reviewsPanel.isLoadingMore = false
 }
 
-export async function fetchReviews({ productId, page, rating, cid }: FetchReviewsOptions, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
-  const data = await $fetch<ReviewData>(`/product/${productId}/reviews`, {
+export async function fetchReviews({ page }: { page?: number }, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
+  const store = productDetailsStore()
+
+  const data = await $fetch<ReviewData>(`/product/${store.productId}/reviews`, {
     ...fetchOptions,
     query: {
       page,
-      rating,
-      cid
+      rating: store.reviewsRatingFilter === 0 ? undefined : store.reviewsRatingFilter,
+      cid: store.reviewsCid
     }
   })
 
   return data
 }
-export async function fetchInitialReviews(productId: FetchReviewsOptions['productId'], aborted: Ref<boolean>) {
+export async function fetchInitialReviews(aborted: Ref<boolean>) {
   const abortController = new AbortController()
 
+  const store = productDetailsStore()
   const unwatch = watch(aborted, (didAbort) => {
     if (didAbort)
       abortController.abort()
   })
 
-  try {
-    const data = await fetchReviews({ productId }, {
-      signal: abortController.signal
-    })
+  const data = await fetchReviews({}, { signal: abortController.signal })
 
-    const store = productDetailsStore()
+  store.reviewsPageMap.set(0, new Map([[1, data.data]]))
+  store.reviewsCid = data.cid
 
-    const pagesMap = new Map()
-    pagesMap.set(1, data.data)
-
-    store.reviewsPageMap2.set(0, pagesMap)
-    store.reviewsCid = data.cid
-
-    return data
-  }
-  catch (error) {
-    return null
-  }
-
-  finally {
-    unwatch()
-  }
+  unwatch()
+  return data
 }

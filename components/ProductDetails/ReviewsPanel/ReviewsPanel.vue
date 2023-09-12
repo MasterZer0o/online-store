@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ count: number }>()
+const props = defineProps<{ count: number }>()
 
 const store = productDetailsStore()
 
@@ -12,7 +12,8 @@ function closeReviews() {
   aborted.value = true
   store.closeReviews()
 }
-const productId = useRoute('p-id-product').params.id
+
+store.filteredReviewsCount = props.count
 
 watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
   if (opened) {
@@ -26,8 +27,9 @@ watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
       return
 
     isLoading.value = true
-    const response = await fetchInitialReviews(productId, aborted)
+    const response = await fetchInitialReviews(aborted)
     store.displayedReviews = response?.data ?? []
+    store.setCachedReviews({ page: 1, rating: 0, reviews: response?.data })
 
     store.reviewsPanel.perPage = response?.perPage ?? 0
     isLoading.value = false
