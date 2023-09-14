@@ -32,6 +32,12 @@ async function fetchWithStars(rating: number) {
   await loadReviews({ page: 1, rating })
   store.reviewsPage = 1
 }
+const entries = Object.entries(store.reviewRatingCounts)
+const totalCount = store.reviewRatingCounts[0]
+const arr: number[] = []
+for (let i = 1; i <= 5; i++) {
+  arr.push(entries[i][1])
+}
 </script>
 
 <template>
@@ -47,17 +53,17 @@ async function fetchWithStars(rating: number) {
     </div>
     <div class="cols">
       <div>
-        <span class=":uno: text-4xl font-semibold">{{ ratings.average }}</span>
+        <span class=":uno: text-4xl font-semibold">{{ 12.3 }}</span>
         <IconsRatingStar :size="30" color="gold" />
       </div>
       <div>
         <ul>
-          <li v-for="star in ratings.stars" :key="star.label">
-            <span>{{ star.label }}</span>
-            <div @click="fetchWithStars(+star.label)">
-              <span :data-amount="star.amount" :style="{ width: `${(star.amount / ratings.allRatings * 100).toFixed(2)}%` }"></span>
+          <li v-for="amount, i in arr" :key="i">
+            <span>{{ i + 1 }}</span>
+            <div @click="fetchWithStars(i + 1)">
+              <span :data-amount="amount" :style="{ width: `${(amount / totalCount * 100).toFixed(2)}%` }"></span>
             </div>
-            <span>{{ (star.amount / ratings.allRatings * 100).toFixed(1) }}%</span>
+            <span>{{ (amount / totalCount * 100).toFixed(1) }}%</span>
           </li>
         </ul>
       </div>

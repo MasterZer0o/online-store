@@ -20,14 +20,14 @@ export async function loadReviews({ page, rating }: { page: number; rating: numb
   store.reviewsPanel.isLoadingMore = false
 }
 
-export async function fetchReviews({ page }: { page?: number }, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
+export async function fetchReviews<WithCount = false>({ page }: { page?: number }, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
   const store = productDetailsStore()
 
-  const data = await $fetch<ReviewData>(`/product/${store.productId}/reviews`, {
+  const data = await $fetch<ReviewData<WithCount>>(`/product/${store.productId}/reviews`, {
     ...fetchOptions,
     query: {
-      page,
-      rating: store.reviewsRatingFilter === 0 ? undefined : store.reviewsRatingFilter,
+      p: page,
+      r: store.reviewsRatingFilter === 0 ? undefined : store.reviewsRatingFilter,
       cid: store.reviewsCid
     }
   })
@@ -43,7 +43,7 @@ export async function fetchInitialReviews(aborted: Ref<boolean>) {
       abortController.abort()
   })
 
-  const data = await fetchReviews({}, { signal: abortController.signal })
+  const data = await fetchReviews<true>({}, { signal: abortController.signal })
 
   store.reviewsPageMap.set(0, new Map([[1, data.data]]))
   store.reviewsCid = data.cid

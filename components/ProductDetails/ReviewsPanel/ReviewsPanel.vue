@@ -13,8 +13,6 @@ function closeReviews() {
   store.closeReviews()
 }
 
-store.filteredReviewsCount = props.count
-
 watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
   if (opened) {
     overlayShow.value = true
@@ -28,7 +26,14 @@ watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
 
     isLoading.value = true
     const response = await fetchInitialReviews(aborted)
-    store.displayedReviews = response?.data ?? []
+
+    store.reviewRatingCounts[0] = props.count
+
+    Object.entries(response.count).forEach(([_, v], index) => {
+      store.reviewRatingCounts[(index + 1) as keyof typeof store.reviewRatingCounts] = v
+    })
+
+    store.displayedReviews = response.data ?? []
     store.setCachedReviews({ page: 1, rating: 0, reviews: response?.data })
 
     store.reviewsPanel.perPage = response?.perPage ?? 0

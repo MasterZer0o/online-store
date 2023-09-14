@@ -9,13 +9,12 @@ const totalPagesRaw = props.count / store.reviewsPanel.perPage
 const lastPage = Number.isInteger(totalPagesRaw) ? totalPagesRaw : Math.floor(totalPagesRaw) + 1
 
 // rating===0 means no filtering
-async function getReviewsPage(page: number, rating = 0) {
+async function getReviewsPage(page: number) {
   if (page === 0 || page === lastPage + 1)
     return
 
   const cachedReviews = store.getCachedReviews({ page })
   if (cachedReviews) {
-    logInfo({ page, rating })
     store.displayedReviews = cachedReviews
   }
   else {
@@ -23,7 +22,7 @@ async function getReviewsPage(page: number, rating = 0) {
     const results = await fetchReviews({ page })
     store.reviewsCid = results.cid
 
-    store.setCachedReviews({ page, rating, reviews: results.data })
+    store.setCachedReviews({ page, rating: store.reviewsRatingFilter, reviews: results.data })
   }
   store.reviewsPage = page
 
@@ -31,9 +30,6 @@ async function getReviewsPage(page: number, rating = 0) {
 
   props.elementToScroll.scrollIntoView({ behavior: 'smooth' })
 }
-onUnmounted(() => {
-  logInfo('UNMOUNTED')
-})
 </script>
 
 <template>

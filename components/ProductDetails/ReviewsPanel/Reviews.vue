@@ -7,7 +7,7 @@ const store = productDetailsStore()
 <template>
   <div ref="elementToScroll" class=":uno: flex items-center">
     <p class=":uno: text-2xl my-3">
-      User Reviews <span class=":uno: text-lg">({{ count }})</span>
+      User Reviews <span class=":uno: text-lg">({{ store.filteredReviewsCount }})</span>
     </p>
     <ProductDetailsReviewsPanelStarsFilterDropdown :total-review-count="count" />
   </div>
