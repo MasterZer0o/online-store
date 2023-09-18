@@ -1,4 +1,4 @@
-export async function loadReviews({ page, rating }: { page: number; rating: number }) {
+export async function loadReviews({ page, rating }: { page: number; rating: PossibleRating }) {
   const store = productDetailsStore()
 
   store.reviewsRatingFilter = rating
@@ -20,10 +20,10 @@ export async function loadReviews({ page, rating }: { page: number; rating: numb
   store.reviewsPanel.isLoadingMore = false
 }
 
-export async function fetchReviews<WithCount = false>({ page }: { page?: number }, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
+export async function fetchReviews<IsInitialRequest = false>({ page }: { page?: number }, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
   const store = productDetailsStore()
 
-  const data = await $fetch<ReviewData<WithCount>>(`/product/${store.productId}/reviews`, {
+  const data = await $fetch<ReviewData<IsInitialRequest>>(`/product/${store.productId}/reviews`, {
     ...fetchOptions,
     query: {
       p: page,

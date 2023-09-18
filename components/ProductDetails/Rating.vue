@@ -6,7 +6,7 @@ const props = defineProps<{
 const { openReviews: openReviewsPanel } = productDetailsStore()
 
 function openReviews() {
-  if (props.reviewCount === 0)
+  if (props.reviewCount === '0')
     return
 
   openReviewsPanel()
@@ -17,7 +17,7 @@ function openReviews() {
   <div class="details-rating">
     <div>
       <IconsRatingStar />
-      <strong>{{ rating?.toFixed(2) ?? 'No rating' }}</strong>
+      <strong>{{ rating?.toFixed(2) ?? 'No ratings' }}</strong>
     </div>
     <div @click="openReviews">
       <IconsReviews />

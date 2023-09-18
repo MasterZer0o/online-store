@@ -13,3 +13,4 @@ export const logInfo = instance.info
 export const logWarn = instance.warn
 export const logError = instance.error
 export const logSuccess = instance.success
+export const logBox = instance.box

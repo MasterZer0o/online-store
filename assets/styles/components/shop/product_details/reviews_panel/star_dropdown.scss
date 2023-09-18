@@ -56,8 +56,16 @@
         font-size: 0.9em;
       }
 
-      &:hover {
+      &.active {
         background-color: var(--bg3);
+
+        svg {
+          fill: #dfc01b;
+        }
+      }
+
+      &:hover {
+        background-color: var(--bg2);
 
         svg {
           fill: #dfc01b;

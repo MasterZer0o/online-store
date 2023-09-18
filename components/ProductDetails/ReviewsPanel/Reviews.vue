@@ -1,5 +1,4 @@
 <script setup lang="ts">
-defineProps<{ count: number }>()
 const elementToScroll = ref() as Ref<HTMLElement>
 const store = productDetailsStore()
 </script>
@@ -9,7 +8,7 @@ const store = productDetailsStore()
     <p class=":uno: text-2xl my-3">
       User Reviews <span class=":uno: text-lg">({{ store.filteredReviewsCount }})</span>
     </p>
-    <ProductDetailsReviewsPanelStarsFilterDropdown :total-review-count="count" />
+    <ProductDetailsReviewsPanelStarsFilterDropdown :element-to-scroll="elementToScroll" />
   </div>
   <section class="reviews-content">
     <div v-if="store.reviewsPanel.isLoadingMore" class="overlay">
@@ -17,5 +16,5 @@ const store = productDetailsStore()
     </div>
     <ProductDetailsReviewsPanelReview v-for="review in store.displayedReviews" :key="review.id" :review="review" />
   </section>
-  <ProductDetailsReviewsPanelPagination :element-to-scroll="elementToScroll" :count="count" />
+  <ProductDetailsReviewsPanelPagination :element-to-scroll="elementToScroll" />
 </template>

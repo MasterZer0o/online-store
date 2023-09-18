@@ -42,6 +42,9 @@ if (error.value !== null) {
       <ProductDetailsDelivery />
     </div>
 
-    <ProductDetailsReviewsPanel :count="parseInt(product!.reviewCount as string)" />
+    <ProductDetailsReviewsPanel
+      :total-count="product!.reviewCount"
+      :average-rating="product!.rating"
+    />
   </main>
 </template>

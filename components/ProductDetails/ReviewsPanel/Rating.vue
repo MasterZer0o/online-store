@@ -1,43 +1,19 @@
 <script setup lang="ts">
-const ratings = {
-  average: 4.5,
-  allRatings: 72,
-  stars: [
-    {
-      label: '5',
-      amount: 20
-    },
-    {
-      label: '4',
-      amount: 34
-    },
-    {
-      label: '3',
-      amount: 11
-    },
-    {
-      label: '2',
-      amount: 2
-    },
-    {
-      label: '1',
-      amount: 5
-    },
-  ]
-}
+defineProps<{ averageRating: number }>()
 const store = productDetailsStore()
-async function fetchWithStars(rating: number) {
+async function fetchWithStars(rating: PossibleRating) {
   store.reviewsCid = undefined
 
   await loadReviews({ page: 1, rating })
   store.reviewsPage = 1
 }
 const entries = Object.entries(store.reviewRatingCounts)
-const totalCount = store.reviewRatingCounts[0]
+const totalCount = +store.totalCount
 const arr: number[] = []
 for (let i = 1; i <= 5; i++) {
   arr.push(entries[i][1])
 }
+arr.reverse()
 </script>
 
 <template>
@@ -53,15 +29,18 @@ for (let i = 1; i <= 5; i++) {
     </div>
     <div class="cols">
       <div>
-        <span class=":uno: text-4xl font-semibold">{{ 12.3 }}</span>
+        <span class=":uno: text-4xl font-semibold">{{ averageRating.toFixed(1) }}</span>
         <IconsRatingStar :size="30" color="gold" />
       </div>
       <div>
         <ul>
           <li v-for="amount, i in arr" :key="i">
-            <span>{{ i + 1 }}</span>
-            <div @click="fetchWithStars(i + 1)">
-              <span :data-amount="amount" :style="{ width: `${(amount / totalCount * 100).toFixed(2)}%` }"></span>
+            <span>{{ arr.length - i }}</span>
+            <div @click="fetchWithStars(arr.length - i as PossibleRating)">
+              <span
+                :data-amount="amount"
+                :style="{ width: `${(amount / totalCount * 100).toFixed(2)}%` }"
+              ></span>
             </div>
             <span>{{ (amount / totalCount * 100).toFixed(1) }}%</span>
           </li>

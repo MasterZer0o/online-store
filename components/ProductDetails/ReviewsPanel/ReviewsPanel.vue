@@ -1,35 +1,39 @@
 <script setup lang="ts">
-const props = defineProps<{ count: number }>()
+const props = defineProps<{
+  totalCount: string
+  averageRating: number
+}>()
 
 const store = productDetailsStore()
 
 const isOpen = ref(store.reviewsPanel.isOpen)
 const overlayShow = ref(store.reviewsPanel.isOpen)
 const isLoading = ref(true)
-const aborted = ref(false)
+const didAbort = ref(false)
 
 function closeReviews() {
-  aborted.value = true
+  didAbort.value = true
   store.closeReviews()
 }
 
+store.totalCount = props.totalCount
 watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
   if (opened) {
     overlayShow.value = true
     isOpen.value = true
 
-    if (aborted.value) {
-      aborted.value = false
+    if (didAbort.value) {
+      didAbort.value = false
     }
     if (store.displayedReviews.length !== 0)
       return
 
     isLoading.value = true
-    const response = await fetchInitialReviews(aborted)
+    const response = await fetchInitialReviews(didAbort)
 
-    store.reviewRatingCounts[0] = props.count
+    store.reviewRatingCounts[0] = +props.totalCount
 
-    Object.entries(response.count).forEach(([_, v], index) => {
+    Object.entries(response.counts).forEach(([_, v], index) => {
       store.reviewRatingCounts[(index + 1) as keyof typeof store.reviewRatingCounts] = v
     })
 
@@ -57,8 +61,8 @@ onUnmounted(() => store.resetReviews())
           <span class="loader"></span>
         </div>
         <template v-else>
-          <ProductDetailsReviewsPanelRating />
-          <ProductDetailsReviewsPanelReviews :count="count" />
+          <ProductDetailsReviewsPanelRating :average-rating="averageRating" />
+          <ProductDetailsReviewsPanelReviews />
         </template>
 
         <button @click="closeReviews">
