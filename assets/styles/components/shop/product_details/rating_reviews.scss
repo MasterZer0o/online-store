@@ -29,5 +29,6 @@
   & > div:nth-child(2) {
     background: #404859;
     color: #d8dee9;
+    flex-shrink: 0;
   }
 }

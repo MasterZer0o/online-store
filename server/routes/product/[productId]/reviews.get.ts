@@ -20,7 +20,7 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
   const reviews = await getReviews({ productId, page, perPage: MAX_REVIEWS_PER_PAGE, cid, rating })
 
   const response: ReviewData | ReviewData<true> = {
-    cid: reviews.at(-1)?.id ?? undefined,
+    cid: reviews.at(-1)!.id,
     counts: reviews.at(-1)?.counts,
     perPage: page === 1 ? MAX_REVIEWS_PER_PAGE : undefined,
     // averageRating: page === 1 ? calculateAverage(reviews[0].counts!) : undefined,
@@ -50,7 +50,7 @@ interface ReviewDataBase {
   /**
    * Last review `id` of the current page for pagination.
    */
-  cid?: number
+  cid: number
   perPage?: number
 }
 

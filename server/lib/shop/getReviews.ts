@@ -1,4 +1,4 @@
-import { and, asc, eq, gt, gte, isNotNull, sql } from 'drizzle-orm'
+import { and, asc, eq, gt, isNotNull, sql } from 'drizzle-orm'
 import { reviews as reviewsSchema } from '~/server/db/schema/products'
 import { users } from '~/server/db/schema/users'
 
@@ -34,12 +34,6 @@ export async function getReviews({ productId, page, perPage, cid, rating }: FnPa
     whereConditions.push(gt(reviewsSchema.id, Number.parseInt(cid)))
   }
 
-  if (page !== 1) {
-    const offset = (page - 1) * perPage
-
-    whereConditions.push(gte(reviewsSchema.id,
-      sql`(SELECT MIN(id + ${offset}) FROM ${reviewsSchema} WHERE ${reviewsSchema.id} <= (SELECT MAX(${reviewsSchema.id}) FROM ${reviewsSchema}) AND ${reviewsSchema.productId} = ${productId})`))
-  }
 
   const isInitialRequest = page === 1 && !rating
 
@@ -51,7 +45,7 @@ export async function getReviews({ productId, page, perPage, cid, rating }: FnPa
         'r3', SUM(CASE WHEN ${reviewsSchema.rating} = 3 THEN 1 ELSE 0 END),
         'r4', SUM(CASE WHEN ${reviewsSchema.rating} = 4 THEN 1 ELSE 0 END),
         'r5', SUM(CASE WHEN ${reviewsSchema.rating} = 5 THEN 1 ELSE 0 END))
-  FROM ${reviewsSchema})`.as('counts')
+    FROM ${reviewsSchema})`.as('counts')
   }
 
   const usersSQ = db.select({
@@ -60,9 +54,9 @@ export async function getReviews({ productId, page, perPage, cid, rating }: FnPa
   }).from(users)
     .as('users')
 
-  const result = await db.select({
+  const result = db.select({
     ...selectFields,
-    username: usersSQ.username,
+    username: usersSQ.username
   }).from(reviewsSchema)
     .where(and(...whereConditions))
     .leftJoin(usersSQ, eq(usersSQ.id, reviewsSchema.userId))

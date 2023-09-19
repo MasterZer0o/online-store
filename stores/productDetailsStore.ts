@@ -1,4 +1,4 @@
-export const productDetailsStore = defineStore('productDetails', () => {
+export const reviewsStore = defineStore('reviews', () => {
   const productId = ref<number | string>(0)
 
   const displayedReviews = ref<ReviewData['data']>([])
@@ -14,8 +14,9 @@ export const productDetailsStore = defineStore('productDetails', () => {
   const reviewsPageMap = new Map<StarFilter, Map<PageNumber, ReviewData['data']>>()
 
   const reviewRatingCounts = {} as Record<PossibleRating, number>
-  const reviewsCid = ref<number | undefined>()
   const reviewsRatingFilter = ref<PossibleRating>(0)
+
+  const cids = new Map<PossibleRating, number>()
 
   const totalPages = computed(() => {
     const totalPagesRaw = reviewRatingCounts[reviewsRatingFilter.value] / reviewsPanel.perPage
@@ -24,15 +25,14 @@ export const productDetailsStore = defineStore('productDetails', () => {
 
   const totalCount = ref() as Ref<string>
 
-  const openReviews = () => reviewsPanel.isOpen = true
-  const closeReviews = () => reviewsPanel.isOpen = false
+  const openPanel = () => reviewsPanel.isOpen = true
+  const closePanel = () => reviewsPanel.isOpen = false
 
   const reviewsPage = ref(1)
   const filteredReviewsCount = computed(() => reviewRatingCounts[reviewsRatingFilter.value])
 
   function resetReviews() {
     displayedReviews.value = []
-    reviewsCid.value = undefined
     reviewsPage.value = 1
     reviewsRatingFilter.value = 0
     reviewsPageMap.clear()
@@ -54,10 +54,9 @@ export const productDetailsStore = defineStore('productDetails', () => {
   return {
     productId,
     displayedReviews,
-    openReviews,
-    closeReviews,
+    openPanel,
+    closePanel,
     reviewsPanel,
-    reviewsCid,
     reviewsPageMap,
     resetReviews,
     getCachedReviews,
@@ -67,6 +66,7 @@ export const productDetailsStore = defineStore('productDetails', () => {
     filteredReviewsCount,
     reviewRatingCounts,
     totalPages,
-    totalCount
+    totalCount,
+    cids
   }
 })

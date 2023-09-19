@@ -1,9 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{ elementToScroll: HTMLElement }>()
 
-const store = productDetailsStore()
+const store = reviewsStore()
 async function fetchWithRating(rating: PossibleRating) {
-  store.reviewsCid = undefined
   props.elementToScroll.scrollIntoView({ behavior: 'smooth' })
   await loadReviews({ page: 1, rating })
   store.reviewsPage = 1

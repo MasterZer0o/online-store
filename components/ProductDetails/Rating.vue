@@ -3,7 +3,7 @@ const props = defineProps<{
   rating: ProductDetails['rating'] | null
   reviewCount: ProductDetails['reviewCount']
 }>()
-const { openReviews: openReviewsPanel } = productDetailsStore()
+const { openPanel: openReviewsPanel } = reviewsStore()
 
 function openReviews() {
   if (props.reviewCount === '0')

@@ -2,7 +2,7 @@
 const props = defineProps<{
   elementToScroll: HTMLElement
 }>()
-const store = productDetailsStore()
+const store = reviewsStore()
 
 // rating===0 means no filtering
 async function getReviewsPage(page: number) {
@@ -15,11 +15,8 @@ async function getReviewsPage(page: number) {
   }
   else {
     store.reviewsPanel.isLoadingMore = true
-    if (page < store.reviewsPage) {
-      store.reviewsCid = undefined
-    }
+
     const results = await fetchReviews({ page })
-    store.reviewsCid = results.cid
 
     store.displayedReviews = results.data
 
@@ -42,10 +39,6 @@ async function getReviewsPage(page: number) {
     </button>
     <div>
       <button>{{ store.reviewsPage }}</button>
-      <span>...</span>
-      <button @click="getReviewsPage(store.totalPages)">
-        {{ store.totalPages }}
-      </button>
     </div>
     <button :class="{ disabled: store.reviewsPage === store.totalPages }" @click="getReviewsPage(store.reviewsPage + 1)">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14" width="20" height="20">

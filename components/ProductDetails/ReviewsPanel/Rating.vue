@@ -1,9 +1,7 @@
 <script setup lang="ts">
 defineProps<{ averageRating: number }>()
-const store = productDetailsStore()
+const store = reviewsStore()
 async function fetchWithStars(rating: PossibleRating) {
-  store.reviewsCid = undefined
-
   await loadReviews({ page: 1, rating })
   store.reviewsPage = 1
 }

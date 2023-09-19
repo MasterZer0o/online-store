@@ -4,7 +4,7 @@ const props = defineProps<{
   averageRating: number
 }>()
 
-const store = productDetailsStore()
+const store = reviewsStore()
 
 const isOpen = ref(store.reviewsPanel.isOpen)
 const overlayShow = ref(store.reviewsPanel.isOpen)
@@ -13,7 +13,7 @@ const didAbort = ref(false)
 
 function closeReviews() {
   didAbort.value = true
-  store.closeReviews()
+  store.closePanel()
 }
 
 store.totalCount = props.totalCount

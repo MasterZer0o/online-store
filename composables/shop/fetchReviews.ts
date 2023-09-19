@@ -1,5 +1,5 @@
 export async function loadReviews({ page, rating }: { page: number; rating: PossibleRating }) {
-  const store = productDetailsStore()
+  const store = reviewsStore()
 
   store.reviewsRatingFilter = rating
   let data
@@ -12,7 +12,6 @@ export async function loadReviews({ page, rating }: { page: number; rating: Poss
     store.reviewsPanel.isLoadingMore = true
     const results = await fetchReviews({ page })
     store.setCachedReviews({ page: 1, rating, reviews: results.data })
-    store.reviewsCid = results.cid
     data = results.data
   }
   store.reviewsRatingFilter = rating
@@ -21,23 +20,25 @@ export async function loadReviews({ page, rating }: { page: number; rating: Poss
 }
 
 export async function fetchReviews<IsInitialRequest = false>({ page }: { page?: number }, fetchOptions: Parameters<typeof $fetch>[1] = {}) {
-  const store = productDetailsStore()
+  const store = reviewsStore()
 
   const data = await $fetch<ReviewData<IsInitialRequest>>(`/product/${store.productId}/reviews`, {
     ...fetchOptions,
     query: {
       p: page,
       r: store.reviewsRatingFilter === 0 ? undefined : store.reviewsRatingFilter,
-      cid: store.reviewsCid
+      cid: store.cids.get(store.reviewsRatingFilter)
     }
   })
+
+  store.cids.set(store.reviewsRatingFilter, data.cid)
 
   return data
 }
 export async function fetchInitialReviews(aborted: Ref<boolean>) {
   const abortController = new AbortController()
 
-  const store = productDetailsStore()
+  const store = reviewsStore()
   const unwatch = watch(aborted, (didAbort) => {
     if (didAbort)
       abortController.abort()
@@ -46,7 +47,6 @@ export async function fetchInitialReviews(aborted: Ref<boolean>) {
   const data = await fetchReviews<true>({}, { signal: abortController.signal })
 
   store.reviewsPageMap.set(0, new Map([[1, data.data]]))
-  store.reviewsCid = data.cid
 
   unwatch()
   return data

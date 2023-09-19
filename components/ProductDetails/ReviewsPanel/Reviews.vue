@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const elementToScroll = ref() as Ref<HTMLElement>
-const store = productDetailsStore()
+const store = reviewsStore()
 </script>
 
 <template>

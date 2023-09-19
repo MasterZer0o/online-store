@@ -21,7 +21,8 @@
     "import/default": "off",
     "n/prefer-global/process": "off",
     "@typescript-eslint/ban-ts-comment": "off",
-    "unicorn/prefer-number-properties": "off"
+    "unicorn/prefer-number-properties": "off",
+    "@stylistic/ts/comma-dangle": "off"
   },
   "overrides": [
     {

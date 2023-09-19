@@ -4,7 +4,7 @@ definePageMeta({
     return !Number.isNaN(Number.parseInt(route.params.id))
   }
 })
-const store = productDetailsStore()
+const store = reviewsStore()
 
 const productId = useRoute('p-id-product').params.id
 store.productId = productId
@@ -34,7 +34,6 @@ if (error.value !== null) {
     </div>
 
     <div>
-      <!-- <ProductDetailsPath /> -->
       <ProductDetailsName :product="product!" />
       <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
       <ProductDetailsConfiguration :variants="product!.variants" />
