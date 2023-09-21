@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { loadReviews } from '~/composables/shop/fetchReviews'
+
 defineProps<{ averageRating: number }>()
 const store = reviewsStore()
 async function fetchWithStars(rating: PossibleRating) {
@@ -6,6 +8,7 @@ async function fetchWithStars(rating: PossibleRating) {
   store.reviewsPage = 1
 }
 const entries = Object.entries(store.reviewRatingCounts)
+
 const totalCount = +store.totalCount
 const arr: number[] = []
 for (let i = 1; i <= 5; i++) {

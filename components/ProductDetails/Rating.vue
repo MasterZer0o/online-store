@@ -3,13 +3,13 @@ const props = defineProps<{
   rating: ProductDetails['rating'] | null
   reviewCount: ProductDetails['reviewCount']
 }>()
-const { openPanel: openReviewsPanel } = reviewsStore()
 
+const emit = defineEmits(['openReviews'])
 function openReviews() {
   if (props.reviewCount === '0')
     return
 
-  openReviewsPanel()
+  emit('openReviews')
 }
 </script>
 

@@ -32,10 +32,11 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
     }, [])
   }
 
-  // await wait(500)
+  await wait(1000)
 
   return response
 })
+
 interface ReviewDataBase {
   data: {
     username: string
@@ -56,7 +57,6 @@ interface ReviewDataBase {
 
 type InitialReviewsRequest = ReviewDataBase & {
   counts: NonNullable<Awaited<ReturnType<typeof getReviews>>[number]['counts']>
-  // averageRating: string
 }
 
 declare global {

@@ -4,6 +4,7 @@ defineProps<{
   rating: ProductDetails['rating'] | null
   reviews: ProductDetails['reviewCount']
 }>()
+const emit = defineEmits(['openReviews'])
 </script>
 
 <template>
@@ -15,6 +16,6 @@ defineProps<{
         <span>{{ price.discountLabel }}</span>
       </div>
     </div>
-    <ProductDetailsRating :review-count="reviews" :rating="rating" />
+    <ProductDetailsRating :review-count="reviews" :rating="rating" @open-reviews="emit('openReviews')" />
   </section>
 </template>

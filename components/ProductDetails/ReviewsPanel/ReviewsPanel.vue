@@ -2,68 +2,77 @@
 const props = defineProps<{
   totalCount: string
   averageRating: number
+  openState: boolean
 }>()
 
-const store = reviewsStore()
+const emit = defineEmits(['closePanel'])
 
-const isOpen = ref(store.reviewsPanel.isOpen)
-const overlayShow = ref(store.reviewsPanel.isOpen)
-const isLoading = ref(true)
+const isOpen = ref(false)
+const overlayShow = ref(false)
+const isLoadingData = ref(true)
 const didAbort = ref(false)
+
+const productId = useRoute('p-id-product').params.id
+const mounted = ref(false)
+const fetched = ref(false)
 
 function closeReviews() {
   didAbort.value = true
-  store.closePanel()
+  emit('closePanel')
+
+  isOpen.value = false
+  setTimeout(() => overlayShow.value = false, 250)
 }
 
-store.totalCount = props.totalCount
-watch(toRefs(store.reviewsPanel).isOpen, async (opened) => {
-  if (opened) {
-    overlayShow.value = true
-    isOpen.value = true
+const shouldImportComponent = ref(false)
 
-    if (didAbort.value) {
-      didAbort.value = false
-    }
-    if (store.displayedReviews.length !== 0)
-      return
+const initialData = ref<ReviewData<true>>()
 
-    isLoading.value = true
-    const response = await fetchInitialReviews(didAbort)
-
-    store.reviewRatingCounts[0] = +props.totalCount
-
-    Object.entries(response.counts).forEach(([_, v], index) => {
-      store.reviewRatingCounts[(index + 1) as keyof typeof store.reviewRatingCounts] = v
-    })
-
-    store.displayedReviews = response.data ?? []
-    store.setCachedReviews({ page: 1, rating: 0, reviews: response?.data })
-
-    store.reviewsPanel.perPage = response?.perPage ?? 0
-    isLoading.value = false
+watch(() => props.openState, async (opened) => {
+  if (!opened) {
+    closeReviews()
     return
   }
 
-  isOpen.value = false
+  overlayShow.value = true
+  isOpen.value = true
 
-  setTimeout(() => overlayShow.value = false, 250)
+  if (didAbort.value) {
+    didAbort.value = false
+  }
+
+  if (initialData.value !== undefined)
+    return
+
+  isLoadingData.value = true
+  shouldImportComponent.value = true
+
+  const { fetchInitialReviews } = await import('~/composables/shop/fetchReviews')
+  if (didAbort.value)
+    return
+
+  const response = await fetchInitialReviews(didAbort, productId)
+  initialData.value = response
+  fetched.value = true
+  isLoadingData.value = false
 })
-
-onUnmounted(() => store.resetReviews())
 </script>
 
 <template>
   <div v-show="overlayShow" class="reviews-overlay" @click.self="closeReviews">
     <transition name="reviews-slide">
       <section v-show="isOpen" class="reviews-panel">
-        <div v-if="isLoading" class="wrapper">
+        <div v-if="isLoadingData || !mounted" class="wrapper">
           <span class="loader"></span>
         </div>
-        <template v-else>
-          <ProductDetailsReviewsPanelRating :average-rating="averageRating" />
-          <ProductDetailsReviewsPanelReviews />
-        </template>
+        <LazyProductDetailsReviewsPanelContent
+          v-if="shouldImportComponent"
+          :initial-data="initialData!"
+          :total-count="totalCount"
+          :average-rating="averageRating"
+          :fetched-data="fetched"
+          @mounted="mounted = true"
+        />
 
         <button @click="closeReviews">
           <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

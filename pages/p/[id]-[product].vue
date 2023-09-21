@@ -4,10 +4,8 @@ definePageMeta({
     return !Number.isNaN(Number.parseInt(route.params.id))
   }
 })
-const store = reviewsStore()
 
 const productId = useRoute('p-id-product').params.id
-store.productId = productId
 
 const { data: product, error } = await useFetch<ProductDetails>(`/product/${productId}`)
 
@@ -24,6 +22,7 @@ if (error.value !== null) {
     fatal: true
   })
 }
+const triggeredReviews = ref(false)
 </script>
 
 <template>
@@ -35,7 +34,7 @@ if (error.value !== null) {
 
     <div>
       <ProductDetailsName :product="product!" />
-      <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" />
+      <ProductDetailsPriceAndRating :price="product!.price" :rating="product!.rating" :reviews="product!.reviewCount" @open-reviews="triggeredReviews = true" />
       <ProductDetailsConfiguration :variants="product!.variants" />
       <ProductDetailsBuy :product="product!" />
       <ProductDetailsDelivery />
@@ -44,6 +43,8 @@ if (error.value !== null) {
     <ProductDetailsReviewsPanel
       :total-count="product!.reviewCount"
       :average-rating="product!.rating"
+      :open-state="triggeredReviews"
+      @close-panel="triggeredReviews = false"
     />
   </main>
 </template>

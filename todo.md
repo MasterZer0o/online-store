@@ -45,6 +45,8 @@
 
 - test for SQL injections
 
+- add lazy imports where needed
+
 - in the future: account button in ShopHeader - instead of redirecting to /login page, show modal
 
 - add default style for ul => mg0 pg0 + remove from any already having it

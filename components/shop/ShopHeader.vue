@@ -17,7 +17,7 @@ const count = 3
           <IconsCart />
           <ShopTooltip text="Show cart" />
         </div>
-        <NuxtLink to="/wishlist">
+        <NuxtLink to="/wishlist" :no-prefetch="true">
           <div class="action">
             <IconsHeart width="30" height="30" />
             <ShopTooltip text="Your wishlist" />

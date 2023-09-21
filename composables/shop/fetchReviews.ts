@@ -35,10 +35,12 @@ export async function fetchReviews<IsInitialRequest = false>({ page }: { page?: 
 
   return data
 }
-export async function fetchInitialReviews(aborted: Ref<boolean>) {
+export async function fetchInitialReviews(aborted: Ref<boolean>, productId: string | number) {
   const abortController = new AbortController()
 
   const store = reviewsStore()
+  store.productId = productId
+
   const unwatch = watch(aborted, (didAbort) => {
     if (didAbort)
       abortController.abort()

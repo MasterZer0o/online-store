@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { fetchReviews } from '~/composables/shop/fetchReviews'
+
 const props = defineProps<{
   elementToScroll: HTMLElement
 }>()

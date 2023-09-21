@@ -5,11 +5,11 @@ const { user } = toRefs(useUser())
 <template>
   <div class="user-actions">
     <div>
-      <NuxtLink v-if="!user.isLoggedIn" to="/login" data-login>
+      <NuxtLink v-if="!user.isLoggedIn" to="/login" data-login :no-prefetch="true">
         Sign in
       </NuxtLink>
 
-      <NuxtLink v-if="!user.isLoggedIn" class="new-link" to="/register">
+      <NuxtLink v-if="!user.isLoggedIn" class="new-link" to="/register" :no-prefetch="true">
         New here? &nbsp;<span>Sign up</span>
       </NuxtLink>
       <ul>

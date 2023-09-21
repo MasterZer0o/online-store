@@ -4,7 +4,6 @@ export const reviewsStore = defineStore('reviews', () => {
   const displayedReviews = ref<ReviewData['data']>([])
 
   const reviewsPanel = reactive({
-    isOpen: false,
     isLoadingMore: false,
     perPage: 0
   })
@@ -24,9 +23,6 @@ export const reviewsStore = defineStore('reviews', () => {
   })
 
   const totalCount = ref() as Ref<string>
-
-  const openPanel = () => reviewsPanel.isOpen = true
-  const closePanel = () => reviewsPanel.isOpen = false
 
   const reviewsPage = ref(1)
   const filteredReviewsCount = computed(() => reviewRatingCounts[reviewsRatingFilter.value])
@@ -54,8 +50,6 @@ export const reviewsStore = defineStore('reviews', () => {
   return {
     productId,
     displayedReviews,
-    openPanel,
-    closePanel,
     reviewsPanel,
     reviewsPageMap,
     resetReviews,
