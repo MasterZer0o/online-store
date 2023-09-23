@@ -6,11 +6,12 @@ interface Params {
   page: string
   cid?: string
   meta: boolean
+  perPage: number
 }
 
 export async function getProducts(options: Params) {
   const db = getDb()
-  const MAX_PRODUCTS_PER_PAGE = 30
+
   const requestedPage = Number.parseInt(options.page)
 
   const whereConditions: Record<string, any> = {
@@ -26,7 +27,7 @@ export async function getProducts(options: Params) {
   }
   else {
     // CASE: fresh GET products request, calculate the offset from the page
-    const offset = (requestedPage - 1) * MAX_PRODUCTS_PER_PAGE || 0
+    const offset = (requestedPage - 1) * options.perPage || 0
 
     whereConditions.filters.push(gte(products.id,
       sql`(SELECT MIN(id) + ${offset} FROM ${products} WHERE ${products.id} <= (SELECT MAX(${products.id}) FROM ${products}) AND ${products.categoryId} = ${whereConditions.categoryId})`
@@ -52,7 +53,7 @@ export async function getProducts(options: Params) {
       .leftJoin(...join)
       .where(where)
       .orderBy(asc(products.id))
-      .limit(MAX_PRODUCTS_PER_PAGE)
+      .limit(options.perPage)
 
     return {
       items: prepareProducts(items),
@@ -70,7 +71,7 @@ export async function getProducts(options: Params) {
     .where(where)
     .leftJoin(...join)
     .orderBy(asc(products.id))
-    .limit(MAX_PRODUCTS_PER_PAGE)
+    .limit(options.perPage)
 
   let [results, [{ count: productCount }]] = await Promise.all([data.execute(), countQuery.execute()])
 
@@ -81,10 +82,10 @@ export async function getProducts(options: Params) {
       .from(products)
       .where(where)
       .leftJoin(...join)
-      .limit(MAX_PRODUCTS_PER_PAGE)
+      .limit(options.perPage)
       .orderBy(desc(products.id))
   }
-  const totalPagesRaw = productCount / MAX_PRODUCTS_PER_PAGE
+  const totalPagesRaw = productCount / options.perPage
   const totalPages = Number.isInteger(totalPagesRaw) ? totalPagesRaw : Math.floor(totalPagesRaw) + 1
 
   if (results.length === 0 && totalPages === 0)

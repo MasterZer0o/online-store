@@ -10,13 +10,9 @@
 
 - get fields from db as camelCase (use AS) and update types accordingly
 
-- put number of results per page in runtime variable and use it  (?)
-
 - transactions
 
 - handle (detect) when using back button (for example when page param change)
-
-- remove desiredCount
 
 - handle timezones - reviews etc.
 
@@ -26,8 +22,6 @@
 
 - combine css (https://vitejs.dev/config/build-options.html#build-csscodesplit)
 
-- uninstall knitwork in migrate.ts and put raw strings
-
 - IMPORTANT handle slug with special characters - slug is coming from product name which contains special characters
 
 - page transitions
@@ -36,8 +30,6 @@
 
 ---
 - perf: prepared statements
-
-- remove TheNavbar when no longer used
 
 - important: handle __nuxt_error page 
 

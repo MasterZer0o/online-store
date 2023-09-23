@@ -4,6 +4,7 @@ defineProps<{
   rating: ProductDetails['rating'] | null
   reviews: ProductDetails['reviewCount']
 }>()
+
 const emit = defineEmits(['openReviews'])
 </script>
 

@@ -9,8 +9,6 @@ onMounted(async () => {
   isPending.value = false
 })
 const items = computed(() => store.items)
-
-// TODO: link to product
 </script>
 
 <template>

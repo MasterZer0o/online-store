@@ -5,9 +5,6 @@ export default defineNuxtConfig({
   modules: ['nuxt-purgecss', '@vueuse/nuxt', '@unocss/nuxt',
     ['@pinia/nuxt', { autoImports: ['defineStore', 'storeToRefs', 'skipHydrate'] }]
   ],
-  nitro: {
-    preset: 'node-server'
-  },
   experimental: {
     inlineSSRStyles: false,
     componentIslands: true,
@@ -74,6 +71,8 @@ export default defineNuxtConfig({
     DATABASE_URL: process.env.DATABASE_URL,
     SESSION_COOKIE_NAME: 'sess',
     SESSION_PASSWORD: 'testtesttesttesttesttesttesttest',
+    PRODUCTS_LISTING_PER_PAGE: 30,
+    REVIEWS_PER_PAGE: 20,
     csrf: {
       algorithm: 'aes-256-cbc',
       secret: 'test',

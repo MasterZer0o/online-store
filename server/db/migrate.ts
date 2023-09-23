@@ -4,7 +4,6 @@ import { migrate } from 'drizzle-orm/node-postgres/migrator'
 import pg from 'pg'
 import { consola } from 'consola'
 import 'dotenv/config'
-import { genImport } from 'knitwork'
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL
@@ -13,7 +12,7 @@ const pool = new pg.Pool({
 const db = drizzle(pool, { logger: true })
 
 try {
-  consola.info('Running migration...')
+  consola.start('Running migration...')
   await migrate(db, { migrationsFolder: './server/db/migrations' })
 
   consola.info('Generating TS exports...')
@@ -22,7 +21,7 @@ try {
 
   for (const file of files) {
     const importName = file.slice(0, file.indexOf('.'))
-    input += `${genImport(`./schema/${importName}`, { name: '*', as: importName })}\n`
+    input += `import * as ${importName} from "./schema/${importName}"\n`
   }
   input += '\nexport const schemas = {\n'
   files.forEach((file) => {

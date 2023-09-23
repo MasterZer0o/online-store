@@ -10,7 +10,7 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
   const productId = Number(getRouterParams(event).productId)
   const { p: requestedPage, cid, r: rating }: IncomingQueryParams = getQuery<IncomingQueryParams>(event)
 
-  const MAX_REVIEWS_PER_PAGE = 20
+  const MAX_REVIEWS_PER_PAGE = useRuntimeConfig().REVIEWS_PER_PAGE
   let page = Number.parseInt(requestedPage)
   page = Number.isNaN(page) ? 1 : page
 
@@ -23,7 +23,6 @@ export default defineEventHandler(async (event): Promise<ReviewData> => {
     cid: reviews.at(-1)!.id,
     counts: reviews.at(-1)?.counts,
     perPage: page === 1 ? MAX_REVIEWS_PER_PAGE : undefined,
-    // averageRating: page === 1 ? calculateAverage(reviews[0].counts!) : undefined,
     data: reviews.reduce<ReviewData['data']>((acc, val) => {
       delete val.counts
 
@@ -62,17 +61,3 @@ type InitialReviewsRequest = ReviewDataBase & {
 declare global {
   type ReviewData<IsInitialRequest = false> = IsInitialRequest extends true ? InitialReviewsRequest : ReviewDataBase
 }
-
-// function calculateAverage(counts: RatingCounts) {
-//   let totalResponses = 0
-//   let totalScore = 0
-//   let k: keyof RatingCounts
-
-//   for (k in counts) {
-//     const value = counts[k]
-//     totalResponses += value
-//     totalScore += counts[k] * parseInt(k[1])
-//   }
-
-//   return (totalScore / totalResponses).toFixed(1)
-// }
