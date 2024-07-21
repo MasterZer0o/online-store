@@ -1,5 +1,8 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
   css: ['assets/styles/main.scss'],
   /* '@nuxtjs/html-validator', */
   modules: ['nuxt-purgecss', '@vueuse/nuxt', '@unocss/nuxt',
